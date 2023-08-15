@@ -11,3 +11,4 @@ capacityQ (Qua newQua capacity delay) = capacity
 
 delayQ :: Quality -> Float  -- la demora por unidad de distancia que sucede en las conexiones de este canal
 delayQ (Qua newQua capacity delay) = delay
+-- que unidad de distancia ? delay*distancia?
