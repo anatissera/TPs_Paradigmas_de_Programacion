@@ -1,8 +1,8 @@
 module Region ( Region, newR, foundR, linkR, tunelR, pathR, linksForR, connectedR, linkedR, delayR, availableCapacityForR, usedCapacityForR )
    where
 
-import City ( City, newC, nameC, distanceC )
-import Quality ( Quality, newQ, capacityQ, delayQ )
+import City
+import Quality 
 import Tunel 
 import Link
 import Point
@@ -31,7 +31,7 @@ linkR (Reg cities links tunels) city1 city2 quality = Reg cities (newL city1 cit
 
 -- tunelR A
 
-tunelRA :: Region -> [City] -> Region
+tunelR :: Region -> [City] -> Region
 tunelR (Reg cities links tunels) citiesToConnect
     | length citiesToConnect < 2 = error "You can't create a tunnel with fewer than 2 cities."
     | not (all (`elem` cities) citiesToConnect) = error "Some cities are not in the region."
