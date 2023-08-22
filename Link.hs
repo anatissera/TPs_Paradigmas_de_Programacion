@@ -1,8 +1,10 @@
-module Link ( Link, newL, linksL, connectsL, capacityL, delayL )
+
+
+module Link ( Link, newL, linksL, connectsL, capacityL, delayL)
    where
 
 import City
-import Quality
+import Quality (Quality, capacityQ, delayQ)
 
 data Link = Lin City City Quality deriving (Eq, Show)
 
@@ -10,7 +12,6 @@ newL :: City -> City -> Quality -> Link -- genera un link entre dos ciudades dis
 newL cityName1 cityName2 quality = Lin cityName1 cityName2 quality
 -- si ya hay un link, que diga error
 -- error "Link already exists between these cities."
-
 
 -- existingLinks :: [Link]
 -- existingLinks = []
@@ -34,7 +35,8 @@ capacityL :: Link -> Int
 capacityL (Lin cityName1 cityName2 quality) = capacityQ quality
 
 delayL :: Link -> Float     -- la demora que sufre una conexion en este canal
-delayL (Lin cityName1 cityName2 quality) = delayQ quality
--- delay por unidad de distancia 
+delayL (Lin city1 city2 quality) = (delayQ quality) * (distanceC city1 city2)
+
+
 
 -- atajar si por ejemplo quieren linkear dos ciudades iguales
