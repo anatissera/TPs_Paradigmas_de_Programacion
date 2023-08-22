@@ -39,8 +39,8 @@ linkR (Reg cities links tunels) city1 city2 quality
 
 -- tunelR
 
-tunelR :: Region -> [City] -> Region
-tunelR (Reg cities links tunnels) citiesToConnect
+tunelRA :: Region -> [City] -> Region
+tunelRA (Reg cities links tunnels) citiesToConnect
     | length [city | city <- citiesToConnect, city `elem` cities] /= length citiesToConnect =
         error "the cities are not in the region"
     | length citiesToConnect < 2 =
@@ -60,8 +60,8 @@ tunelR (Reg cities links tunnels) citiesToConnect
     verifiedLinks _ _ = []
 
 
-tunelRA :: Region -> [City] -> Region
-tunelRA region@(Reg cities links tunels) citiesToConnect
+tunelR :: Region -> [City] -> Region
+tunelR region@(Reg cities links tunels) citiesToConnect
     | length citiesToConnect < 2 = error "You can't create a tunnel with fewer than 2 cities."
     | not (all (`elem` cities) citiesToConnect) = error "Some cities are not in the region."
     | not (all (hasExistingL links) linksToCheck) = error "Missing link between cities."
@@ -132,7 +132,7 @@ delayR (Reg cities links tunels) city1 city2 =
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
 availableCapacityForR (Reg cities links tunels) city1 city2 = 
     case find (\link -> linksL city1 city2 link) links of
-    Just link -> CapacityL link
+    Just link -> CapacityL link -- -usesT link tunnel (recursivo)
     Nothing -> error "NoMatchingLink: No link connects the provided cities"
 
     -- hasSufficientQ :: [Link] -> (City, City) -> Bool
