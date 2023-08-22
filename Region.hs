@@ -25,6 +25,8 @@ foundR (Reg cities links tunnels) newCity
         Just (_ :: City) -> True
         Nothing -> False
 
+-- las ciudades que se pasan tienen que ser data City
+
 linkR :: Region -> City -> City -> Quality -> Region
 linkR (Reg cities links tunels) city1 city2 quality
     | not(any(\existingCity -> existingCity == city1)cities) || not(any(\existingCity -> existingCity == city2)cities) = error "UnavailableCity: At least one city is not in the region."
@@ -57,9 +59,28 @@ tunelR (Reg cities links tunnels) citiesToConnect
     verifiedLinks links (c1:c2:rest) = filter (\link -> linksL c1 c2 link) links  ++ verifiedLinks links (c2:rest)
     verifiedLinks _ _ = []
 
--- tunelRA
+
 tunelRA :: Region -> [City] -> Region
-tunelRA (Reg cities links tunnels) citiesToConnect
+tunelRA region@(Reg cities links tunels) citiesToConnect
+    | length citiesToConnect < 2 = error "You can't create a tunnel with fewer than 2 cities."
+    | not (all (`elem` cities) citiesToConnect) = error "Some cities are not in the region."
+    | not (all (hasExistingL links) linksToCheck) = error "Missing link between cities."
+    | not((availableCapacityForR region (head cities) (last cities)) > 0) = error "Insufficient capacity in some links."
+    | otherwise = Reg cities links (newTunnel : tunels)
+  where
+    linksToCheck = zip citiesToConnect (tail citiesToConnect)
+    newTunnel = newT [getLink city1 city2 | (city1, city2) <- linksToCheck]
+    
+    getLink :: City -> City -> Link
+    getLink c1 c2 = head [link | link <- links, connectsL c1 link && connectsL c2 link]
+
+    hasExistingL :: [Link] -> (City, City) -> Bool
+    hasExistingL links (c1, c2) = any (\link -> linksL c1 c2 link) links
+
+    
+-- tunelRA 2
+tunelRB :: Region -> [City] -> Region
+tunelRB (Reg cities links tunnels) citiesToConnect
     | length citiesToConnect < 2 = 
         error "You can't create a tunnel with fewer than 2 cities."
     | not (all (`elem` cities) citiesToConnect) = 
@@ -74,26 +95,26 @@ tunelRA (Reg cities links tunnels) citiesToConnect
         any (\link -> linksL c1 c2 link) links && linkedCheck links (c2:rest)
     linkedCheck _ _ = True
 
-    updateLinkCapacities :: [Link] -> [City] -> [Link]
-    updateLinkCapacities [] _ = []
-    updateLinkCapacities (link:restLinks) citiesToConnect =
-        let (city1, city2, quality) = getLinkInfo link
-        in if (city1, city2) `elem` linksToCheck
-            then decreaseLQ link : updateLinkCapacities restLinks citiesToConnect
-            else link : updateLinkCapacities restLinks citiesToConnect
+    -- updateLinkCapacities :: [Link] -> [City] -> [Link]
+    -- updateLinkCapacities [] _ = []
+    -- updateLinkCapacities (link:restLinks) citiesToConnect =
+    --     let (city1, city2, quality) = getLinkInfo link
+    --     in if (city1, city2) `elem` linksToCheck
+    --         then decreaseLQ link : updateLinkCapacities restLinks citiesToConnect
+    --         else link : updateLinkCapacities restLinks citiesToConnect
     
     getLinkInfo :: Link -> (City, City, Quality)
     getLinkInfo (Lin city1 city2 quality) = (city1, city2, quality)
 
-    decreaseLQ :: Link -> Link
-    decreaseLQ (Lin city1 city2 quality) =
-        Lin city1 city2 (decreaseQ quality)
+    -- decreaseLQ :: Link -> Link
+    -- decreaseLQ (Lin city1 city2 quality) =
+    --     Lin city1 city2 (decreaseQ quality)
     
     linksToCheck = [(city1, city2) | (city1, city2, _) <- map getLinkInfo links]
 
--- tiene que haber un link preexistente entre las ciudades del camino. Es decir, si se pasa region [A, B, C], tiene que haber un túnel de A a B y de B a C.
--- las ciudades que se pasan tienen que ser data City
--- los data link tienen una capacidad entre A y B, otra entre B y C. Para hacer un túnel se necesita que la capacidad de todos los links sea suficiente. Además, una vez creado el tunel, la capacidad se reduce en 1 en todos los links del túnel
+
+
+-- los data link tienen una capacidad entre A y B, otra entre B y C. Para hacer un túnel se necesita que la capacidad de todos los links sea suficiente.
 
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
@@ -114,6 +135,18 @@ availableCapacityForR (Reg cities links tunels) city1 city2 =
     Just link -> CapacityL link
     Nothing -> error "NoMatchingLink: No link connects the provided cities"
 
+    -- hasSufficientQ :: [Link] -> (City, City) -> Bool
+    -- hasSufficientQ links (c1, c2) = any (\link -> capacityL link > 0) [getLink c1 c2 | link <- links]
+
+-- ARREGLAR
+-- Si hay tunel, se reduce la capacidad
 
 -- Describir los distintos esecenarios <- creo que tiene que haber un archivo con esto, donde se manifiesten todas las decisiones tomadas
 -- links repetidos -> ?
+
+
+-- emilio
+eslaPrimera c [] = False 
+eslaPrimera c a:[] = connectsL a c 
+eslaPrimera c a:b:ls = -- && not(connectsL a c)
+

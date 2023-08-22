@@ -17,7 +17,7 @@ tunelRA (Reg cities links tunels) citiesToConnect
     | not (all (`elem` cities) citiesToConnect) = error "Some cities are not in the region."
     | not (all (hasExistingL links) linksToCheck) = error "Missing link between cities."
     | not (all (hasSufficientQ links) linksToCheck) = error "Insufficient capacity in some links."
-    | otherwise = Reg cities (updateLQ links citiesToConnect) (newTunnel : tunels)
+    | otherwise = Reg cities links (newTunnel : tunels)
   where
     linksToCheck = zip citiesToConnect (tail citiesToConnect)
     newTunnel = newT [getLink city1 city2 | (city1, city2) <- linksToCheck]
@@ -30,20 +30,6 @@ tunelRA (Reg cities links tunels) citiesToConnect
 
     hasSufficientQ :: [Link] -> (City, City) -> Bool
     hasSufficientQ links (c1, c2) = any (\link -> capacityL link > 0) [getLink c1 c2 | link <- links]
-
-    decreaseQ :: Quality -> Quality
-    decreaseQ quality = newQ newQua ((capacityQ quality)-1) (delayQ quality)
-
-    updateLQ :: [Link] -> [City] -> [Link]
-
-    updateLQ [] _ = []
-    updateLQ (link : restLinks) (c1 : c2 : restCities) =
-            updatedLink : updateLQ restLinks restCities
-        where
-            updatedLink = updateLinkQuality link
-
-    updateLQ links _ = links
-
 
 
 
