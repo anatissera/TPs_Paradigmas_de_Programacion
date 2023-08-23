@@ -20,9 +20,3 @@ usesT linkToCheck (Tun links) = linkToCheck `elem` links
 
 delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
 delayT (Tun links) = sum (map delayL links)
-
-
--- emilio
--- eslaPrimera c [] = False 
--- eslaPrimera c a:[] = connectsL a c 
--- eslaPrimera c a:b:ls = -- && not(connectsL a c)

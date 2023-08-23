@@ -15,10 +15,10 @@ newR :: Region
 newR = Reg [] [] []
 
 foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
-foundR (Reg cities links tunnels) newCity
+foundR (Reg cities links tunels) newCity
     | not (isCityType newCity) = error "InvalidCityType: The second argument must be of type City"
     | not(any(\existingCity -> existingCity == newCity) cities) = error "CityAlreadyExists: A city with the same name already exists in the region."
-    | otherwise = Reg (newCity : cities) links tunnels
+    | otherwise = Reg (newCity : cities) links tunels
   where
     isCityType :: City -> Bool
     isCityType city = case cast city of
@@ -28,10 +28,10 @@ foundR (Reg cities links tunnels) newCity
 linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
 linkR (Reg cities links tunels) city1 city2 quality
     | not(any(\existingCity -> existingCity == city1)cities) || not(any(\existingCity -> existingCity == city2)cities) = error "At least one city is not in the region."
+    | any(\link -> linksL city1 city2 link) links = error "Cities are already linked"
     | otherwise = Reg cities (newLink : links) tunels
   where
     newLink = newL city1 city2 quality
--- atajar si ya hay un link entre esas ciudades? pero qué si quiere aumentar la quality por ejemplo?? DECISIÓN A TOMAR
 
 tunelR :: Region -> [City] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 tunelR region@(Reg cities links tunels) citiesToConnect
@@ -63,7 +63,7 @@ connectedR (Reg cities links tunels) city1 city2
 
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
 linkedR (Reg cities links tunels) city1 city2 = any (\link -> linksL city1 city2 link) links
--- ATAJAR SI LAS CIUDADES ESTAN EN LA REGION, codigo repetido? (Igual al de arriba?)
+-- ATAJAR SI LAS CIUDADES ESTAN EN LA REGION, codigo repetido? (Igual al de arriba?) -> Hacer una funcion
 
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 delayR (Reg cities links tunels) city1 city2 =
@@ -72,15 +72,11 @@ delayR (Reg cities links tunels) city1 city2 =
     Nothing -> error "No tunnel connects the provided cities"
 
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
-availableCapacityForR (Reg _ links tunnels) city1 city2 =
+availableCapacityForR (Reg _ links tunels) city1 city2 =
     case find (\link -> linksL city1 city2 link) links of
-        Just link -> capacityL link - usedCapacityForR tunnels link
+        Just link -> capacityL link - usedCapacityForR tunels link
         Nothing -> error "No link connects the provided cities"
   where
     usedCapacityForR :: [Tunel] -> Link -> Int
-    usedCapacityForR tunnels link =
-        sum [1 | tunel <- tunnels, usesT link tunel]
-        
-
--- Describir los distintos esecenarios <- tiene que haber un archivo con esto, donde se manifiesten todas las decisiones tomadas
--- links repetidos -> ?
+    usedCapacityForR tunels link =
+        sum [1 | tunel <- tunels, usesT link tunel]
