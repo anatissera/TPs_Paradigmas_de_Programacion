@@ -25,16 +25,13 @@ foundR (Reg cities links tunnels) newCity
         Just (_ :: City) -> True
         Nothing -> False
 
-
 linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
 linkR (Reg cities links tunels) city1 city2 quality
-    | not(any(\existingCity -> existingCity == city1)cities) || not(any(\existingCity -> existingCity == city2)cities) = 
-        error "At least one city is not in the region."
+    | not(any(\existingCity -> existingCity == city1)cities) || not(any(\existingCity -> existingCity == city2)cities) = error "At least one city is not in the region."
     | otherwise = Reg cities (newLink : links) tunels
   where
     newLink = newL city1 city2 quality
-
--- Si ya hay 
+-- atajar si ya hay un link entre esas ciudades? pero qué si quiere aumentar la quality por ejemplo?? DECISIÓN A TOMAR
 
 tunelR :: Region -> [City] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 tunelR region@(Reg cities links tunels) citiesToConnect
@@ -42,27 +39,31 @@ tunelR region@(Reg cities links tunels) citiesToConnect
         error "You can't create a tunnel with fewer than 2 cities."
     | not (all (`elem` cities) citiesToConnect) = 
         error "Some cities are not in the region."
-    | not (all (hasExistingL links) linksToCheck) = 
+    | not (all (hasExistingL links) linksToCheck) =
         error "Missing link between cities."
-    | not((availableCapacityForR region (head cities) (last cities)) > 0) = 
-        error "Insufficient capacity in some links."
-    | otherwise = Reg cities links (newTunnel : tunels)
+    | any (\(city1, city2) -> availableCapacityForR region city1 city2 < 1) linksToCheck = 
+        error "Insufficient capacity in some links."                        
   where
     linksToCheck = zip citiesToConnect (tail citiesToConnect)
-    newTunnel = newT [getLink city1 city2 | (city1, city2) <- linksToCheck]
-    
-    getLink :: City -> City -> Link
-    getLink c1 c2 = head [link | link <- links, connectsL c1 link && connectsL c2 link]
 
     hasExistingL :: [Link] -> (City, City) -> Bool
     hasExistingL links (c1, c2) = any (\link -> linksL c1 c2 link) links
 
+    newTunnel = newT [getLink city1 city2 | (city1, city2) <- linksToCheck]
+
+    getLink :: City -> City -> Link
+    getLink c1 c2 = head [link | link <- links, connectsL c1 link && connectsL c2 link]
+
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
-connectedR (Reg cities links tunels) city1 city2 = any (\tunel -> connectsT city1 city2 tunel) tunels
+connectedR (Reg cities links tunels) city1 city2
+ | not(city1 `elem` cities && city2 `elem` cities) = error "Some cities are not in the region"
+ | null tunels = error "There is not a tunnel in the region yet"
+ | otherwise = any (\tunel -> connectsT city1 city2 tunel) tunels 
 
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
 linkedR (Reg cities links tunels) city1 city2 = any (\link -> linksL city1 city2 link) links
+-- ATAJAR SI LAS CIUDADES ESTAN EN LA REGION, codigo repetido? (Igual al de arriba?)
 
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 delayR (Reg cities links tunels) city1 city2 =
