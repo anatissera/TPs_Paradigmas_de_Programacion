@@ -31,6 +31,25 @@ tunelRA (Reg cities links tunels) citiesToConnect
     hasSufficientQ :: [Link] -> (City, City) -> Bool
     hasSufficientQ links (c1, c2) = any (\link -> capacityL link > 0) [getLink c1 c2 | link <- links]
 
+-- TIZIANO
+-- tunelR
 
+tunelRT :: Region -> [City] -> Region
+tunelRT (Reg cities links tunnels) citiesToConnect
+    | length [city | city <- citiesToConnect, city `elem` cities] /= length citiesToConnect =
+        error "the cities are not in the region"
+    | length citiesToConnect < 2 =
+        error "need at least 2 cities to create a tunnel"
+    | not (linkedCheck links citiesToConnect) =
+        error "cities are not linked"
+    | otherwise =
+        Reg cities links ((newT (verifiedLinks links citiesToConnect)):tunnels)
+  where
 
+    linkedCheck links (c1:c2:rest)
+        | any (\link -> linksL c1 c2 link) links = linkedCheck links (c2:rest)
+        | otherwise = False
+    linkedCheck _ _ = True
 
+    verifiedLinks links (c1:c2:rest) = filter (\link -> linksL c1 c2 link) links  ++ verifiedLinks links (c2:rest)
+    verifiedLinks _ _ = []
