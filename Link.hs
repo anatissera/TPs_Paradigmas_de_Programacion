@@ -1,5 +1,3 @@
-
-
 module Link ( Link, newL, linksL, connectsL, capacityL, delayL)
    where
 

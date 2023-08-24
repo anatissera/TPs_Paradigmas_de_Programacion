@@ -67,7 +67,3 @@ connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades est
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
-
-
--- dos ciudades estan conectadas si son el inicio y el final de una conexion (túnel)
--- tiene que haber un enlace (link) para hacer un tunel
