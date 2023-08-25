@@ -15,9 +15,9 @@ connectsT city1 city2 (Tun links)
   | length links == 1 && city1 == city2 = error "A tunel with just one city does not exist"
   | length links == 2 = areHeadAndTail && not (linksL city1 city2 (head links) || linksL city1 city2 (last links)) 
   | otherwise = areHeadAndTail
-  
   where
     areHeadAndTail = (connectsL city1 (head links) && connectsL city2 (last links)) || (connectsL city2 (head links) && connectsL city1 (last links))
+-- Preguntar si la lista de links esta ordenada en base al recorrido del tunel
 
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese link
 usesT linkToCheck (Tun links) = linkToCheck `elem` links
