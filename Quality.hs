@@ -5,8 +5,8 @@ data Quality = Qua String Int Float deriving (Eq, Show)
 
 newQ :: String -> Int -> Float -> Quality
 newQ newQua capacity delay
-   | capacity < 0 = error "Capacity can not be negative"
-   | delay < 0 = error "Delay can not be negative"
+   | capacity < 0 = error "Capacity cannot be negative"
+   | delay < 0 = error "Delay cannot be negative"
    | otherwise = Qua newQua capacity delay
 
 capacityQ :: Quality -> Int   -- cuantos túneles puede tolerar esta conexión

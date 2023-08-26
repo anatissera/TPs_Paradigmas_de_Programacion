@@ -27,6 +27,8 @@ linkR (Reg cities links tunels) city1 city2 quality
         error "At least one city is not in the region."
     | any(\link -> linksL city1 city2 link) links = 
         error "Cities are already linked"
+    | city1 == city2 = 
+        error "Is not posibble to link the same city"
     | otherwise = Reg cities (newLink : links) tunels
   where
     newLink = newL city1 city2 quality
@@ -42,7 +44,9 @@ tunelR region@(Reg cities links tunels) citiesToConnect
     | not (all (hasExistingL links) linksToCheck) =
         error "Missing link between cities."
     | any (\(city1, city2) -> availableCapacityForR region city1 city2 < 1) linksToCheck = 
-        error "Insufficient capacity in some links."       
+        error "Insufficient capacity in some links."     
+    | head cities == last cities =
+        error "Cannot connect a city with itself."  
     | otherwise = Reg cities links (newTunel : tunels)                 
   where
     linksToCheck = zip citiesToConnect (tail citiesToConnect)

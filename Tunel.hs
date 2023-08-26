@@ -12,7 +12,7 @@ newT links = Tun links
 
 connectsT :: City -> City -> Tunel -> Bool -- inidca si este tunel conecta estas dos ciudades distintas
 connectsT city1 city2 (Tun links)
-  | length links == 1 && city1 == city2 = error "A tunel with just one city does not exist"
+  | city1 == city2 = error "Cities cannot be connected to themselves."
   | length links == 2 = areHeadAndTail && not (linksL city1 city2 (head links) || linksL city1 city2 (last links)) 
   | otherwise = areHeadAndTail
   where
