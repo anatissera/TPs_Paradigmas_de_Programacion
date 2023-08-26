@@ -1,4 +1,4 @@
-module TP1.Link ( Link, newL, linksL, connectsL, capacityL, delayL )
+module Link ( Link, newL, linksL, connectsL, capacityL, delayL )
    where
 
 import City
