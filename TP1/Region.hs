@@ -1,11 +1,11 @@
 module Region ( Region, newR, foundR, linkR, tunelR, connectedR, linkedR, delayR, availableCapacityForR)
    where
 
-import City 
-import Quality 
-import Tunel 
-import Link
-import Point
+import TP1.City 
+import TP1.Quality 
+import TP1.Tunel 
+import TP1.Link
+import TP1.Point
 import Data.List (find)
 
 data Region = Reg [City] [Link] [Tunel] deriving (Eq, Show)
