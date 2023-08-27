@@ -24,7 +24,6 @@ exception action = do
 testF :: IO Bool -> Bool
 testF action = unsafePerformIO action
 
--- Point
 northEast = newP 9 12
 northWest = newP (-3) 13
 southEast = newP 10 (-4)
@@ -33,7 +32,6 @@ east = newP  12 6
 west = newP (-5) 7
 center = newP 5 6
 
--- City
 cam = newC "Cambridge" northEast
 nHam = newC "Northampton" northWest
 sHam = newC "Southampton" southWest
@@ -43,7 +41,6 @@ lon = newC "London"  east
 lon1 = newC "London" center
 sil = newC "Silverstone" northWest
 
--- Quality
 high0 = newQ "High" 7 (-2) -- < 0
 high = newQ "High" 7 2
 mediumHigh = newQ "Medium-High" 5 3
@@ -52,7 +49,6 @@ mediumLow = newQ "Medium-Low" 3 5
 low = newQ "Low" 1 6
 low0 = newQ "Low" (-4) 6 -- < 0
 
--- Region
 uk = newR
 uk1 = foundR uk cam
 uk2 = foundR uk1 nHam
@@ -64,7 +60,7 @@ uk7 = foundR uk6 oxf
 uk0 = foundR uk7 lon1 -- name already exists
 uk02 = foundR uk7 sil -- location is used
 
-uk8 = linkR uk4 nHam oxf medium -- not in region
+uk8 = linkR uk7 sil oxf medium -- not in region
 uk9 = linkR uk7 oxf lon high
 uk10 = linkR uk9 oxf nHam medium 
 uk11 = linkR uk10 nHam cam mediumHigh 
@@ -99,15 +95,19 @@ region = [
          testF (exception (evaluate uk12)), 
          not(linkedR uk15 oxf ebo),
          testF (exception (evaluate uk15_0)),
+         not(linkedR uk15 oxf ebo),
          testF (exception (evaluate uk16)),
          availableCapacityForR uk17 cam ebo == 0,
          testF (exception (evaluate uk18)), 
+         connectedR uk20 lon oxf,
+         not(connectedR uk20 lon cam),
          testF (exception (evaluate uk21)),
+         linkedR uk15 lon sil,
          testF (exception (evaluate uk22)),
          linkedR uk9 oxf lon,
          connectedR uk17 lon sHam,
-         availableCapacityForR uk20 nHam cam == (capacityQ mediumHigh)-1 ,
-         availableCapacityForR uk20 oxf lon == (capacityQ high)-3, 
+         availableCapacityForR uk20 nHam cam == capacityQ mediumHigh-1 ,
+         availableCapacityForR uk20 oxf lon == capacityQ high-3, 
          testF (exception (evaluate (connectedR uk20 lon sil))),
          testF (exception (evaluate (connectedR uk20 lon lon))),
          not(connectedR uk20 nHam ebo),
@@ -118,13 +118,5 @@ region = [
          delayR uk20 oxf cam == delayQ high * distanceC oxf lon + delayQ mediumHigh * distanceC lon cam,
          connectedR uk20 cam oxf,
          testF (exception (evaluate uk23)),
-         testF (exception (evaluate uk24)),
-         True]
-
-notRegion :: [Bool]
-notRegion = [
-    linkedR uk15 oxf ebo,
-    linkedR uk15 lon sil, 
-    connectedR uk20 lon cam,
-    connectedR uk17 cam sHam, 
-    False]
+         testF (exception (evaluate uk24))
+         ]
