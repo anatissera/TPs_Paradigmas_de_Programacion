@@ -1,27 +1,34 @@
 package queue;
+import java.util.ArrayList;
+
+import hanoi.Disc;
 
 public class Queue {
 	
-	public int size = 0;
-
-  public boolean isEmpty() {
-		return size == 0;
+	public static String EmptyQueue = "Queue is empty";
+	public static String ExpectedErrorFail = "Expected Error was not thrown.";
+	
+	private int size = 0;
+	
+	private ArrayList<Queue> queueElements = new ArrayList();
+	
+	
+	public boolean isEmpty() {
+		return queueElements.size() == 0;
 	}
 
-	public Queue add( Object  cargo ) {
-		// TODO Auto-generated method stub
-		return this;
+	public Queue add( Object cargo ) {
+		queueElements.add(cargo);
 		size ++;
 	}
 
 	public Object take() {
-    // TODO Auto-generated method stub
-		return null;
+		size --;
+		return queueElements.remove(0);
 	}
 
 	public Object head() {
-		// TODO Auto-generated method stub
-    return null;
+		return queueElements.get(0);
 	}
 
 	public int size() {
