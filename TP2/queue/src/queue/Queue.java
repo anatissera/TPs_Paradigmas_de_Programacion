@@ -1,26 +1,37 @@
 package queueTester;
 import java.util.ArrayList;
 
-public abstract class Queue {
+public class Queue {
 	
-//	private int size = 0;
-//	
-//	private ArrayList<Object> queueElements = new ArrayList<>();
-//	
-//
-//	static Queue EmptyQueue() {
-//		return new EmptyQueue();
-//		}
-//		
-//	static Queue NonEmptyQueue() {
-//		return new NonEmptyQueue();
-//	}
+	private ArrayList<Object> queueElements = new ArrayList<>();
+	
+	Variables does = new ThrowsError();
 
-	public abstract boolean isEmpty();
-	public abstract Queue add( Object cargo );
-	public abstract Object take();
-	public abstract Object head();
-	public abstract int size();
-
-
+	boolean isEmpty() {
+		return queueElements.isEmpty();
+	}
+	
+	Queue add(Object cargo) {
+		queueElements.add(cargo);
+		does = does.nextState();
+		return this;
+	}
+	
+	Object take() {
+		does = does.previousState(); 
+		return queueElements.remove(0);
+	}
+	
+	Object head() {
+		return does.head(queueElements);
+	}
+	
+	int size() {
+		return queueElements.size();
+	}
+	
+	public ArrayList<Object> getQueueElements() {
+	       return queueElements;
+	}
+	    
 }
