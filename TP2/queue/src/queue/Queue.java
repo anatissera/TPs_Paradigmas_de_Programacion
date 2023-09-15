@@ -5,7 +5,7 @@ public class Queue {
 	
 	private ArrayList<Object> queueElements = new ArrayList<>();
 	
-	Variables does = new ThrowsError();
+	QueueState state = new EmptyQueueState();
 
 	boolean isEmpty() {
 		return queueElements.isEmpty();
@@ -13,25 +13,21 @@ public class Queue {
 	
 	Queue add(Object cargo) {
 		queueElements.add(cargo);
-		does = does.nextState();
+		state = new NonEmptyQueueState(state);
 		return this;
 	}
 	
 	Object take() {
-		does = does.previousState(); 
+		state = state.previousState(); 
 		return queueElements.remove(0);
 	}
 	
 	Object head() {
-		return does.head(queueElements);
+		return state.head(queueElements);
 	}
 	
 	int size() {
 		return queueElements.size();
 	}
-	
-	public ArrayList<Object> getQueueElements() {
-	       return queueElements;
-	}
-	    
+   
 }

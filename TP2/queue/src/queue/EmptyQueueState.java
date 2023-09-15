@@ -2,15 +2,16 @@ package queueTester;
 
 import java.util.ArrayList;
 
-public class ThrowsError extends Variables {
+public class EmptyQueueState extends QueueState {
 
 	public static String EmptyQueueMessage = "Queue is empty";
 
-    public Variables previousState() {
-        throw new Error(EmptyQueueMessage);
+    public QueueState previousState() {
+    	throw new Error(EmptyQueueMessage);
     }
 
     public Object head(ArrayList<Object> queueElements) {
-        throw new Error(EmptyQueueMessage);
+    	throw new Error(EmptyQueueMessage);
     }
+    
 }

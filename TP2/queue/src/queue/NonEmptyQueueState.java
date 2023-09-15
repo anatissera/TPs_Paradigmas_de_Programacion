@@ -2,15 +2,15 @@ package queueTester;
 
 import java.util.ArrayList;
 
-public class ExecutesProgramme extends Variables {
+public class NonEmptyQueueState extends QueueState {
 
-    private final Variables previousState;
+    private final QueueState previousState;
 
-    public ExecutesProgramme(Variables previousDoes) {
+    public NonEmptyQueueState(QueueState previousDoes) {
         this.previousState = previousDoes;
     }
 
-    public Variables previousState() {
+    public QueueState previousState() {
         return previousState;
     }
 
