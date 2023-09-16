@@ -1,4 +1,4 @@
-package queueTester;
+package queue;
 
 import org.junit.jupiter.api.Test;
 
