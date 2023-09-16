@@ -1,9 +1,12 @@
 package queue;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 public class QueueTest {
 	
@@ -81,8 +84,9 @@ public class QueueTest {
 	return queue;
   }
 
-  private void emptyQueueMessageEqualsErrorMessage(Runnable toBeRun) {
+  private void emptyQueueMessageEqualsErrorMessage( Executable executable ) {
 	assertEquals(EmptyQueueState.EmptyQueueMessage, 
-			assertThrows(Error.class, () -> toBeRun.run()).getMessage());
+			assertThrows(Error.class, executable ).getMessage());
   }
+
 }
