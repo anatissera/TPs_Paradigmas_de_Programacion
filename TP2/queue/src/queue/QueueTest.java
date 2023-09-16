@@ -1,6 +1,7 @@
 package queueTester;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
@@ -81,8 +82,8 @@ public class QueueTest {
 	return queue;
   }
 
-  private void emptyQueueMessageEqualsErrorMessage(Runnable toBeRun) {
-	assertEquals(EmptyQueueState.EmptyQueueMessage, 
-			assertThrows(Error.class, () -> toBeRun.run()).getMessage());
+  private void emptyQueueMessageEqualsErrorMessage( Executable executable ) {
+	assertEquals( EmptyQueueState.EmptyQueueMessage, 
+			assertThrows( Error.class, executable ).getMessage() );
   }
 }
