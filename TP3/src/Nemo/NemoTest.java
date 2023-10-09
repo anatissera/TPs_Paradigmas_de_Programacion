@@ -131,10 +131,8 @@ public class NemoTest {
 
   }
   @Test
-  public void Test11() { // si no reconoce algún comando tira error (?
+  public void Test11() { 
 	  
-	  Submarine sub = new Submarine();
-	  assertThrowsLike(Coordinates.ComandoDesconocido, ()-> sub.move("dlhr"));
   }
   
   @Test

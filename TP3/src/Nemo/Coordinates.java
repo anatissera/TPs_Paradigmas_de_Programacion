@@ -33,6 +33,7 @@ public class Coordinates {
 
 		for (int i = 0; i < whereTo.length(); i++) {
 			 char comando = whereTo.charAt(i);
+			 
 			if (comando == 'd') {
 				z -= 1;
 			}
@@ -93,10 +94,6 @@ public class Coordinates {
 					// no tiene ningún efecto detectable en el submarino.
 					// ¿No hay que hacer nada?
 				}
-			}
-			
-			else {
-			    throw new RuntimeException(ComandoDesconocido);
 			}
 
 

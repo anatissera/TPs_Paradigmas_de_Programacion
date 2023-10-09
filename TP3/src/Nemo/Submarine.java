@@ -5,6 +5,7 @@ public class Submarine {
 	public Coordinates coordinates;
 	
 //	public Orientation orientation;
+	 
 	
 	public Submarine  () {
 		coordinates = new Coordinates();
@@ -27,10 +28,17 @@ public class Submarine {
 	}
 	
 	 public Submarine move(String whereTo) {
-		coordinates.modify(whereTo); //¿cómo hacer para que se llame a coordinates y a orientation?
+//			for (int i = 0; i < whereTo.length(); i++) {
+//				 char comando = whereTo.charAt(i);
+//				 coordinates.modify(comando);
+//			}
+		 //¿cómo hacer para que se llame a coordinates y a orientation?
+		 coordinates.modify(whereTo);
 		return null;
 		 
 	 }
+	 
+//	 public abstract Submarine modify( String command );
 	 
  
 }
