@@ -1,10 +1,14 @@
 package Nemo;
 
 public class Coordinates {
+
+	public static String NoSePuedeLanzarLaCapsula = "No se puede lanzar la cápsula por debajo del primer nivel de inmersión";
+	public static String ComandoDesconocido = "Comando desconocido";
+	
 	public int x = 0;
 	public int y = 0;
 	public int z = 0;
-	public String direction;
+	public String direction = "North";
 	
 	public Coordinates() {
 	}
@@ -27,14 +31,17 @@ public class Coordinates {
 		// o sea solo se puede lanzar en la superficie (0) o el primer nivel de profundidad (-1).
 		// "uuuu" no hace nada porque no se puede ascender más allá de la superficie.
 
-		for (int= 0, i < whereTo.length(), i++){
-			if (whereTo.equals("d")) {
+		for (int i = 0; i < whereTo.length(); i++) {
+			 char comando = whereTo.charAt(i);
+			if (comando == 'd') {
 				z -= 1;
 			}
-			if (whereTo.equals("u")) {
-				z += 1;
+			else if (comando == 'u') {
+				if (z < 0) {
+					z += 1;
+				}	
 			}
-			if (whereTo.equals("l")) {
+			else if (comando == 'l') {
 				if (direction.equals("North")) {
 					direction = "West";
 				}
@@ -47,8 +54,9 @@ public class Coordinates {
 				else if (direction.equals("East")) {
 					direction = "North";
 				}
+				// conviene hacer una lista linkeada que vaya para adelante y para atrás
 			}
-			if (whereTo.equals("r")) {
+			else if (comando == 'r') {
 				if (direction.equals("North")) {
 					direction = "East";
 				}
@@ -62,7 +70,7 @@ public class Coordinates {
 					direction = "North";
 				}
 			}
-			if (whereTo.equals("f")) {
+			else if (comando == 'f') {
 				if (direction.equals("North")) {
 					y += 1;
 				}
@@ -75,17 +83,22 @@ public class Coordinates {
 				else if (direction.equals("West")) {
 					x -= 1;
 				}
-				if (whereTo.equals("m")) {
-					if (z < -1) {
-						throw new RunTimeException("No se puede lanzar la cápsula por debajo del primer nivel de inmersión");
-					}
-					else {
-						// lanzar la cápsula
-						// no tiene ningún efecto detectable en el submarino.
-						// ¿No hay que hacer nada?
-					}
+			}
+			else if (comando == 'm') {
+				if (z < (-1)) {
+					throw new RuntimeException(NoSePuedeLanzarLaCapsula);
 				}
-		}
+				else {
+					// lanzar la cápsula
+					// no tiene ningún efecto detectable en el submarino.
+					// ¿No hay que hacer nada?
+				}
+			}
+			
+			else {
+			    throw new RuntimeException(ComandoDesconocido);
+			}
+
 
 		}
 		return null;

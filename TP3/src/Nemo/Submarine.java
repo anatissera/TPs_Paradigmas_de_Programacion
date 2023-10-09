@@ -27,7 +27,7 @@ public class Submarine {
 	}
 	
 	 public Submarine move(String whereTo) {
-		coordinates.modify(whereTo);
+		coordinates.modify(whereTo); //¿cómo hacer para que se llame a coordinates y a orientation?
 		return null;
 		 
 	 }
