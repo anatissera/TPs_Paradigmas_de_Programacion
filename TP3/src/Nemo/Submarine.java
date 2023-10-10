@@ -75,10 +75,11 @@ public class Submarine {
 //	    }
 	    
 	    public Coordinates coordinates;
+	    public Depth depth = new IsOnSurface();
 	    public Orientation orientation = new North();
 
 	    public Submarine() {
-	        coordinates = new Coordinates();
+	        coordinates = new Coordinates(0, 0);
 	    }
 
 	    public void move(String commands) {
@@ -93,7 +94,7 @@ public class Submarine {
 	    }
 
 	    public int getDepth() {
-	        return coordinates.getZ();
+	        return depth.getZ();
 	    }
 
 	    public int position_X() {
