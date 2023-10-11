@@ -1,9 +1,12 @@
 package Nemo;
 
-	public abstract class Orientation {
-		public String direction = "North"; //debe inicializarse en Submarine
-		public String getDirection() { return direction; }
-	    public abstract Orientation turnLeft();
-	    public abstract Orientation turnRight();
-	    public abstract Orientation moveForward(Coordinates coordinates);
-	}	
+public abstract class Orientation {
+
+	public String cardinalPoint;
+	public String getDirection() { return cardinalPoint; }
+	
+	public abstract void turnRight(Submarine submarine);
+	public abstract void turnLeft(Submarine submarine);
+	public abstract void moveForward(Coordinates coordinate);
+	
+}

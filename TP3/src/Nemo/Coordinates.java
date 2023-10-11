@@ -5,11 +5,9 @@ public class Coordinates {
 	public static String NoSePuedeLanzarLaCapsula = "No se puede lanzar la cápsula por debajo del primer nivel de inmersión";
 	public static String ComandoDesconocido = "Comando desconocido";
 	
-	public int x; //inicializar los valores en Submarine
+	public int x;
 	public int y;
-//	public int z;
-//	public String direction = "North";
-	
+
     public Coordinates(int x, int y) {
         this.x = x;
         this.y = y;
@@ -17,9 +15,7 @@ public class Coordinates {
 	
 	public int getX() { return x; }
 	public int getY() { return y; }
-//	public int getZ() { return z; }
-//	public String getDirection() { return direction; }
-	
+
 	  public void moveEast() {
 	        x += 1;
 	    }

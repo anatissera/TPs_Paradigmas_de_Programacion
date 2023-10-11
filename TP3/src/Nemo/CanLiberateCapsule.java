@@ -2,6 +2,10 @@ package Nemo;
 
 public class CanLiberateCapsule extends DepthState{
 	
+	public DepthState launchCapsule() {
+		return null;
+	}
+	
 	 public CanLiberateCapsule depthState = new IsOnSurface();
 	 
 	 public CanLiberateCapsule moveDown() {
@@ -14,12 +18,13 @@ public class CanLiberateCapsule extends DepthState{
 		return this;
 	 }
 	
-	public DepthState launchCapsule() {
-		return null;
-	}
-	
 	public DepthState previousState() {
 			return this.moveUp();
+	}
+
+	@Override
+	public int getZ() {
+		return depthState.getZ();
 	}
 	
 }

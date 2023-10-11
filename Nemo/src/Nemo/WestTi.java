@@ -16,5 +16,5 @@ public class West extends Orientation {
 		submarine.coordinates = new Coordinates(submarine.positionX - 1, 
 												submarine.positionY, 
 												submarine.positionZ);
-	}
+	
 }

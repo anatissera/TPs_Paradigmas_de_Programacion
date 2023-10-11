@@ -2,20 +2,18 @@ package Nemo;
 
 public class East extends Orientation {
 
-    @Override
-    public Orientation turnLeft() {
-        return new North();
-    }
+	public String cardinalPoint = "East";
 
-    @Override
-    public Orientation turnRight() {
-        return new South();
-    }
+	public void turnRight(Submarine submarine) { 
+		submarine.orientation = new South();
+	}
 
-    @Override
-    public Orientation moveForward(Coordinates coordinates) {
+	public void turnLeft(Submarine submarine) {
+		submarine.orientation = new North();
+	}
+
+    public void moveForward(Coordinates coordinates) {
         coordinates.moveEast();
-		return null;
     }
 
 }

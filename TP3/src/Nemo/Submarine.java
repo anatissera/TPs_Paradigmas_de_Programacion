@@ -75,7 +75,7 @@ public class Submarine {
 //	    }
 	    
 	    public Coordinates coordinates;
-	    public DepthState depth;
+	    public Depth depth;
 	    public Orientation orientation = new North();
 
 	    public Submarine() {
@@ -106,31 +106,32 @@ public class Submarine {
 	    }
 
 	    public String getOrientation() {
-	        return coordinates.getDirection();
+	        return orientation.getDirection();
 	    }
 
+	    
 	    public void executeLeft() {
-	        orientation = orientation.turnLeft();
+	        orientation.turnLeft();
 	    }
 
 	    public void executeRight() {
-	        orientation = orientation.turnRight();
+	        orientation.turnRight();
 	    }
 
 	    public void executeForward() {
-	        orientation = orientation.moveForward(coordinates);
+	        orientation.moveForward(coordinates);
 	    }
 
 	    public void executeDown() {
-	        orientation = coordinates.moveDown();
+	        depth.moveDown();
 	    }
 
 	    public void executeUp() {
-	        orientation = coordinates.moveUp();
+	        depth.moveUp();
 	    }
 
 	    public void executeLaunchCapsule() {
-	        orientation = coordinates.launchCapsule();
+	        depth.launchCapsule();
 	    }
 
 }

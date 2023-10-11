@@ -3,6 +3,10 @@ package Nemo;
 public class IsNotOnSurface extends CanLiberateCapsule {
 	int z = -1;
 
+	public int getZ() {
+		return z;
+	}
+
 //	@Override
 //	public CanLiberateCapsule moveUp() {
 //		return new IsOnSurface();

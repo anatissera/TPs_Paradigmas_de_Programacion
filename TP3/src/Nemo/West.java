@@ -1,22 +1,19 @@
 package Nemo;
 
 public class West extends Orientation {
-	@Override
-	public Orientation turnLeft() {
-		// TODO Auto-generated method stub
-		return null;
+
+	public String cardinalPoint = "West";
+
+	public void turnRight(Submarine submarine) {
+		submarine.orientation = new North();
 	}
 
-	@Override
-	public Orientation turnRight() {
-		// TODO Auto-generated method stub
-		return null;
+	public void turnLeft(Submarine submarine) {
+		submarine.orientation = new South();
 	}
-
-	  public Orientation moveForward(Coordinates coordinates) {
+	
+	  public void moveForward(Coordinates coordinates) {
 	        coordinates.moveWest();
-			return null;
 	    }
-
-
+	
 }
