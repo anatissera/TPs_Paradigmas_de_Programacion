@@ -11,7 +11,7 @@ public class Depth {
     }
 	
     public void moveUp() {
-        depthState = new CannotLiberateCapsule(depthState); // acá es donde quiero el anterior
+        depthState = new CannotLiberateCapsule(depthState).moveUp(); // acá es donde quiero el anterior
     }
 
 
