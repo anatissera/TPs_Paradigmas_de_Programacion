@@ -75,7 +75,7 @@ public class Submarine {
 //	    }
 	    
 	    public Coordinates coordinates;
-	    public Depth depth = new IsOnSurface();
+	    public DepthState depth;
 	    public Orientation orientation = new North();
 
 	    public Submarine() {
