@@ -1,16 +1,16 @@
 package Nemo;
 
 public class Depth {
-	public int getZ() { return DepthState.getZ(); }
+	public int getZ() { return depthState.getZ(); }
 	
-	public DepthState depthState = new CanLiberateCapsule();
+	public DepthState depthState = new IsOnSurface();
 	
     public void moveDown() {
         depthState = depthState.moveDown();
     }
 	
     public void moveUp() {
-        depthState = new CannotLiberateCapsule(depthState).moveUp(); // acá es donde quiero el anterior
+        depthState = depthState.previousState();
     }
 
 	public void launchCapsule() {

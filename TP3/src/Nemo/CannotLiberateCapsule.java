@@ -1,37 +1,31 @@
 package Nemo;
 
 public class CannotLiberateCapsule extends DepthState {
-	int z = -2;
-	public int getZ() {
-		return z;
-	}
+	public static String CannotLaunchCapsule = "No se puede lanzar la cápsula por debajo del primer nivel de inmersión";
+	
+	private int z;
+	
+	public int getZ() { return z; }
 	
 	public DepthState launchCapsule() {
-		throw new RuntimeException("No se puede lanzar la cápsula por debajo del primer nivel de inmersión");
+		throw new RuntimeException(CannotLaunchCapsule);
 	}
-
-	@Override
-	public DepthState moveUp() {
-		z += 1;
-		return null;
-	}
-
-	@Override
-	public DepthState moveDown() {
-		z -=1;
-		return this;
-	}
-
+	
     private final DepthState previousState;
 
-    public CannotLiberateCapsule(DepthState previousDoes) {
+    public CannotLiberateCapsule(DepthState previousDoes, int z) {
         this.previousState = previousDoes;
+        this.z = z;
     }
 
     public DepthState previousState() {
+    	z +=1;
         return previousState;
     }
 
-
-
+	public DepthState moveDown() {
+		z -=1;
+		return new CannotLiberateCapsule(this, z);
+	}
+	
 }
