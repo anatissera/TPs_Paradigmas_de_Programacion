@@ -9,7 +9,7 @@ public class DownCommand extends Command {
 	}
 	
 	public void excecuteCommand(Submarine submarine) {
-		// deriver to depth
+		submarine.depth.moveDown();
 	}
 
 }

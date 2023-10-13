@@ -12,8 +12,8 @@ public class West extends Orientation {
 		submarine.orientation = new South();
 	}
 	
-	  public void moveForward(Coordinates coordinates) {
-	        coordinates.moveWest();
-	    }
+	public void moveForward(Coordinates coordinates) {
+	    coordinates.moveWest();
+	}
 	
 }

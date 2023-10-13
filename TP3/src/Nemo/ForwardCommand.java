@@ -9,6 +9,6 @@ public class ForwardCommand extends Command {
 	}
 	
 	public void excecuteCommand(Submarine submarine) {
-		submarine.orientation.moveForward(submarine);
+		submarine.orientation.moveForward(submarine.coordinates);
 	}
 }

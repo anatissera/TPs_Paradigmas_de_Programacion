@@ -182,8 +182,8 @@ public class NemoTest {
 	}
 
 	private void checkPosition(Submarine sub, int x, int y, int z, String direction) {
-	    assertEquals(x, sub.position_X());
-	    assertEquals(y, sub.position_Y());
+	    assertEquals(x, sub.getPosition_X());
+	    assertEquals(y, sub.getPosition_Y());
 	    assertEquals(z, sub.getDepth());
 	    assertEquals(direction, sub.getOrientation());
 	}

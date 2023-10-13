@@ -12,13 +12,8 @@ public class North extends Orientation {
 		submarine.orientation = new West();
 	}
 
-//	public void moveForward(Submarine submarine) {
-//		submarine.coordinates = new Coordinates(submarine.positionX, 
-//												submarine.positionY + 1, 
-//												submarine.positionZ);
-//	}
-	
-    public void moveForward(Coordinates coordinates) {
+	public void moveForward(Coordinates coordinates) {
         coordinates.moveNorth();
     }
+	
 }

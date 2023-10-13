@@ -9,6 +9,6 @@ public class MissileCommand extends Command {
 	}
 	
 	public void excecuteCommand(Submarine submarine) {
-		// deriver a depth
+		submarine.depth.launchCapsule();
 	}
 }
