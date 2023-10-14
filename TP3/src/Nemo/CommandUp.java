@@ -1,10 +1,10 @@
 package Nemo;
 
-public class UpCommand extends Command {
+public class CommandUp extends Command {
 
 //	public static String UpCommandMessage = "u";
 	
-	public UpCommand() {
+	public CommandUp() {
 		commandMessage = u;
 	}
 	

@@ -14,7 +14,7 @@ public class Submarine {
 
 	    public Submarine() {
 	        coordinates = new Coordinates(0, 0);
-	        orientation = new North();
+	        orientation = new OrientationNorth();
 	    }
 
 	    public int getDepth() {
@@ -35,7 +35,7 @@ public class Submarine {
 	    
 	    public void move(String commandsMessage) {
 	        List<Command> commandsList = new ArrayList<>();
-	        commandsList.addAll(List.of(new DownCommand(), new UpCommand(), new ForwardCommand(), new RightCommand(), new LeftCommand(), new MissileCommand()));
+	        commandsList.addAll(List.of(new CommandDown(), new CommandUp(), new CommandForward(), new CommandRight(), new CommandLeft(), new CommandMissile()));
 	        for (int i = 0; i < commandsMessage.length(); i++) {
 	            final char currentChar = commandsMessage.charAt(i);
 	            Object command = commandsList.stream()

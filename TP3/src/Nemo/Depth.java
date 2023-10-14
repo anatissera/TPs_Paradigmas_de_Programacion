@@ -3,7 +3,7 @@ package Nemo;
 public class Depth {
 	public int getZ() { return depthState.getZ(); }
 	
-	public DepthState depthState = new IsOnSurface();
+	public DepthState depthState = new DepthIsOnSurface();
 	
     public void moveDown() {
         depthState = depthState.moveDown();

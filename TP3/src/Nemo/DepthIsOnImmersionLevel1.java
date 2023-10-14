@@ -1,6 +1,6 @@
 package Nemo;
 
-public class IsOnImmersionLevel1 extends DepthState{
+public class DepthIsOnImmersionLevel1 extends DepthState{
 	
 	private int z = -1;
 	
@@ -11,11 +11,11 @@ public class IsOnImmersionLevel1 extends DepthState{
 	}
 	
 	 public DepthState moveDown() {
-		return new CannotLiberateCapsule(this, z - 1);
+		return new DepthCannotLiberateCapsule(this, z - 1);
 	 }
 	
 	public DepthState previousState() {
-		return new IsOnSurface();
+		return new DepthIsOnSurface();
 	}
 
 }

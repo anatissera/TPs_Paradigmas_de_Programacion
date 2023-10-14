@@ -9,7 +9,7 @@ import java.util.function.Function;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-public class NemoTest {
+public class TestNemo {
   
   @Test
   public void Test00() { 

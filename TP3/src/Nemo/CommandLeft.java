@@ -1,10 +1,10 @@
 package Nemo;
 
-public class LeftCommand extends Command {
+public class CommandLeft extends Command {
 
 //	public static char LeftCommandMessage = 'l';
 	
-	public LeftCommand() {
+	public CommandLeft() {
 		commandMessage = l;
 	}
 	

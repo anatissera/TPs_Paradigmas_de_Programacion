@@ -1,10 +1,10 @@
 package Nemo;
 
-public class ForwardCommand extends Command {
+public class CommandForward extends Command {
 
 //	private static char ForwardCommandMessage = 'f';
 
-	public ForwardCommand () {
+	public CommandForward () {
 		commandMessage = f;
 	}
 

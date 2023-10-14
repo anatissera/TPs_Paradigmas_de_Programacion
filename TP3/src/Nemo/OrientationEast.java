@@ -1,15 +1,15 @@
 package Nemo;
 
-public class East extends Orientation {
+public class OrientationEast extends Orientation {
 
 	public String cardinalPoint = "East";
 
 	public void turnRight(Submarine submarine) { 
-		submarine.orientation = new South();
+		submarine.orientation = new OrientationSouth();
 	}
 
 	public void turnLeft(Submarine submarine) {
-		submarine.orientation = new North();
+		submarine.orientation = new OrientationNorth();
 	}
 
     public void moveForward(Coordinates coordinates) {

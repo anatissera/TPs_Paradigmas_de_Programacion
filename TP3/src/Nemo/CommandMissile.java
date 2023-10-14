@@ -1,10 +1,10 @@
 package Nemo;
 
-public class MissileCommand extends Command {
+public class CommandMissile extends Command {
 
 //	public static String MissileCommandMessage = "d";
 	
-	public MissileCommand () {
+	public CommandMissile () {
 		commandMessage = m;
 	}
 	

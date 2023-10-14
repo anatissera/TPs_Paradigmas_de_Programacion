@@ -1,10 +1,10 @@
 package Nemo;
 
-public class RightCommand extends Command {
+public class CommandRight extends Command {
 
 //	public static String RightCommandMessage = "r";
 	
-	public RightCommand() {
+	public CommandRight() {
 		commandMessage = r;
 	}
 	

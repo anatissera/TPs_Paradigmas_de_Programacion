@@ -1,8 +1,8 @@
 package Nemo;
 
-public class DownCommand extends Command {
+public class CommandDown extends Command {
 
-	public DownCommand () {
+	public CommandDown () {
 		commandMessage = d;
 	}
 	
