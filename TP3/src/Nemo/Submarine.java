@@ -26,5 +26,13 @@ public class Submarine {
 	    public String getOrientation() {
 	        return orientation.getDirection();
 	    }
+	    
+	    public void move(String commandsMessage) {
+			for(int i = 0; i<commandsMessage.length(); i++) {
+				Command command = new Command(commandsMessage.charAt(i));
+				command.excecuteCommand(this);
+				}
+	    	
+	    }
 
 }
