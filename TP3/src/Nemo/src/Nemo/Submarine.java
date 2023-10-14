@@ -28,11 +28,9 @@ public class Submarine {
 	    }
 	    
 	    public void move(String commandsMessage) {
-			for(int i = 0; i<commandsMessage.length(); i++) {
-				Command command = new Command(commandsMessage.charAt(i));
-				command.excecuteCommand(this);
-				}
-	    	
+    		for(int i = 0; i<commandsMessage.length(); i++) {
+    			Command command = new Command(commandsMessage.charAt(i));
+    			command.excecuteCommand(this);
+    			}
 	    }
-
 }

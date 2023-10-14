@@ -4,8 +4,8 @@ public class UpCommand extends Command {
 
 //	public static String UpCommandMessage = "u";
 	
-	public UpCommand () {
-		super (d);
+	public UpCommand (char commandMessage) {
+		commandMessage = 'u';
 	}
 	
 //	public void excecuteCommand(char UpCommandMessage, Submarine submarine) {
@@ -13,7 +13,7 @@ public class UpCommand extends Command {
 //	}
 	
 	public void excecuteCommand(Submarine submarine) {
-		submarine.depth.moveUp();
+		// deriver to depth
 	}
 
 }

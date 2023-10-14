@@ -4,11 +4,11 @@ public class ForwardCommand extends Command {
 
 //	public static String ForwardCommandMessage = "f";
 
-	public ForwardCommand () {
-		super (m);
+	public ForwardCommand (char commandMessage) {
+		commandMessage = 'f';
 	}
 	
 	public void excecuteCommand(Submarine submarine) {
-		submarine.orientation.moveForward(submarine.coordinates);
+		submarine.orientation.moveForward(submarine);
 	}
 }
