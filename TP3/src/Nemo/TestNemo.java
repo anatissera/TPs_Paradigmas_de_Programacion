@@ -12,7 +12,7 @@ import org.junit.jupiter.api.function.Executable;
 public class TestNemo {
   
   @Test
-  public void Test00() { 
+  public void Test00SubmarineInitializesCorrectly() { 
 	  Submarine sub = new Submarine ();
 	  
 	  checkPosition (sub);
@@ -32,20 +32,15 @@ public class TestNemo {
 
   
   @Test
-  public void Test01() { //Si le decis que no haga nada, que no haga nada
+  public void Test01SubmarineDoesNothingWhenEmptyCommand() { //Si le decis que no haga nada, que no haga nada
 	  Submarine sub = new Submarine();
 	  sub.move("");
-//	  assertEquals(0, sub.position_X());
-//	  assertEquals(0, sub.position_Y());
-//	  assertEquals(0, sub.getDepth());
-//    assertEquals("North", sub.getOrientation());
 	  
       checkPosition (sub);
-      // refactorear tests 0 y 1
 	  
   }
   @Test
-  public void Test02() { // probar que baja
+  public void Test02SubmarineMovesDown() {
 	  
 	  Submarine sub = new Submarine();
 	  int initialDepth = sub.getDepth();
@@ -58,118 +53,215 @@ public class TestNemo {
   }
   
   @Test
-  public void Test03() { // probar que no emerge de la superficie
+  public void Test03SubmarineDoesnotEmergeFromSurface() {
 	  Submarine sub = new Submarine();
 	  sub.move("u");
 	  
 	  assertEquals (0, sub.getDepth());
   }
+  
   @Test
-  public void Test04() { // se mueve hacia adelante y no hacia abajo
+  public void Test04SubmarineMovesForwardOnce() { 
         Submarine sub = new Submarine();
-//        int initialCoordinates = 
         sub.move("f");
         
         checkPosition (sub, 0, 1 , 0, "North");
-        
-	  
   }
+  
   @Test
-  public void Test05() { // rotar a la izquierda y no hacia abajo
+  public void Test05SubmarineRotatesLeft() { 
         Submarine sub = new Submarine();
         sub.move("l");
         
         checkPosition (sub, 0, 0 , 0, "West");
-
-	  
   }
+  
   @Test
-  public void Test06() { // rotar a la derecha y no hacia abajo
+  public void Test06SubmarineRotatesRight() { 
         Submarine sub = new Submarine();
-        int initialDepth = sub.getDepth();
         sub.move("r");
         
         checkPosition (sub, 0, 0 , 0, "East");
+  }
+  
+  @Test
+  public void Test07SubmarineHasNoProblemsMovingDownTooDeep() {
+          Submarine sub = new Submarine();
+          sub.move("dddddddddd");
+          assertEquals(sub.getDepth(), -10);
+  }
+  
+  @Test
+  public void Test08SubmarineDoesNotEmergeFromSurfaceEvenWhenInsistedOn() {
+         
+          Submarine sub = new Submarine();
+          sub.move("uuuuu");
+          assertEquals(0, sub.getDepth());  
+  }
+  
+  public void Test09MovesUpAndDown() {
 
-        assertEquals (initialDepth, sub.getDepth());
+      Submarine sub = new Submarine();
+      sub.move("dddd");
+      assertEquals(sub.getDepth(), -4);
+      sub.move("uuu");
+      assertEquals(sub.getDepth(), -1);
+      
+      // verificar que no tira error
   }
   
   @Test
-  public void Test07() {
-	  // ejecuta las todos los comandos de un string
-          Submarine sub = new Submarine();
-          sub.move("dlfflfd");
-          
-          checkPosition (sub, -2, -1 , -2, "South");
-  }
-  
-  @Test
-  public void Test08() {
-          // no pasa nada si le insistimos en emerger cuando está en superficie.
-          Submarine sub = new Submarine();
-          sub.move("uuuu");
-          // verificar que no emerge más de lo que puede (arriba de 0)
-          assertEquals(0, sub.getDepth());
-	  
-  }
-  @Test
-  public void Test09() {
-          //no hay problemas con sumergirse demasiado
-          Submarine sub = new Submarine();
-          sub.move("dddd");
-          // verificar que no tira error
-          assertEquals(sub.getDepth(), -4);
-
-  }
-  
-  @Test
-  public void Test10() {
-      //	Si se intenta liberar a mayor profundidad de lo permitido el submarino se destruye.
-      // (verificar que "ddm" tira error)
+  public void Test10SubmarineCanReleaseCapsuleOnSurface() {
 	  Submarine sub = new Submarine();
-	  assertThrowsLike(Coordinates.NoSePuedeLanzarLaCapsula, ()-> sub.move("ddm"));
+	  sub.move("m");
+  }
+  
+  @Test
+  public void Test11SubmarineCanReleaseCapsuleOnImmersionLevel1() {
+	  Submarine sub = new Submarine();
+	  sub.move("dm");
+  }
+  
+  @Test
+  public void Test12SubmarineCannotReleaseCapsuleDeeperThanAllowed() {
+	  Submarine sub = new Submarine();
+	  assertThrowsLike(DepthState.CannotReleaseCapsule, ()-> sub.move("ddm"));
+  }
+  @Test
+  public void Test13SubmarineRotatesRightCirculary() {
+	  Submarine sub = new Submarine();
+      sub.move("r");
+      assertEquals(sub.getOrientation(), "East");
+      sub.move("r");
+      assertEquals(sub.getOrientation(), "South");
+      sub.move("r");
+      assertEquals(sub.getOrientation(), "West");
+      sub.move("r");
+      checkPosition (sub);
 
   }
+  
   @Test
-  public void Test11() { 
+  public void Test14SubmarineRotatesLeftCirculary() {
 	  
+	  Submarine sub = new Submarine();
+	  sub.move("l");
+	  assertEquals(sub.getOrientation(), "West");
+	  sub.move("l");
+	  assertEquals(sub.getOrientation(), "South");
+	  sub.move("l");
+	  assertEquals(sub.getOrientation(), "East");
+	  sub.move("l");
+	  checkPosition (sub);
+
   }
   
   @Test
-  public void Test12() {
-	  
+  public void test15SubmarineMovesCorrectlyWhenFacingNorth() {
+      Submarine sub = new Submarine();
+      sub.move("ffff");
+      checkPosition(sub, 0, 4, 0, "North");
+  }
+  
+
+  @Test
+  public void test16SubmarineMovesCorrectlyWhenFacingSouth() {
+      Submarine sub = new Submarine();
+      sub.move("rrffff");
+      checkPosition(sub, 0, -4, 0, "South");
+  }
+
+  @Test
+  public void test17SubmarineMovesCorrectlyWhenFacingEast() {
+      Submarine sub = new Submarine();
+      sub.move("rffff");
+      checkPosition(sub, 4, 0, 0, "East");
+  }
+  
+
+  @Test
+  public void test18SubmarineMovesCorrectlyWhenFacingWest() {
+      Submarine sub = new Submarine();
+      sub.move("lffff");
+      checkPosition(sub, -4, 0, 0, "West");
+  }
+ 
+  @Test
+  public void Test19SubmarineCanMoveDownAfterReleasingACapsule() {
+      Submarine sub = new Submarine();
+      sub.move("mdmddd");
+      
+      assertEquals(sub.getDepth(), -4);
   }
   
   @Test
-  public void Test13() {
-	  
+  public void Test20SubmarineExecutesCommandsInOrder() {
+      Submarine sub = new Submarine();
+      sub.move("dlfflfd");
+          
+      checkPosition (sub, -2, -1 , -2, "South");
   }
+
+// Adicionales
   
   @Test
-  public void Test14() {
-	  
+  public void testSubmarineDoesNothing() {
+      Submarine sub = new Submarine();
+      sub.move("mmuuu");
+      checkPosition(sub);
   }
-  
+
+
   @Test
-  public void Test15() {
-	  
+  public void testSubmarineMovesForward() {
+      Submarine sub = new Submarine();
+      sub.move("frfrfrfr");
+      checkPosition(sub, 0, 0, 0, "North");
   }
-  
+
   @Test
-  public void Test16() {
-	  
+  public void testSubmarineMovesDown() {
+      Submarine sub = new Submarine();
+      sub.move("dfd");
+      checkPosition(sub, 0, 1, -2, "North");
   }
-  
+
   @Test
-  public void Test17() {
-	  
+  public void testSubmarineMovesDiagonally() {
+      Submarine sub = aSubmarine();
+      sub.move("ddlfrfum");
+      checkPosition(sub, -1, 1, -1, "North");
   }
-  
+
   @Test
-  public void Test18() {
-	  
+  public void testSubmarineMovesInComplexPath() {
+      Submarine sub = aSubmarine();
+      sub.move("frumumfrumm");
+      checkPosition(sub, 1, 1, 0, "South");
   }
-  
+
+
+  @Test
+  public void testSubmarineComplexPath() {
+      Submarine sub = aSubmarine();
+      sub.move("fdlfruuurrr");
+      checkPosition(sub, -1, 1, 0, "West");
+  }
+
+  @Test
+  public void testSubmarinePerformsMixedMoves() {
+      Submarine sub = aSubmarine();
+      sub.move("mumdmumddfru");
+      checkPosition(sub, 0, 1, -1, "East");
+  }
+
+  @Test
+  public void testSubmarineComplexCommands() {
+      Submarine sub = aSubmarine();
+      sub.move("fdfrmfru");
+      checkPosition(sub, 1, 2, 0, "South");
+  }
+  //
   
   private void assertThrowsLike( String message, Executable executable ) {
 	    assertEquals( message,
@@ -187,5 +279,9 @@ public class TestNemo {
 	    assertEquals(z, sub.getDepth());
 	    assertEquals(direction, sub.getOrientation());
 	}
+	
+    private Submarine aSubmarine() {
+        return new Submarine();
+    }
   
 }

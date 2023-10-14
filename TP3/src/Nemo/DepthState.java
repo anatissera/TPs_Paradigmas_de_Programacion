@@ -7,5 +7,7 @@ public abstract class DepthState {
 	    public abstract DepthState launchCapsule();
 	    public abstract DepthState moveDown();
 	    public abstract DepthState previousState();
+	    
+	    public static String CannotReleaseCapsule = "No se puede liberar la cápsula por debajo del primer nivel de inmersión";
 
 }

@@ -1,9 +1,6 @@
 package Nemo;
 
 public class Coordinates {
-
-	public static String NoSePuedeLanzarLaCapsula = "No se puede lanzar la cápsula por debajo del primer nivel de inmersión";
-	public static String ComandoDesconocido = "Comando desconocido";
 	
 	public int x;
 	public int y;
