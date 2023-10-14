@@ -7,6 +7,6 @@ public abstract class Orientation {
 	
 	public abstract void turnRight(Submarine submarine);
 	public abstract void turnLeft(Submarine submarine);
-	public abstract void moveForward(Coordinates coordinate);
+	public abstract void moveForward(Submarine submarine);
 	
 }

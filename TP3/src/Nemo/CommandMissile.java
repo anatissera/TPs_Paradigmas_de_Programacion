@@ -5,10 +5,15 @@ public class CommandMissile extends Command {
 //	public static String MissileCommandMessage = "d";
 	
 	public CommandMissile () {
-		commandMessage = m;
+		commandMessage = 'm';
 	}
 	
-	public void excecuteCommand(Submarine submarine) {
+//	public void excecuteCommand(Submarine submarine) {
+//		submarine.depth.launchCapsule();
+//	}
+
+	protected void execute(Submarine submarine) {
 		submarine.depth.launchCapsule();
 	}
+
 }

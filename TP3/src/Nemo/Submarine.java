@@ -1,12 +1,6 @@
 package Nemo;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 public class Submarine {
-	
-	// ??
 
 	    public Coordinates coordinates;
 	    public Depth depth;
@@ -15,6 +9,8 @@ public class Submarine {
 	    public Submarine() {
 	        coordinates = new Coordinates(0, 0);
 	        orientation = new OrientationNorth();
+	        depth = new Depth();
+	      
 	    }
 
 	    public int getDepth() {
@@ -34,18 +30,23 @@ public class Submarine {
 	    }
 	    
 	    public void move(String commandsMessage) {
-	        List<Command> commandsList = new ArrayList<>();
-	        commandsList.addAll(List.of(new CommandDown(), new CommandUp(), new CommandForward(), new CommandRight(), new CommandLeft(), new CommandMissile()));
-	        for (int i = 0; i < commandsMessage.length(); i++) {
-	            final char currentChar = commandsMessage.charAt(i);
-	            Object command = commandsList.stream()
-	                    .filter(each -> each.commandMessage == currentChar)
-	                    .findFirst()
-	                    .orElse(null);
-	            
-	            if (command != null) {
-	                ((Command) command).excecuteCommand(this);
-	            }
-	        }
+
+//	        for (int i = 0; i < commandsMessage.length(); i++) {
+//	            final char currentChar = commandsMessage.charAt(i);
+//	            Object command = commandsList.stream()
+//	                    .filter(each -> each.commandMessage == currentChar)
+//	                    .findFirst()
+//	                    .orElse(null);
+//	            
+//	            if (command != null) {
+//	                ((Command) command).excecuteCommand(this);
+//	            }
+//	        }
+	    	 for (char currentChar : commandsMessage.toCharArray()) {
+	             Command command = Command.createCommand(currentChar);
+	             if (command != null) {
+	                 command.execute(this);
+	             }
+	         }
 	    }
 }

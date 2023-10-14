@@ -2,7 +2,9 @@ package Nemo;
 
 public class OrientationWest extends Orientation {
 
-	public String cardinalPoint = "West";
+	public OrientationWest () {	
+		cardinalPoint = "West";
+	}
 
 	public void turnRight(Submarine submarine) {
 		submarine.orientation = new OrientationNorth();
@@ -12,8 +14,8 @@ public class OrientationWest extends Orientation {
 		submarine.orientation = new OrientationSouth();
 	}
 	
-	public void moveForward(Coordinates coordinates) {
-	    coordinates.moveWest();
+	public void moveForward(Submarine submarine) {
+	    submarine.coordinates.moveWest();
 	}
 	
 }

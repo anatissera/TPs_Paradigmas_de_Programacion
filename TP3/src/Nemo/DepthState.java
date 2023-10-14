@@ -7,6 +7,5 @@ public abstract class DepthState {
 	    public abstract DepthState launchCapsule();
 	    public abstract DepthState moveDown();
 	    public abstract DepthState previousState();
-	   
 
 }

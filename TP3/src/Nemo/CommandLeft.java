@@ -5,10 +5,14 @@ public class CommandLeft extends Command {
 //	public static char LeftCommandMessage = 'l';
 	
 	public CommandLeft() {
-		commandMessage = l;
+		commandMessage = 'l';
 	}
 	
-	public void excecuteCommand(Submarine submarine) {
+//	public void excecuteCommand(Submarine submarine) {
+//		submarine.orientation.turnLeft(submarine);
+//	}
+
+	protected void execute(Submarine submarine) {
 		submarine.orientation.turnLeft(submarine);
 	}
 
