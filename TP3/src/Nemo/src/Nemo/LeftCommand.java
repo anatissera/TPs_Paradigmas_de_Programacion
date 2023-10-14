@@ -2,10 +2,10 @@ package Nemo;
 
 public class LeftCommand extends Command {
 
-//	public static char LeftCommandMessage = 'd';
+//	public static char LeftCommandMessage = 'l';
 	
-	public LeftCommand (char commandMessage) {
-		super(l);
+	public LeftCommand() {
+		commandMessage = l;
 	}
 	
 	public void excecuteCommand(Submarine submarine) {

@@ -2,8 +2,8 @@ package Nemo;
 
 public class DownCommand extends Command {
 
-	public DownCommand(char commandMessageChar) {
-		super(d);
+	public DownCommand () {
+		commandMessage = d;
 	}
 	
 	public void excecuteCommand(Submarine submarine) {

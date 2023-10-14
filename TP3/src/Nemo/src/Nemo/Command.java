@@ -11,9 +11,11 @@ public abstract class Command {
 	public static char f = 'f';
 	public static char m = 'm';
 	
-	public Command(char commandMessageChar){
-		this.commandMessage = commandMessageChar;
-	}
+//	public Command(char commandMessageChar){
+//		this.commandMessage = commandMessageChar;
+//	}
 	
-	public abstract void excecuteCommand(Submarine submarine);
+//	public abstract void excecuteCommand(Submarine submarine);
+
+	protected abstract void excecuteCommand(Submarine submarine);
 }

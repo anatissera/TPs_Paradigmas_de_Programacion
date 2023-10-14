@@ -1,7 +1,11 @@
 package Nemo;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 public class Submarine {
-	    
+
 	    public Coordinates coordinates;
 	    public Depth depth;
 	    public Orientation orientation;
@@ -28,9 +32,18 @@ public class Submarine {
 	    }
 	    
 	    public void move(String commandsMessage) {
-    		for(int i = 0; i<commandsMessage.length(); i++) {
-    			Command command = new Command(commandsMessage.charAt(i));
-    			command.excecuteCommand(this);
-    			}
+	        List<Command> commandsList = new ArrayList<>();
+	        commandsList.addAll(List.of(new DownCommand(), new UpCommand(), new ForwardCommand(), new RightCommand(), new LeftCommand(), new MissileCommand()));
+	        for (int i = 0; i < commandsMessage.length(); i++) {
+	            final char currentChar = commandsMessage.charAt(i);
+	            Object command = commandsList.stream()
+	                    .filter(each -> each.commandMessage == currentChar)
+	                    .findFirst()
+	                    .orElse(null);
+	            
+	            if (command != null) {
+	                ((Command) command).excecuteCommand(this);
+	            }
+	        }
 	    }
 }

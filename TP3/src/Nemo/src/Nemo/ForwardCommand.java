@@ -2,14 +2,10 @@ package Nemo;
 
 public class ForwardCommand extends Command {
 
-//	public static String ForwardCommandMessage = "f";
+//	private static char ForwardCommandMessage = 'f';
 
-//	public ForwardCommand (char ) {
-//		commandMessage = f;
-//	}
-	
-	public ForwardCommand(char commandMessageChar) {
-		super(f);
+	public ForwardCommand () {
+		commandMessage = f;
 	}
 
 	public void excecuteCommand(Submarine submarine) {
