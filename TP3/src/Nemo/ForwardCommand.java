@@ -4,8 +4,8 @@ public class ForwardCommand extends Command {
 
 //	public static String ForwardCommandMessage = "f";
 
-	public ForwardCommand (char commandMessage) {
-		commandMessage = 'f';
+	public ForwardCommand () {
+		super (m);
 	}
 	
 	public void excecuteCommand(Submarine submarine) {

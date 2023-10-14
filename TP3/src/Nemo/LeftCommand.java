@@ -5,7 +5,7 @@ public class LeftCommand extends Command {
 //	public static char LeftCommandMessage = 'd';
 	
 	public LeftCommand (char commandMessage) {
-		commandMessage = 'l';
+		super(l);
 	}
 	
 	public void excecuteCommand(Submarine submarine) {

@@ -4,8 +4,8 @@ public class UpCommand extends Command {
 
 //	public static String UpCommandMessage = "u";
 	
-	public UpCommand (char commandMessage) {
-		commandMessage = 'u';
+	public UpCommand () {
+		super (d);
 	}
 	
 //	public void excecuteCommand(char UpCommandMessage, Submarine submarine) {

@@ -4,8 +4,8 @@ public class RightCommand extends Command {
 
 //	public static String RightCommandMessage = "r";
 	
-	public RightCommand (char commandMessage) {
-		commandMessage = 'r';
+	public RightCommand () {
+		super(r);
 	}
 	
 	public void excecuteCommand(Submarine submarine) {

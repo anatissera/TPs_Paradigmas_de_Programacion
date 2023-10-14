@@ -4,8 +4,8 @@ public class MissileCommand extends Command {
 
 //	public static String MissileCommandMessage = "d";
 	
-	public MissileCommand (char commandMessage) {
-		commandMessage = 'm';
+	public MissileCommand () {
+		super(m);
 	}
 	
 	public void excecuteCommand(Submarine submarine) {
