@@ -15,7 +15,7 @@ public class DepthIsOnSurface extends DepthState {
 	}
 
 	public DepthState previousState() {
-		return null;
+		return this;
 	}
 
 }
