@@ -1,6 +1,6 @@
 package Nemo;
 
-public class DepthCannotLiberateCapsule extends DepthState {
+public class DepthStateCannotLiberateCapsule extends DepthState {
 	
 	private int z;
 	
@@ -12,7 +12,7 @@ public class DepthCannotLiberateCapsule extends DepthState {
 	
     private final DepthState previousState;
 
-    public DepthCannotLiberateCapsule(DepthState previousDoes, int z) {
+    public DepthStateCannotLiberateCapsule(DepthState previousDoes, int z) {
         this.previousState = previousDoes;
         this.z = z;
     }
@@ -23,8 +23,7 @@ public class DepthCannotLiberateCapsule extends DepthState {
     }
 
 	public DepthState moveDown() {
-		z -=1;
-		return new DepthCannotLiberateCapsule(this, z);
+		return new DepthStateCannotLiberateCapsule(this, z - 1);
 	}
 	
 }

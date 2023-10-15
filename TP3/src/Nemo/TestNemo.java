@@ -102,10 +102,10 @@ public class TestNemo {
   public void Test09MovesUpAndDown() {
 
       Submarine sub = new Submarine();
-      sub.move("dddd");
-      assertEquals(sub.getDepth(), -4);
+      sub.move("ddddd");
+      assertEquals(sub.getDepth(), -5);
       sub.move("uuu");
-      assertEquals(sub.getDepth(), -1);
+      assertEquals(sub.getDepth(), -2);
       
       // verificar que no tira error
   }
