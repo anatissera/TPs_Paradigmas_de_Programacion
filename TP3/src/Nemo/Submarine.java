@@ -29,15 +29,12 @@ public class Submarine {
 	        return orientation.getDirection();
 	    }
 	    
-	    public void move(String commandsMessage) {
+	    public Submarine move(String commandsMessage) {
 	    	commandsMessage.chars()
 	    	.mapToObj(charCommand -> (char)charCommand)
-	    	.map(Command::createCommand)
+	    	.map(currentChar -> Command.createCommand(currentChar))
 	    	.forEach(command -> command.execute(this));
+	    	return this;
 	    }
 	    
-//   	 for (char currentChar : commandsMessage.toCharArray()) {
-//        Command command = Command.createCommand(currentChar);
-//        if (command != null) {
-//            command.execute(this);
 }

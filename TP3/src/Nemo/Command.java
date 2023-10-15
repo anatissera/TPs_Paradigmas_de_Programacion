@@ -24,10 +24,6 @@ import java.util.List;
 	            .findFirst()
 	            .orElse(null);
 	    }
-
-//	    protected char getCommandMessage() {
-//	        return commandMessage;
-//	    }
 	    
 	    protected abstract void execute(Submarine submarine);
 	    
