@@ -5,21 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6cce5ad-3226-4536-b756-9d2a51274e37" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/CommandDown.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/CommandDown.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/CommandForward.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/CommandForward.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/CommandLeft.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/CommandLeft.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/CommandMissile.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/CommandMissile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/CommandRight.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/CommandRight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/CommandUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/CommandUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/DepthState.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/DepthState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/Orientation.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/Orientation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/OrientationEast.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/OrientationEast.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/OrientationNorth.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/OrientationNorth.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/OrientationSouth.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/OrientationSouth.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/OrientationWest.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/OrientationWest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/Submarine.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/Submarine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/Coordinates.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +61,7 @@
       <workItem from="1696891738909" duration="2000" />
       <workItem from="1697304176676" duration="2000" />
       <workItem from="1697305834236" duration="15000" />
+      <workItem from="1697398623452" duration="24000" />
     </task>
     <servers />
   </component>

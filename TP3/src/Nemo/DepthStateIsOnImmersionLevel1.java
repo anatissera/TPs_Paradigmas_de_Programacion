@@ -2,9 +2,9 @@ package Nemo;
 
 public class DepthStateIsOnImmersionLevel1 extends DepthState{
 	
-	private int z = -1;
-	
-	public int getZ() { return z; }
+	DepthStateIsOnImmersionLevel1(){
+		z = -1;
+	}
 	
 	public DepthState launchCapsule() {
 		return null;

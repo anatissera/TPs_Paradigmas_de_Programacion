@@ -15,7 +15,7 @@ public class OrientationWest extends Orientation {
 	}
 	
 	public void moveForward(Submarine submarine) {
-	    submarine.coordinates.moveWest();
+		submarine.coordinates = submarine.coordinates.moveWest();
 	}
 	
 }

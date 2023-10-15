@@ -15,7 +15,7 @@ public class OrientationNorth extends Orientation {
 	}
 
 	public void moveForward(Submarine submarine) {
-        submarine.coordinates.moveNorth();
+		submarine.coordinates = submarine.coordinates.moveNorth();
     }
 	
 }

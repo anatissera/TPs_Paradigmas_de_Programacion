@@ -3,7 +3,9 @@ package Nemo;
 public abstract class DepthState {
 		
 	 	protected int z;
-	 	public abstract int getZ();
+	 	public int getZ() {
+	 		return z;
+	 	}
 	    public abstract DepthState launchCapsule();
 	    public abstract DepthState moveDown();
 	    public abstract DepthState previousState();

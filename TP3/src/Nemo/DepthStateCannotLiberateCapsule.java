@@ -2,10 +2,6 @@ package Nemo;
 
 public class DepthStateCannotLiberateCapsule extends DepthState {
 	
-	private int z;
-	
-	public int getZ() { return z; }
-	
 	public DepthState launchCapsule() {
 		throw new RuntimeException(CannotReleaseCapsule);
 	}
@@ -18,7 +14,6 @@ public class DepthStateCannotLiberateCapsule extends DepthState {
     }
 
     public DepthState previousState() {
-    	z +=1;
         return previousState;
     }
 

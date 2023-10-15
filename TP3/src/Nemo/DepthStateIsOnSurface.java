@@ -1,10 +1,10 @@
 package Nemo;
 
 public class DepthStateIsOnSurface extends DepthState {
-   
-	private int z = 0;
-
-	public int getZ() { return z; }
+	
+	DepthStateIsOnSurface(){
+		z = 0;
+	}
 
 	public DepthState launchCapsule() {
 		return null;
