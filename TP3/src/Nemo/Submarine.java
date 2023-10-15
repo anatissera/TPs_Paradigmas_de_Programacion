@@ -30,23 +30,14 @@ public class Submarine {
 	    }
 	    
 	    public void move(String commandsMessage) {
-
-//	        for (int i = 0; i < commandsMessage.length(); i++) {
-//	            final char currentChar = commandsMessage.charAt(i);
-//	            Object command = commandsList.stream()
-//	                    .filter(each -> each.commandMessage == currentChar)
-//	                    .findFirst()
-//	                    .orElse(null);
-//	            
-//	            if (command != null) {
-//	                ((Command) command).excecuteCommand(this);
-//	            }
-//	        }
-	    	 for (char currentChar : commandsMessage.toCharArray()) {
-	             Command command = Command.createCommand(currentChar);
-	             if (command != null) {
-	                 command.execute(this);
-	             }
-	         }
+	    	commandsMessage.chars()
+	    	.mapToObj(charCommand -> (char)charCommand)
+	    	.map(Command::createCommand)
+	    	.forEach(command -> command.execute(this));
 	    }
+	    
+//   	 for (char currentChar : commandsMessage.toCharArray()) {
+//        Command command = Command.createCommand(currentChar);
+//        if (command != null) {
+//            command.execute(this);
 }
