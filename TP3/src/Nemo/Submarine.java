@@ -6,10 +6,10 @@ public class Submarine {
 	    public Depth depth;
 	    public Orientation orientation;
 
-	    public Submarine() {
-	        coordinates = new Coordinates(0, 0);
-	        orientation = new OrientationNorth();
-	        depth = new Depth();
+	    public Submarine( Coordinates initialPosition, Orientation orientation ) {
+	        this.coordinates = initialPosition;
+	        this.orientation = orientation;
+	        this.depth = new Depth();
 	      
 	    }
 
@@ -17,16 +17,12 @@ public class Submarine {
 	        return depth.getZ();
 	    }
 
-	    public int getPosition_X() {
-	        return coordinates.getX();
+	    public Coordinates getCoordinates() {
+	    	return coordinates.getCoordinates();
 	    }
 
-	    public int getPosition_Y() {
-	        return coordinates.getY();
-	    }
-
-	    public String getOrientation() {
-	        return orientation.getDirection();
+	    public Orientation getOrientation() {
+	        return orientation;
 	    }
 	    
 	    public Submarine move(String commandsMessage) {

@@ -1,8 +1,8 @@
 package Nemo;
 
-public class DepthStateIsOnSurface extends DepthState {
+public class DepthStateSurface extends DepthState {
 	
-	DepthStateIsOnSurface(){
+	DepthStateSurface(){
 		z = 0;
 	}
 
@@ -11,7 +11,7 @@ public class DepthStateIsOnSurface extends DepthState {
 	}
 
 	public DepthState moveDown() {
-		return new DepthStateIsOnImmersionLevel1();
+		return new DepthStateImmersionLevel1();
 	}
 
 	public DepthState previousState() {

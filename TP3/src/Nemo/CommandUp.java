@@ -1,18 +1,12 @@
 package Nemo;
 
 public class CommandUp extends Command {
-
-//	public static String UpCommandMessage = "u";
 	
 	public CommandUp() {
 		commandMessage = 'u';
 	}
-	
-//	public void excecuteCommand(Submarine submarine) {
-//		submarine.depth.moveUp();
-//	}
 
-	protected void execute(Submarine submarine) {
+	public void execute(Submarine submarine) {
 		submarine.depth.moveUp();
 	}
 

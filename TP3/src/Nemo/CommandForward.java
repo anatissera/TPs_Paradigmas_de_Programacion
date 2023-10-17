@@ -2,17 +2,11 @@ package Nemo;
 
 public class CommandForward extends Command {
 
-//	private static char ForwardCommandMessage = 'f';
-
 	public CommandForward () {
 		commandMessage = 'f';
 	}
 
-//	public void excecuteCommand(Submarine submarine) {
-//		submarine.orientation.moveForward(submarine);
-//	}
-
-	protected void execute(Submarine submarine) {
+	public void execute(Submarine submarine) {
 		submarine.orientation.moveForward(submarine);
 	}
 	

@@ -6,7 +6,7 @@ public class CommandDown extends Command {
 		commandMessage = 'd';
 	}
 
-	protected void execute(Submarine submarine) {
+	public void execute(Submarine submarine) {
 		submarine.depth.moveDown();
 	}
 }

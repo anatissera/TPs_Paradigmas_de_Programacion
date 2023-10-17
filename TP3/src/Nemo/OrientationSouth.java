@@ -2,10 +2,6 @@ package Nemo;
 
 public class OrientationSouth extends Orientation {
 
-	public OrientationSouth () {	
-		cardinalPoint = "South";
-	}
-
 	public void turnRight(Submarine submarine) {
 		submarine.orientation = new OrientationWest();
 	}
