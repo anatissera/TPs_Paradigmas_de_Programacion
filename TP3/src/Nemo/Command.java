@@ -1,23 +1,22 @@
 package Nemo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 	
 	public abstract class Command {
 		
 	    public char commandMessage;
 
-	    private static List<Command> commandsList = new ArrayList<>();
-
-	    static {
-	        commandsList.add(new CommandDown());
-	        commandsList.add(new CommandUp());
-	        commandsList.add(new CommandForward());
-	        commandsList.add(new CommandRight());
-	        commandsList.add(new CommandLeft());
-	        commandsList.add(new CommandMissile());
-	    }
-
+	    private static List<Command> commandsList = new ArrayList<>(Arrays.asList(
+	    	    new CommandDown(),
+	    	    new CommandUp(),
+	    	    new CommandForward(),
+	    	    new CommandRight(),
+	    	    new CommandLeft(),
+	    	    new CommandMissile()
+	    	));
+	    
 	    public static Command createCommand(char commandChar) {
 	        return commandsList.stream()
 	            .filter(command -> command.commandMessage == commandChar)
