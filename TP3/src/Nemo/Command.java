@@ -6,7 +6,7 @@ import java.util.List;
 	
 	public abstract class Command {
 		
-	    public char commandMessage;
+	    protected char commandMessage;
 
 	    private static List<Command> commandsList = new ArrayList<>(Arrays.asList(
 	    	    new CommandDown(),
@@ -19,11 +19,14 @@ import java.util.List;
 	    
 	    public static Command createCommand(char commandChar) {
 	        return commandsList.stream()
-	            .filter(command -> command.commandMessage == commandChar)
+	            .filter(command -> command.applies(commandChar))
 	            .findFirst()
 	            .orElse(null);
 	    }
 	    
 	    protected abstract void execute(Submarine submarine);
-	    
+
+		protected boolean applies(char receivedCommand) {
+			return receivedCommand == commandMessage ;
+		}
 	}
