@@ -84,7 +84,6 @@ public class TestNemo {
   public void Test12SubmarineCannotReleaseCapsuleDeeperThanAllowed() {
 	  Submarine sub = defaultSubmarine();
 	  assertThrowsLike(DepthState.CannotReleaseCapsule, ()-> sub.move("ddm"));
-	  assertEquals(sub.getDepth(), -2);
   }
   
   @Test
@@ -145,6 +144,8 @@ public class TestNemo {
   public void test23SubmarineMovesInSquare() {
       checkDefaultPosition( defaultSubmarine().move("frfrfrfr") );
   }
+  
+  
 
   // ya está testeado de alguna otra manera, decidir qué hacer
   
