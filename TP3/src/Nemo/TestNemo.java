@@ -22,7 +22,7 @@ public class TestNemo {
 	  
 	  Submarine sub = defaultSubmarine();
 	  int initialDepth = sub.getDepth();
-	  sub.move("d");
+	  sub.move('d');
 
       assertEquals (initialDepth - 1, sub.getDepth());
 	  checkPosition (sub, defaultCoordinates() , -1, north() );
@@ -30,22 +30,22 @@ public class TestNemo {
   
   @Test
   public void Test03SubmarineDoesnotEmergeFromSurface() {
-	  assertEquals ( 0,  defaultSubmarine().move("u").getDepth() );
+	  assertEquals ( 0,  defaultSubmarine().move('u').getDepth() );
   }
   
   @Test
   public void Test04SubmarineMovesForwardOnce() { 
-        checkPosition ( defaultSubmarine().move("f") , new Coordinates(0, 1), 0, north() );
+        checkPosition ( defaultSubmarine().move('f') , new Coordinates(0, 1), 0, north() );
   }
   
   @Test
   public void Test05SubmarineRotatesLeft() {  
-        checkPosition ( defaultSubmarine().move("l") , defaultCoordinates(), 0, west() );
+        checkPosition ( defaultSubmarine().move('l') , defaultCoordinates(), 0, west() );
   }
   
   @Test
   public void Test06SubmarineRotatesRight() { 
-        checkPosition ( defaultSubmarine().move("r") , defaultCoordinates(), 0, east() );
+        checkPosition ( defaultSubmarine().move('r') , defaultCoordinates(), 0, east() );
   }
   
   @Test
@@ -69,7 +69,7 @@ public class TestNemo {
   @Test
   public void Test10SubmarineCanReleaseCapsuleOnSurface() {
 	  Submarine sub = defaultSubmarine();
-	  sub.move("m");
+	  sub.move('m');
 	  assertEquals(sub.getDepth(), 0);
   }
   
@@ -89,12 +89,12 @@ public class TestNemo {
   
   @Test
   public void Test13SubmarineRotatesRightCirculary() {
-	  testCircularRotation( "r", east(), west() );
+	  testCircularRotation( 'r', east(), west() );
   }
   
   @Test
   public void Test14SubmarineRotatesLeftCirculary() {
-	  testCircularRotation( "l", west(), east() );
+	  testCircularRotation( 'l', west(), east() );
   }
   
   @Test
@@ -178,7 +178,6 @@ public class TestNemo {
   }
   
   
-  // funciones auxiliares  
   private Submarine defaultSubmarine() {
 		return new Submarine ( defaultCoordinates(), north() );
   }
@@ -213,7 +212,7 @@ public class TestNemo {
 	  return new OrientationWest();
   }
 	
-  public void testCircularRotation(String directionRoL, Orientation FirstOrientation, Orientation LastOrientation) {
+  public void testCircularRotation(char directionRoL, Orientation FirstOrientation, Orientation LastOrientation) {
 	  Submarine sub = defaultSubmarine();
 	  assertEquals(sub.getOrientation(), north());
 	  sub.move(directionRoL);

@@ -7,9 +7,9 @@ public class Submarine {
 	    public Orientation orientation;
 
 	    public Submarine( Coordinates initialPosition, Orientation orientation ) {
-	        this.coordinates = initialPosition;
+	        coordinates = initialPosition;
 	        this.orientation = orientation;
-	        this.depth = new Depth();
+	        depth = new Depth();
 	      
 	    }
 
@@ -25,12 +25,17 @@ public class Submarine {
 	        return orientation;
 	    }
 	    
-	    public Submarine move(String commandsMessage) {
-	    	commandsMessage.chars()
-	    	.mapToObj(charCommand -> (char)charCommand)
-	    	.map(currentChar -> Command.createCommand(currentChar))
-	    	.forEach(command -> command.execute(this));
+	    public Submarine move(String commandsString) {
+	    	commandsString.chars()
+	    	.mapToObj(commandChar -> (char)commandChar)
+	    	.forEach(commandChar -> move(commandChar));
 	    	return this;
+	    }
+	    
+	    public Submarine move(char commandChar) {
+	    	Command.createCommand(commandChar).execute(this);
+	    	return this;
+	    
 	    }
 	    
 }
