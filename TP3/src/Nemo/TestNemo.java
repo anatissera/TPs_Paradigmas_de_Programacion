@@ -84,7 +84,6 @@ public class TestNemo {
   @Test
   public void Test12Part1SubmarineCannotReleaseCapsuleDeeperThanAllowed() {
 	  Submarine sub = defaultSubmarine();
-<<<<<<< HEAD
 	  sub.move("dd");
 	  assertEquals(sub.getDepth(), -2);
 	  assertThrowsLike(DepthState.CannotReleaseCapsule, ()-> sub.move('m'));
@@ -93,9 +92,6 @@ public class TestNemo {
   @Test
   public void Test12Part2SubmarineCannotReleaseCapsuleDeeperThanAllowedOnTheSameCommandMessage() {
 	  assertThrowsLike(DepthState.CannotReleaseCapsule, ()-> defaultSubmarine().move("dddddm"));
-=======
-	  assertThrowsLike(DepthState.CannotReleaseCapsule, ()-> sub.move("ddm"));
->>>>>>> c35ecfdac3625eeee605499561d77c845e40b97f
   }
   
   @Test
@@ -153,18 +149,11 @@ public class TestNemo {
   public void test22SubmarineMovesDiagonally() {
       checkPosition( defaultSubmarine().move("ddlfrfum") , new Coordinates(-1, 1), -1, north() );
   }
-<<<<<<< HEAD
-=======
 
   @Test
   public void test23SubmarineMovesInSquare() {
       checkDefaultPosition( defaultSubmarine().move("frfrfrfr") );
   }
-  
-  
-
-  // ya está testeado de alguna otra manera, decidir qué hacer
->>>>>>> c35ecfdac3625eeee605499561d77c845e40b97f
   
   @Test
   public void test23SubmarineMovesInComplexPath() {
@@ -186,6 +175,7 @@ public class TestNemo {
       sub.move("fdfrmfru");
       checkPosition(sub, new Coordinates(1, 2), 0, south() );
   }
+  
   
   
   private Submarine defaultSubmarine() {
