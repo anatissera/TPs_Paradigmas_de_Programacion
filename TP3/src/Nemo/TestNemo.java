@@ -18,14 +18,13 @@ public class TestNemo {
   }
   
   @Test
-  public void Test02SubmarineMovesDown() {
-	  
-	  Submarine sub = defaultSubmarine();
-	  int initialDepth = sub.getDepth();
-	  sub.move('d');
-
-      assertEquals (initialDepth - 1, sub.getDepth());
-	  checkPosition (sub, defaultCoordinates() , -1, north() );
+  public void Test02Part1SubmarineMovesDownOnceReceivingAChar() {
+      assertEquals ( - 1, defaultSubmarine().move('d').getDepth() );
+  }
+  
+  @Test
+  public void Test02Part2SubmarineMovesDownOnceReceivingAString() {
+	  assertEquals ( - 1, defaultSubmarine().move("d").getDepth() );
   }
   
   @Test
@@ -39,12 +38,12 @@ public class TestNemo {
   }
   
   @Test
-  public void Test05SubmarineRotatesLeft() {  
+  public void Test05SubmarineRotatesLeftOnce() {  
         checkPosition ( defaultSubmarine().move('l') , defaultCoordinates(), 0, west() );
   }
   
   @Test
-  public void Test06SubmarineRotatesRight() { 
+  public void Test06SubmarineRotatesRightOnce() { 
         checkPosition ( defaultSubmarine().move('r') , defaultCoordinates(), 0, east() );
   }
   
@@ -69,8 +68,9 @@ public class TestNemo {
   @Test
   public void Test10SubmarineCanReleaseCapsuleOnSurface() {
 	  Submarine sub = defaultSubmarine();
-	  sub.move('m');
 	  assertEquals(sub.getDepth(), 0);
+	  sub.move('m');
+	  checkDefaultPosition(sub);
   }
   
   @Test
@@ -78,13 +78,20 @@ public class TestNemo {
 	  Submarine sub = defaultSubmarine();
 	  sub.move("dm");
 	  assertEquals(sub.getDepth(), -1);
+	  checkPosition( sub, defaultCoordinates(), -1, north() );
   }
   
   @Test
-  public void Test12SubmarineCannotReleaseCapsuleDeeperThanAllowed() {
+  public void Test12Part1SubmarineCannotReleaseCapsuleDeeperThanAllowed() {
 	  Submarine sub = defaultSubmarine();
-	  assertThrowsLike(DepthState.CannotReleaseCapsule, ()-> sub.move("ddm"));
+	  sub.move("dd");
 	  assertEquals(sub.getDepth(), -2);
+	  assertThrowsLike(DepthState.CannotReleaseCapsule, ()-> sub.move('m'));
+  }
+  
+  @Test
+  public void Test12Part2SubmarineCannotReleaseCapsuleDeeperThanAllowedOnTheSameCommandMessage() {
+	  assertThrowsLike(DepthState.CannotReleaseCapsule, ()-> defaultSubmarine().move("dddddm"));
   }
   
   @Test
@@ -113,7 +120,6 @@ public class TestNemo {
       checkPosition( defaultSubmarine().move("rffff") , new Coordinates(4, 0), 0, east() );
   }
   
-
   @Test
   public void test18SubmarineMovesCorrectlyWhenFacingWest() {
       checkPosition( defaultSubmarine().move("lffff") , new Coordinates(-4, 0), 0, west() );
@@ -125,8 +131,8 @@ public class TestNemo {
   }
   
   @Test
-  public void test20SubmarineDoesNothing() {
-      checkDefaultPosition( defaultSubmarine().move("mmuuu") );
+  public void test20SubmarineDoesNothingWhenReceivingNonMovingCommandsOnANonMovingState() {
+      checkDefaultPosition( defaultSubmarine().move("mumuu") );
   }
   
   @Test
@@ -134,44 +140,32 @@ public class TestNemo {
       checkPosition ( defaultSubmarine().move("dlfflfd") , new Coordinates(-2, -1), -2, south() );
   }
   
-// Adicionales
+  @Test
+  public void test23SubmarineMovesInSquareBackToOriginalPosition() {
+      checkDefaultPosition( defaultSubmarine().move("frfrfrfr") );
+  }
   
   @Test
   public void test22SubmarineMovesDiagonally() {
       checkPosition( defaultSubmarine().move("ddlfrfum") , new Coordinates(-1, 1), -1, north() );
   }
-
-  @Test
-  public void test23SubmarineMovesInSquare() {
-      checkDefaultPosition( defaultSubmarine().move("frfrfrfr") );
-  }
-
-  // ya está testeado de alguna otra manera, decidir qué hacer
   
   @Test
-  public void testSubmarineMovesInComplexPath() {
-      Submarine sub = defaultSubmarine();
-      sub.move("frumumfrumm");
-      checkPosition(sub, new Coordinates(1, 1), 0, south() );
-  }
-
-
-  @Test
-  public void testSubmarineMovesInComplexPath2() {
+  public void test23SubmarineMovesInComplexPath() {
       Submarine sub = defaultSubmarine();
       sub.move("fdlfruuurrr");
       checkPosition(sub, new Coordinates(-1, 1), 0, west() );
   }
 
   @Test
-  public void testSubmarineMovesInComplexPath3() {
+  public void test24SubmarineMovesInComplexPath2() {
       Submarine sub = defaultSubmarine();
       sub.move("mumdmumddfru");
       checkPosition(sub, new Coordinates(0, 1), -1, east() );
   }
 
   @Test
-  public void testSubmarineMovesInComplexPath4() {
+  public void test25SubmarineMovesInComplexPath3() {
       Submarine sub = defaultSubmarine();
       sub.move("fdfrmfru");
       checkPosition(sub, new Coordinates(1, 2), 0, south() );

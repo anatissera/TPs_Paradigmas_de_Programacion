@@ -10,7 +10,6 @@ public class Submarine {
 	        coordinates = initialPosition;
 	        this.orientation = orientation;
 	        depth = new Depth();
-	      
 	    }
 
 	    public int getDepth() {
