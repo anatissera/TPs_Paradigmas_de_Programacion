@@ -8,8 +8,14 @@ import org.junit.jupiter.api.function.Executable;
 public class TestNemo {
   
   @Test
-  public void Test00SubmarineInitializesCorrectly() { 
+  public void Test00Part1SubmarineInitializesCorrectlyWithDefaultCoordinates() { 
 	  checkDefaultPosition ( defaultSubmarine() );
+  }
+  
+  @Test
+  public void Test00Part2SubmarineInitializesCorrectlyWithRandomCoordinates() { 
+	  Coordinates randomCoordinates = new Coordinates(2,4);
+	  checkPosition (new Submarine(randomCoordinates, south()), randomCoordinates, 0, south());
   }
   
   @Test
