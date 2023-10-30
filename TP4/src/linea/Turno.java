@@ -14,7 +14,7 @@ public class Turno {
     }
 
     public void alternarTurno() {
-        jugadorActual = (jugadorActual == 'R') ? 'A' : 'R'; // cambia el turno entre Rojas y Azules ??? .
+        jugadorActual = (jugadorActual == 'R') ? 'B' : 'R'; // cambia el turno entre Rojas y Azules ??? .
     }
 
     

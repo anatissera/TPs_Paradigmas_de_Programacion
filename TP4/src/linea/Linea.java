@@ -15,7 +15,8 @@ public class Linea {
 	        this.altura = altura;
 	        this.tablero = new char[altura][base];
 	        turno = new Turno('R');
-	        triunfo = InitializeTriunfo.createTriunfo(varianteTriunfo);
+	        triunfo = InitializeTriunfo.createTriunfo(varianteTriunfo); // los triunfos son polimórficos, la estrategia va sin ifs. 
+	        															// Referencia a reporte balance
 	    }
 
 	    public boolean playRedkAt(int columna) {
@@ -32,36 +33,29 @@ public class Linea {
 	            tablero[fila][columna] = jugador;
 	            turno.alternarTurno();
 
-	            boolean win = triunfo.checkWin(this, fila, columna, jugador);
-	            if (win) {
-	                return true;
-	            }
+	          
+	            } // si puedo poner fichas es que ninguno ganó todavía, hacerlo así
+	            // mientras el juego no esté finished
 
-	            boolean draw = triunfo.checkDraw(this);
-	            if (draw) {
-	                return true;
-	            }
-	        }
-	        return false;
-	    } // debería estar en las implementaciones de Triunfo
-
+	        return finished();
+	    } 
 
 	    public boolean finished() {
-	        return triunfo.checkWin(this) || triunfo.checkDraw(this);
+	        return triunfo.checkWin(this) || triunfo.checkDraw(this); // debería estar en las implementaciones de Triunfo
 	    }
 
     public String show() {
         return IntStream.range(0, altura)
             .mapToObj(this::getRow)
             .reduce("", (acc, row) -> acc + row + "\n");
-    }
+    } // hay que tener un show de esto
 
+    // esta implementación iría en linea?
     private String getRow(int fila) {
         return IntStream.range(0, base)
             .mapToObj(columna -> String.valueOf(tablero[fila][columna]))
             .reduce("", (acc, cell) -> acc + cell + " ");
     }
-
 
     private int findAvailableRow(int columna) {
         return IntStream.range(0, altura)
@@ -69,4 +63,6 @@ public class Linea {
             .findFirst()
             .orElse(-1);
     }
+    
+    // no hay clase fichas, jugador, ni tablero
 }
