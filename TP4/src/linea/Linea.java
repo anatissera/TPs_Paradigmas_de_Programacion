@@ -34,7 +34,7 @@ public class Linea {
 	        															// Referencia a reporte balance
 	    }
 
-	    public boolean playRedkAt(int columna) {
+	    public boolean playRedAt(int columna) {
 	        return play('R', columna);
 	    }
 
