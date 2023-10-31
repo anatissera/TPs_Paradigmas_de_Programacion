@@ -2,10 +2,25 @@ package linea;
 
 import java.util.stream.IntStream;
 
+//¿Qué ifs sacar?
+// no hay ifs en la estrategia, ni en quien gana ni de quien es el turno
+
+// crear:
+// función preguntar: qué hay en una coordenada, rojo, azul o vacío, o sea: " ", "x", "o"
+// la complejidad la tiene preguntar, columna no tiene más que el ancho
+// no indexo columnas
+// lista de listas :) arreglo de arreglos :(
+
+
 public class Linea {
 	   private int base;
 	    private int altura;
-	    private char[][] tablero;
+	    private char[][] tablero; //no tenemos que tener tablero ni arreglo de arreglos.
+	    // la lista es de la base, el tamaño de cada columna depende de las fichas que tengo
+	    // la lista va creciendo con las fichas que se agregan, así vas recorriendo solo las que agregaste a nivel altura
+	    // la ficha no debe saber dónde está, solo el juego.
+	    // lista de columnas
+	    
 	    private Turno turno;
 
 	    private Triunfo triunfo;
