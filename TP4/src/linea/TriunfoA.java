@@ -13,14 +13,6 @@ public class TriunfoA extends Triunfo {
         return checkVertical(linea) || checkHorizontal(linea);
     }
 
-    @Override
-    public boolean checkDraw(Linea linea) {
-        boolean isDraw = IntStream.range(0, linea.getBase())
-            .allMatch(columna -> linea.ColumnIsFull(columna));
-
-        return isDraw && !checkWin(linea);
-    }
-
     private boolean checkVertical(Linea linea) {
         int base = linea.getBase();
         int altura = linea.alturaMaxActual();

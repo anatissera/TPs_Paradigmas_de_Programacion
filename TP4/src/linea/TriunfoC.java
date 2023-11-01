@@ -18,8 +18,4 @@ public class TriunfoC  extends Triunfo{
         return triunfoA.checkWin(linea) || triunfoB.checkWin(linea);
     }
 
-    @Override
-    public boolean checkDraw(Linea linea) {
-        return triunfoA.checkDraw(linea) || triunfoB.checkDraw(linea);
-    }
 }

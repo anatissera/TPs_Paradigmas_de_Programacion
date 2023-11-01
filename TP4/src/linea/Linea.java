@@ -16,7 +16,6 @@ import java.util.List;
 // no indexo columnas
 // lista de listas :) arreglo de arreglos :(
 
-
 public class Linea {
 	//no tenemos que tener tablero ni arreglo de arreglos.
 	    // la lista es de la base, el tamaño de cada columna depende de las fichas que tengo
@@ -24,8 +23,7 @@ public class Linea {
 	    // la lista va creciendo en altura con las fichas que se agregan, así vas recorriendo solo las que agregaste y no tenes espacios de más porque sí
 	    // la ficha no debe saber dónde está, solo el juego.
 	    // lista de columnas
-	    
-	    
+
 	    private int base;
 	    private int altura;
 	    private List<List<Character>> columnas;
@@ -111,8 +109,7 @@ public class Linea {
 }
 
 
-// La clase principal es Linea, que representa el juego "4 en línea". Esta clase tiene un atributo columnas, 
-// que es una lista de listas que simula el tablero. Cada lista interna representa una columna en el juego 
+// Cada lista interna representa una columna en el juego
 // y contiene caracteres que representan las fichas de los jugadores.
 //
 // Para gestionar las filas, se utiliza el método alturaMaxActual(). Este método recorre todas las columnas 

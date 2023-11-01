@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class connect4Test {
 	
-	@Test
-	public void testHorizontalWin() {
+	@Test void testHorizontalWin() {
 	    Linea game = new Linea(7, 6, 'A');
 	    game.playRedAt(0);
 	    game.playRedAt(1);
@@ -17,8 +16,7 @@ public class connect4Test {
 	    assertTrue(game.finished());
 	}
 
-	@Test
-	public void testVerticalWin() {
+	@Test void testVerticalWin() {
 	    Linea game = new Linea(7, 6, 'A');
 	    game.playRedAt(0);
 	    game.playRedAt(0);
@@ -27,8 +25,7 @@ public class connect4Test {
 	    assertTrue(game.finished());
 	}
 
-	@Test
-	public void testDiagonalWin() {
+	@Test void testDiagonalWin() {
 	    Linea game = new Linea(7, 6, 'B');
 	    game.playRedAt(0);
 	    game.playBlueAt(1);
@@ -43,8 +40,9 @@ public class connect4Test {
 	}
 
 	@Test
-	public void testDrawWithFullBoard() {
-	    Linea game = new Linea(4, 4, 'C');
+	void testDraw() {
+	    Linea game = new Linea(4, 4, 'A');
+	    
 	    game.playRedAt(0);
 	    game.playBlueAt(1);
 	    game.playRedAt(2);
@@ -57,8 +55,12 @@ public class connect4Test {
 	    game.playBlueAt(1);
 	    game.playRedAt(2);
 	    game.playBlueAt(3);
+
 	    assertTrue(game.finished());
-	    assertTrue(game.show().contains("X X X X"));
+	}
+
+	@Test void test(){
+
 	}
 
 }

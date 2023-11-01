@@ -1,5 +1,7 @@
 package linea;
 
+import java.util.stream.IntStream;
+
 //public interface Triunfo {
 //    boolean checkWin(Linea linea, int fila, int columna, char jugador);
 //    boolean checkWin(Linea linea);
@@ -30,7 +32,15 @@ public abstract class Triunfo {
     }
 
     public abstract boolean checkWin(Linea linea);
-    public abstract boolean checkDraw(Linea linea);
+//    public abstract boolean checkDraw(Linea linea);
+
+    public boolean checkDraw(Linea linea) {
+        boolean isDraw = IntStream.range(0, linea.getBase())
+            .allMatch(columna -> linea.ColumnIsFull(columna));
+
+        return isDraw && !checkWin(linea);
+    }
+
 }
 
 //package nemo3;
