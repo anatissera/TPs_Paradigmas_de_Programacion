@@ -14,12 +14,10 @@ public class Turno {
     }
 
     public void alternarTurno() {
-        jugadorActual = (jugadorActual == 'R') ? 'B' : 'R'; // cambia el turno entre Rojas y Azules ??? .
+        jugadorActual = (jugadorActual == 'X') ? '0' : 'X';
     }
 
-    
-//	public String NoEsTurnoErrorDescription = "No es turno";
-//	
+
 //	private ArrayList<Ficha> cartasDeManoDisponibles;
 //	private ArrayList<Ficha> cartasDePieDisponibles;
 //	private ArrayList<Ficha> cartasDeManoJugadas;

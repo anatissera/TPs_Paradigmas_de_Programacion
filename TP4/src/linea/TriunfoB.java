@@ -6,6 +6,18 @@ public class TriunfoB  extends Triunfo{
     }
 	// solo 4 en línea diagonales.
 
+	@Override
+	public boolean checkWin(Linea linea) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean checkDraw(Linea linea) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	// ¿cómo recorro las columnas?
 	// extiendo las columnas para que abarque todo el tablero para recorrer las columnas
 	// puedo recorrer el tablero de cualquier tamaño sin que el tamaño sea un problema

@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6cce5ad-3226-4536-b756-9d2a51274e37" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/TP3/src/Nemo/Coordinates.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP3/src/Nemo/Coordinates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/InitializeTriunfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/InitializeTriunfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/Linea.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/Linea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/Triunfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/Triunfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriunfoA.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriunfoA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriunfoB.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriunfoB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriunfoC.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriunfoC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/Turno.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/Turno.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/connect4Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/connect4Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +69,7 @@
       <workItem from="1697304176676" duration="2000" />
       <workItem from="1697305834236" duration="15000" />
       <workItem from="1697398623452" duration="24000" />
+      <workItem from="1698798632192" duration="22000" />
     </task>
     <servers />
   </component>

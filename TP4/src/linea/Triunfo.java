@@ -18,7 +18,7 @@ package linea;
 //    // Implementa las reglas de triunfo 'C'
 //}
 
-class Triunfo {
+public abstract class Triunfo {
     protected char key;
 
     public Triunfo(char aKey) {
@@ -29,6 +29,8 @@ class Triunfo {
         return key == varianteTriunfo;
     }
 
+    public abstract boolean checkWin(Linea linea);
+    public abstract boolean checkDraw(Linea linea);
 }
 
 //package nemo3;

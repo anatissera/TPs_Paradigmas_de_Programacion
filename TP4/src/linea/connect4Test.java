@@ -14,10 +14,10 @@ public class connect4Test {
 	@Test
 	public void testHorizontalWin() {
 	    Linea game = new Linea(7, 6, 'C');
-	    game.playRedkAt(0);
-	    game.playRedkAt(1);
-	    game.playRedkAt(2);
-	    game.playRedkAt(3);
+	    game.playRedAt(0);
+	    game.playRedAt(1);
+	    game.playRedAt(2);
+	    game.playRedAt(3);
 	    assertTrue(game.finished());
 	    // Verificar que el jugador Rojo gane horizontalmente.
 	}
@@ -25,10 +25,10 @@ public class connect4Test {
 	@Test
 	public void testVerticalWin() {
 	    Linea game = new Linea(7, 6, 'C');
-	    game.playRedkAt(0);
-	    game.playRedkAt(0);
-	    game.playRedkAt(0);
-	    game.playRedkAt(0);
+	    game.playRedAt(0);
+	    game.playRedAt(0);
+	    game.playRedAt(0);
+	    game.playRedAt(0);
 	    assertTrue(game.finished());
 	    // Verificar que el jugador Rojo gane verticalmente.
 	}
@@ -36,15 +36,15 @@ public class connect4Test {
 	@Test
 	public void testDiagonalWin() {
 	    Linea game = new Linea(7, 6, 'C');
-	    game.playRedkAt(0);
+	    game.playRedAt(0);
 	    game.playBlueAt(1);
-	    game.playRedkAt(1);
+	    game.playRedAt(1);
 	    game.playBlueAt(2);
-	    game.playRedkAt(2);
+	    game.playRedAt(2);
 	    game.playBlueAt(2);
-	    game.playRedkAt(3);
+	    game.playRedAt(3);
 	    game.playBlueAt(3);
-	    game.playRedkAt(3);
+	    game.playRedAt(3);
 	    assertTrue(game.finished());
 	    // Verificar que el jugador Rojo gane diagonalmente.
 	}
