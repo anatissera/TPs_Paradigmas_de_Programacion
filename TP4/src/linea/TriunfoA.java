@@ -3,12 +3,11 @@ package linea;
 import java.util.stream.IntStream;
 
 public class TriunfoA extends Triunfo {
+	
 	public TriunfoA() {
         super('A');
     }
-// solo 4 en línea verticales u horizontales
 
-    @Override
     public boolean checkWin(Linea linea) {
         return checkVertical(linea) || checkHorizontal(linea);
     }
@@ -22,9 +21,7 @@ public class TriunfoA extends Triunfo {
                 .anyMatch(fila -> {
                     char ficha = linea.preguntarAt(columna, fila);
                     return ficha != ' ' && ficha == linea.preguntarAt(columna, fila + 1) &&
-                           ficha == linea.preguntarAt(columna, fila + 2) && ficha == linea.preguntarAt(columna, fila + 3);
-                })
-            );
+                           ficha == linea.preguntarAt(columna, fila + 2) && ficha == linea.preguntarAt(columna, fila + 3);}));
     }
 
     private boolean checkHorizontal(Linea linea) {
@@ -36,8 +33,6 @@ public class TriunfoA extends Triunfo {
                 .anyMatch(fila -> {
                     char ficha = linea.preguntarAt(columna, fila);
                     return ficha != ' ' && ficha == linea.preguntarAt(columna + 1, fila) &&
-                           ficha == linea.preguntarAt(columna + 2, fila) && ficha == linea.preguntarAt(columna + 3, fila);
-                })
-            );
+                           ficha == linea.preguntarAt(columna + 2, fila) && ficha == linea.preguntarAt(columna + 3, fila);}));
     }
 }

@@ -57,7 +57,7 @@ public class Linea {
 
 	    private boolean play(char color, int columna) {
 	        if ( columna < 0 || columna >= base || ColumnIsFull(columna) ) {
-	            return false; // este if se puede quedar
+	            return false; // este if se puede quedar      // hay que agregar un mensaje de error??
 	        }
 
 	        columnas.get(columna).add(color);
@@ -106,6 +106,9 @@ public class Linea {
 	    }
 	    
     // no hay clase fichas, jugador, ni tablero
+	    
+	// que pasa si quiere poner una ficha en una columna que no existe?
+	// 
 }
 
 

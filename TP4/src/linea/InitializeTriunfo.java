@@ -11,6 +11,6 @@ public class InitializeTriunfo {
         ).stream()
         .filter(each -> each.applies(varianteTriunfo))
         .findFirst()
-        .orElseThrow(() -> new IllegalArgumentException("Variante de triunfo no válida"));
+        .orElseThrow(() -> new RuntimeException("Variante de estrategia no válida"));
     }
 }
