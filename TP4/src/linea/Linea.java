@@ -60,7 +60,7 @@ public class Linea {
 	            return false; // este if se puede quedar      // hay que agregar un mensaje de error??
 	        }
 
-	        columnas.get(columna).add(color);
+	        columnas.get(columna).add(0, color);
 	        turno.alternarTurno();
 
 	        return finished();  // si puedo poner fichas es que ninguno ganó todavía, hacerlo así
