@@ -59,9 +59,12 @@ public class Linea {
 	        if ( columna < 0 || columna >= base || ColumnIsFull(columna) ) {
 	            return false; // este if se puede quedar      // hay que agregar un mensaje de error??
 	        }
+	        else {
+	        	List<Character> currentColumn = columnas.get(columna);
+	        	currentColumn.add(0, color); // Agregar en la parte superior de la columna
+	        	turno.alternarTurno();
 
-	        columnas.get(columna).add(0, color);
-	        turno.alternarTurno();
+	        }
 
 	        return finished();  // si puedo poner fichas es que ninguno ganó todavía, hacerlo así
            // mientras el juego no esté finished
@@ -71,19 +74,49 @@ public class Linea {
 	    public boolean finished() {
 	        return triunfo.checkWin(this) || triunfo.checkDraw(this);
 	    }
-
-	    public String show() {
-	        return IntStream.range(0, alturaMaxActual())
-	            .mapToObj(this::getRow)
-	            .collect(Collectors.joining("\n"));
-	    }
-
-	    private String getRow(int fila) {
-	        return IntStream.range(0, base)
-	            .mapToObj(columna -> String.valueOf(preguntarAt(columna, fila)))
-	            .collect(Collectors.joining(" ")) + " ";
-	    }
 	    
+//	    public String show() {
+//	        StringBuilder board = new StringBuilder();
+//	        for (int fila = altura - 1; fila >= 0; fila--) {
+//	            board.append("| ");
+//	            for (int columna = 0; columna < base; columna++) {
+//	                char ficha = preguntarAt(columna, fila);
+//	                board.append(ficha != ' ' ? ficha : "-");
+//	                board.append(" ");
+//	            }
+//	            board.append("|\n");
+//	        }
+//	        board.append("| ");
+//	        for (int columna = 0; columna < base; columna++) {
+//	            board.append("^ ");
+//	        }
+//	        board.append("|\n");
+//	        return board.toString();
+//	    }
+	    
+	    public String show() {
+	        StringBuilder board = new StringBuilder();
+
+	        for (int fila = altura - 1; fila >= 0; fila--) {
+	            board.append("| ");
+	            for (int columna = 0; columna < base; columna++) {
+	                char ficha = preguntarAt(columna, fila);
+	                board.append(ficha != ' ' ? ficha : "-");
+	                board.append(" ");
+	            }
+	            board.append("|\n");
+	        }
+
+	        board.append("| ");
+	        for (int columna = 0; columna < base; columna++) {
+	            board.append("^ ");
+	        }
+	        board.append("|\n");
+
+	        return board.toString();
+	    }
+
+
 	    public char preguntarAt(int columna, int fila) {
 	        if (fila < columnas.get(columna).size()) {
 	            return columnas.get(columna).get(fila);
