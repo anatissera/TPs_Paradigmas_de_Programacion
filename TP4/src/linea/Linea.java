@@ -37,16 +37,19 @@ public class Linea {
 	                .mapToObj(i -> new ArrayList<Character>())
 	                .collect(Collectors.toList());
 	        
-	        turn = new Turno('X'); // X es rojas/negras
+	        turn = new Turno().setTurno('X');; // X es rojas/negras
 	        triumphVariant = InitializeTriumphVariant.createTriunfo(estrategia);
 	    } 
 	   // Referencia a reporte balance
 	 
 	    public boolean playRedAt(int columna) {
+//	    	turn.redPlays();
 	        return play('X', columna);
+	       
 	    }
 
 	    public boolean playBlueAt(int columna) {
+//	    	turn.bluePlays();
 	        return play('O', columna); // O es azules
 	    }
 
@@ -56,13 +59,12 @@ public class Linea {
 	        }
 	        else {
 	        	  List<Character> currentColumn = columns.get(columna);
-	        	  int row = currentColumn.size(); // Obtener la fila superior disponible
-	        	  currentColumn.add(row, color); // Agregar en la fila superior disponible
+	        	  int row = currentColumn.size(); 
+	        	  currentColumn.add(row, color);
 	        	  turn.alternarTurno();
 	        }
 
-	        return finished();  // si puedo poner fichas es que ninguno ganó todavía, hacerlo así
-           // mientras el juego no esté finished
+	        return finished();  // si puedo poner fichas es que ninguno ganó todavía
 
 	    }
 
@@ -102,13 +104,13 @@ public class Linea {
 	    
 	    boolean ColumnIsFull(int column) {
 	        return columns.get(column).size() >= height;
-	    } // en la columna particular
+	    } 
 	    
-	    public int alturaMaxActual() {
+	    public int maxHeight() {
 	    	 return columns.stream()
 	    		        .map(List::size)
 	    		        .reduce(0, Integer::max);
-	    } // en todo el juego
+	    }
 	    
 	    public int getBase() {
 	        return base;
@@ -116,6 +118,14 @@ public class Linea {
 
 		public int getHeight() {
 			return height;
+		}
+		
+		public Triumph getTriumphVariant() {
+		    return triumphVariant;
+		}
+
+		public Turno getTurn() {
+		    return turn;
 		}
 	    
     // no hay clase fichas, jugador, ni tablero

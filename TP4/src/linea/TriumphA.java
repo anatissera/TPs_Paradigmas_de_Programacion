@@ -14,19 +14,19 @@ public class TriumphA extends Triumph {
 
     private boolean checkVertical(Linea linea) {
         int base = linea.getBase();
-        int height = linea.alturaMaxActual();
+        int height = linea.maxHeight();
 
-        return checkLineaVorH(linea, base, height - 3, 0, 1);
+        return checkLine(linea, base, height - 3, 0, 1);
     }
 
     private boolean checkHorizontal(Linea linea) {
         int base = linea.getBase();
-        int height = linea.alturaMaxActual();
+        int height = linea.maxHeight();
         
-        return checkLineaVorH(linea, base - 3, height, 1, 0);
+        return checkLine(linea, base - 3, height, 1, 0);
     }
     
-    private boolean checkLineaVorH(Linea linea, int baseLimit, int heightLimit, int deltaBase, int deltaHeight) {
+    private boolean checkLine(Linea linea, int baseLimit, int heightLimit, int deltaBase, int deltaHeight) {
     	
         return IntStream.range(0, baseLimit)
             .anyMatch(columna -> IntStream.range(0, heightLimit)

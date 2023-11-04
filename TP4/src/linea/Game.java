@@ -15,6 +15,13 @@ public class Game {
         System.out.println( game.show() );
       }
     }
+    
+    if (game.getTriumphVariant().checkWin(game)) {
+        System.out.println("¡Las " + game.getTurn().getJugadorActual() + " ganan!");
+    } else {
+        System.out.println("¡Empate!");
+    }
+    
   }
 
   private static int promptInt( String message ) {
