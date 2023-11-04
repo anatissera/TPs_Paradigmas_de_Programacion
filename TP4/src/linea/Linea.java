@@ -17,32 +17,27 @@ import java.util.List;
 // lista de listas :) arreglo de arreglos :(
 
 public class Linea {
-	//no tenemos que tener tablero ni arreglo de arreglos.
-	    // la lista es de la base, el tamaño de cada columna depende de las fichas que tengo
-	    // o sea que inicializo una lista del tamaño del primer argumento que me pasan, o sea de la base
-	    // la lista va creciendo en altura con las fichas que se agregan, así vas recorriendo solo las que agregaste y no tenes espacios de más porque sí
-	    // la ficha no debe saber dónde está, solo el juego.
-	    // lista de columnas
+//		no tenemos que tener tablero ni arreglo de arreglos.
+//	     la lista es de la base, el tamaño de cada columna depende de las fichas que tengo
+//	     o sea que inicializo una lista del tamaño del primer argumento que me pasan, o sea de la base
+//	     la lista va creciendo en altura con las fichas que se agregan, así vas recorriendo solo las que agregaste y no tenes espacios de más porque sí
+//	     la ficha no debe saber dónde está, solo el juego.
+//	     lista de columnas
 
 	    private int base;
-	    private int altura;
+	    private int height;
 	    private List<List<Character>> columnas;
 	    private Turno turno;
 	    private Triunfo triunfo;
 	    
-	    public Linea(int base, int altura, char estrategia) {
-	      
+	    public Linea(int base, int height, char estrategia) {
 	        this.base = base;
-	        this.altura = altura;
-//	        this.columnas = new ArrayList<>();
-//	        for (int i = 0; i < base; i++) {
-//	            columnas.add(new ArrayList<>());
-//	        }
+	        this.height = height;
 	        this.columnas = IntStream.range(0, base)
 	                .mapToObj(i -> new ArrayList<Character>())
 	                .collect(Collectors.toList());
 	        
-	        turno = new Turno('X'); // X es rojas
+	        turno = new Turno('X'); // X es rojas/negras
 	        triunfo = InitializeTriunfo.createTriunfo(estrategia);
 	    } 
 	   // Referencia a reporte balance
@@ -60,10 +55,10 @@ public class Linea {
 	            return false; // este if se puede quedar      // hay que agregar un mensaje de error??
 	        }
 	        else {
-	        	List<Character> currentColumn = columnas.get(columna);
-	        	currentColumn.add(0, color); // Agregar en la parte superior de la columna
-	        	turno.alternarTurno();
-
+	        	  List<Character> currentColumn = columnas.get(columna);
+	        	    int fila = currentColumn.size(); // Obtener la fila superior disponible
+	        	    currentColumn.add(fila, color); // Agregar en la fila superior disponible
+	        	    turno.alternarTurno();
 	        }
 
 	        return finished();  // si puedo poner fichas es que ninguno ganó todavía, hacerlo así
@@ -97,7 +92,7 @@ public class Linea {
 	    public String show() {
 	        StringBuilder board = new StringBuilder();
 
-	        for (int fila = altura - 1; fila >= 0; fila--) {
+	        for (int fila = height - 1; fila >= 0; fila--) {
 	            board.append("| ");
 	            for (int columna = 0; columna < base; columna++) {
 	                char ficha = preguntarAt(columna, fila);
@@ -125,7 +120,7 @@ public class Linea {
 	    }
 	    
 	    boolean ColumnIsFull(int columna) {
-	        return columnas.get(columna).size() >= altura;
+	        return columnas.get(columna).size() >= height;
 	    } // en la columna particular
 	    
 	    public int alturaMaxActual() {
@@ -137,6 +132,10 @@ public class Linea {
 	    public int getBase() {
 	        return base;
 	    }
+
+		public int getAltura() {
+			return height;
+		}
 	    
     // no hay clase fichas, jugador, ni tablero
 	    
