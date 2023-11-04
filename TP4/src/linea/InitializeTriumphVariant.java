@@ -2,12 +2,12 @@ package linea;
 
 import java.util.List;
 
-public class InitializeTriunfo {
-    static public Triunfo createTriunfo(char varianteTriunfo) {
+public class InitializeTriumphVariant {
+    static public Triumph createTriunfo(char varianteTriunfo) {
         return List.of(
-            new TriunfoA(),
-            new TriunfoB(),
-            new TriunfoC()
+            new TriumphA(),
+            new TriumphB(),
+            new TriumphC()
         ).stream()
         .filter(each -> each.applies(varianteTriunfo))
         .findFirst()

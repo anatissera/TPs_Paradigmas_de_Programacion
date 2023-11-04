@@ -1,16 +1,16 @@
 package linea;
 
-public class TriunfoC  extends Triunfo{
+public class TriumphC  extends Triumph{
 	// 4 en línea en cualquier orientación.
 	// = A + B
 	
-    private Triunfo triunfoA;
-    private Triunfo triunfoB;
+    private Triumph triunfoA;
+    private Triumph triunfoB;
     
-	public TriunfoC () {
+	public TriumphC () {
 		super('C');
-		this.triunfoA = new TriunfoA();
-	    this.triunfoB = new TriunfoB();
+		this.triunfoA = new TriumphA();
+	    this.triunfoB = new TriumphB();
 	}
 
     @Override

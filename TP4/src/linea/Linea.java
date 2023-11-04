@@ -26,19 +26,19 @@ public class Linea {
 
 	    private int base;
 	    private int height;
-	    private List<List<Character>> columnas;
-	    private Turno turno;
-	    private Triunfo triunfo;
+	    private List<List<Character>> columns;
+	    private Turno turn;
+	    private Triumph triumphVariant;
 	    
 	    public Linea(int base, int height, char estrategia) {
 	        this.base = base;
 	        this.height = height;
-	        this.columnas = IntStream.range(0, base)
+	        this.columns = IntStream.range(0, base)
 	                .mapToObj(i -> new ArrayList<Character>())
 	                .collect(Collectors.toList());
 	        
-	        turno = new Turno('X'); // X es rojas/negras
-	        triunfo = InitializeTriunfo.createTriunfo(estrategia);
+	        turn = new Turno('X'); // X es rojas/negras
+	        triumphVariant = InitializeTriumphVariant.createTriunfo(estrategia);
 	    } 
 	   // Referencia a reporte balance
 	 
@@ -52,13 +52,13 @@ public class Linea {
 
 	    private boolean play(char color, int columna) {
 	        if ( columna < 0 || columna >= base || ColumnIsFull(columna) ) {
-	            return false; // este if se puede quedar      // hay que agregar un mensaje de error??
+	            return false; // hay que agregar un mensaje de error??
 	        }
 	        else {
-	        	  List<Character> currentColumn = columnas.get(columna);
-	        	    int fila = currentColumn.size(); // Obtener la fila superior disponible
-	        	    currentColumn.add(fila, color); // Agregar en la fila superior disponible
-	        	    turno.alternarTurno();
+	        	  List<Character> currentColumn = columns.get(columna);
+	        	  int row = currentColumn.size(); // Obtener la fila superior disponible
+	        	  currentColumn.add(row, color); // Agregar en la fila superior disponible
+	        	  turn.alternarTurno();
 	        }
 
 	        return finished();  // si puedo poner fichas es que ninguno ganó todavía, hacerlo así
@@ -67,35 +67,16 @@ public class Linea {
 	    }
 
 	    public boolean finished() {
-	        return triunfo.checkWin(this) || triunfo.checkDraw(this);
+	        return triumphVariant.checkWin(this) || triumphVariant.checkDraw(this);
 	    }
-	    
-//	    public String show() {
-//	        StringBuilder board = new StringBuilder();
-//	        for (int fila = altura - 1; fila >= 0; fila--) {
-//	            board.append("| ");
-//	            for (int columna = 0; columna < base; columna++) {
-//	                char ficha = preguntarAt(columna, fila);
-//	                board.append(ficha != ' ' ? ficha : "-");
-//	                board.append(" ");
-//	            }
-//	            board.append("|\n");
-//	        }
-//	        board.append("| ");
-//	        for (int columna = 0; columna < base; columna++) {
-//	            board.append("^ ");
-//	        }
-//	        board.append("|\n");
-//	        return board.toString();
-//	    }
 	    
 	    public String show() {
 	        StringBuilder board = new StringBuilder();
 
-	        for (int fila = height - 1; fila >= 0; fila--) {
+	        for (int row = height - 1; row >= 0; row--) {
 	            board.append("| ");
-	            for (int columna = 0; columna < base; columna++) {
-	                char ficha = preguntarAt(columna, fila);
+	            for (int column = 0; column < base; column++) {
+	                char ficha = preguntarAt(column, row);
 	                board.append(ficha != ' ' ? ficha : "-");
 	                board.append(" ");
 	            }
@@ -103,7 +84,7 @@ public class Linea {
 	        }
 
 	        board.append("| ");
-	        for (int columna = 0; columna < base; columna++) {
+	        for (int column = 0; column < base; column++) {
 	            board.append("^ ");
 	        }
 	        board.append("|\n");
@@ -112,19 +93,19 @@ public class Linea {
 	    }
 
 
-	    public char preguntarAt(int columna, int fila) {
-	        if (fila < columnas.get(columna).size()) {
-	            return columnas.get(columna).get(fila);
+	    public char preguntarAt(int column, int row) {
+	        if (row < columns.get(column).size()) {
+	            return columns.get(column).get(row);
 	        }
 	        return ' ';
 	    }
 	    
-	    boolean ColumnIsFull(int columna) {
-	        return columnas.get(columna).size() >= height;
+	    boolean ColumnIsFull(int column) {
+	        return columns.get(column).size() >= height;
 	    } // en la columna particular
 	    
 	    public int alturaMaxActual() {
-	    	 return columnas.stream()
+	    	 return columns.stream()
 	    		        .map(List::size)
 	    		        .reduce(0, Integer::max);
 	    } // en todo el juego
@@ -133,7 +114,7 @@ public class Linea {
 	        return base;
 	    }
 
-		public int getAltura() {
+		public int getHeight() {
 			return height;
 		}
 	    

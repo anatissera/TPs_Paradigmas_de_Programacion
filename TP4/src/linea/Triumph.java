@@ -2,10 +2,10 @@ package linea;
 
 import java.util.stream.IntStream;
 
-public abstract class Triunfo {
+public abstract class Triumph {
     protected char key;
 
-    public Triunfo(char aKey) {
+    public Triumph(char aKey) {
         key = aKey;
     }
 
@@ -17,7 +17,7 @@ public abstract class Triunfo {
 
     public boolean checkDraw(Linea linea) {
   
-        if ( (linea.getBase() < 4 && linea.getAltura() < 4) || (IntStream.range(0, linea.getBase())
+        if ( (linea.getBase() < 4 && linea.getHeight() < 4) || (IntStream.range(0, linea.getBase())
             .allMatch(columna -> linea.ColumnIsFull(columna)) && !checkWin(linea)) ) {
         	System.out.print( "empate!" );
         	return true;
