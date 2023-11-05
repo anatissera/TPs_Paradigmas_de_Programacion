@@ -27,7 +27,7 @@ public class connect4Test {
 	public void test02EnElPrimerEnfrentamientoLuegoDeLaManoJuegaElPie() {
 		Linea game = new Linea(4, 4, 'C');
 		
-		game.playRedAt( 0 );
+		game.playRedAt(1);
 	
 		assertFalse(game.getTurn().redsTurn());
 		assertTrue(game.getTurn().bluesTurn());		
@@ -38,9 +38,9 @@ public class connect4Test {
 	
 		Linea game = new Linea(4, 4, 'C');
 		
-		game.playRedAt( 0 );
+		game.playRedAt(1);
 		
-		assertThrowsLike( "No es turno" , () -> game.playRedAt( 0 ) );
+		assertThrowsLike( "No es turno" , () -> game.playRedAt(1) );
 	
 		assertFalse(game.getTurn().redsTurn());
 		assertTrue(game.getTurn().bluesTurn());	
@@ -54,10 +54,10 @@ public class connect4Test {
 		
 		Linea game = new Linea(4, 4, 'C');
 		
-		game.playRedAt( 0 );
-		game.playBlueAt( 0 );
+		game.playRedAt(1);
+		game.playBlueAt(1);
 		
-		assertThrowsLike( "No es turno" , () -> game.playBlueAt( 0 ) );
+		assertThrowsLike( "No es turno" , () -> game.playBlueAt(1) );
 	
 		assertTrue(game.getTurn().redsTurn());
 		assertFalse(game.getTurn().bluesTurn());	
@@ -65,67 +65,85 @@ public class connect4Test {
 	}
 	
 	@Test
-	public void test05CannotPlayOutsideTheGameSpace() {
+	public void test05CannotPlayOnceTheGameIsFinished() {
+		Linea game = new Linea(3, 3, 'C');
+		assertThrowsLike( "El juego ha terminado" , () -> game.playRedAt(1) );
+		
 	}
 	
-	@Test void testGameCannotBeInizializatedWithNonValidStrategy(){
-		assertThrowsLike( "Variante de estrategia no válida" , () -> new Linea(7,6,'K') ); //InitializeTriunfo.NonValidStrategyVariant
+	@Test
+	public void test06CannotPlayOutsideTheGameSpace() {
+		Linea game = new Linea(4, 4, 'C');
+		assertThrowsLike( "La posición no se encuentra disponible" , () -> game.playRedAt(5) );
 	}
 	
+	@Test
+	public void test07CannotPlayOnAFullColumn() {
+		Linea game = new Linea(4, 4, 'C');
+		game.playRedAt(1);
+		game.playBlueAt(1);
+		game.playRedAt(1);
+		game.playBlueAt(1);
+		assertThrowsLike( "La posición no se encuentra disponible" , () -> game.playRedAt(1) );
+	}
+	
+//	@Test void testGameCannotBeInizializatedWithNonValidStrategy(){
+//		assertThrowsLike( "Variante de estrategia no válida" , () -> new Linea(7,6,'K') ); //InitializeTriunfo.NonValidStrategyVariant
+//	} //innecesario creo
 	
 	@Test void testHorizontalWin() {
 	    Linea game = new Linea(7, 6, 'A');
-	    game.playRedAt(0);
-	    game.playBlueAt(0);
 	    game.playRedAt(1);
 	    game.playBlueAt(1);
 	    game.playRedAt(2);
 	    game.playBlueAt(2);
 	    game.playRedAt(3);
+	    game.playBlueAt(3);
+	    game.playRedAt(4);
 	    assertTrue(game.finished());
 	}
 
 	@Test void testVerticalWin() {
 	    Linea game = new Linea(7, 6, 'A');
-	    game.playRedAt(0);
-	    game.playBlueAt(1);
-	    game.playRedAt(0);
-	    game.playBlueAt(1);
-	    game.playRedAt(0);
-	    game.playBlueAt(1);
-	    game.playRedAt(0);
+	    game.playRedAt(1);
+	    game.playBlueAt(2);
+	    game.playRedAt(1);
+	    game.playBlueAt(2);
+	    game.playRedAt(1);
+	    game.playBlueAt(2);
+	    game.playRedAt(1);
 	    assertTrue(game.finished());
 	}
 
 	@Test void testDiagonalFromLeftToRightWin() {
 	    Linea game = new Linea(7, 6, 'B');
-	    game.playRedAt(0);
-	    game.playBlueAt(1);
 	    game.playRedAt(1);
 	    game.playBlueAt(2);
 	    game.playRedAt(2);
 	    game.playBlueAt(3);
-	    game.playRedAt(2);
-	    game.playBlueAt(3);
 	    game.playRedAt(3);
-	    game.playBlueAt(0);
+	    game.playBlueAt(4);
 	    game.playRedAt(3);
+	    game.playBlueAt(4);
+	    game.playRedAt(4);
+	    game.playBlueAt(1);
+	    game.playRedAt(4);
 	    assertTrue(game.finished());
 	}
 	
 	@Test void testDiagonalFromRightToLeftWin() {
 	    Linea game = new Linea(7, 6, 'B');
+	    game.playRedAt(4);
+	    game.playBlueAt(3);
 	    game.playRedAt(3);
 	    game.playBlueAt(2);
 	    game.playRedAt(2);
 	    game.playBlueAt(1);
+	    game.playRedAt(2);
+	    game.playBlueAt(1);
 	    game.playRedAt(1);
-	    game.playBlueAt(0);
+	    game.playBlueAt(4);
 	    game.playRedAt(1);
-	    game.playBlueAt(0);
-	    game.playRedAt(0);
-	    game.playBlueAt(3);
-	    game.playRedAt(0);
 	    assertTrue(game.finished());
 	}
 	
@@ -133,26 +151,25 @@ public class connect4Test {
 	void testDraw() {
 	    Linea game = new Linea(4, 4, 'A');
 	    
-	    game.playRedAt(0);
-	    game.playBlueAt(1);
-	    game.playRedAt(2);
-	    game.playBlueAt(3);
-	    game.playRedAt(0);
-	    game.playBlueAt(1);
-	    game.playRedAt(2);
-	    game.playBlueAt(3);
-	    game.playRedAt(0);
-	    game.playBlueAt(1);
-	    game.playRedAt(2);
-	    game.playBlueAt(3);
 	    game.playRedAt(1);
-	    game.playBlueAt(0);
-	    game.playRedAt(3);
 	    game.playBlueAt(2);
+	    game.playRedAt(3);
+	    game.playBlueAt(4);
+	    game.playRedAt(1);
+	    game.playBlueAt(2);
+	    game.playRedAt(3);
+	    game.playBlueAt(4);
+	    game.playRedAt(1);
+	    game.playBlueAt(2);
+	    game.playRedAt(3);
+	    game.playBlueAt(4);
+	    game.playRedAt(2);
+	    game.playBlueAt(1);
+	    game.playRedAt(4);
+	    game.playBlueAt(3);
 
 	    assertTrue(game.finished());
 	}
-
 
 	  private void assertThrowsLike( String message, Executable executable ) {
 		  assertEquals( message,
