@@ -17,14 +17,14 @@ public class connect4Test {
 	
 	@Test
     public void test01RedsAlwaysStart() {
-			Linea game = new Linea(4, 4, 'C');
-			
-			assertTrue(game.getTurn().redsTurn());
-			assertFalse(game.getTurn().bluesTurn());
-	}
+		Linea game = new Linea(4, 4, 'C');
+		
+		assertTrue(game.getTurn().redsTurn());
+		assertFalse(game.getTurn().bluesTurn());
+}
 	
 	@Test
-	public void test02EnElPrimerEnfrentamientoLuegoDeLaManoJuegaElPie() {
+	public void test02BluePlaysAfterRedTurn() {
 		Linea game = new Linea(4, 4, 'C');
 		
 		game.playRedAt(1);
@@ -35,12 +35,11 @@ public class connect4Test {
 	
 	@Test
 	public void test03RedsCannotPlayWhenItsBluesTurn() {
-	
 		Linea game = new Linea(4, 4, 'C');
 		
 		game.playRedAt(1);
 		
-		assertThrowsLike( "No es turno" , () -> game.playRedAt(1) );
+		assertThrowsLike( Turno.notTurnErrorDescription , () -> game.playRedAt(1) );
 	
 		assertFalse(game.getTurn().redsTurn());
 		assertTrue(game.getTurn().bluesTurn());	
@@ -57,7 +56,7 @@ public class connect4Test {
 		game.playRedAt(1);
 		game.playBlueAt(1);
 		
-		assertThrowsLike( "No es turno" , () -> game.playBlueAt(1) );
+		assertThrowsLike( Turno.notTurnErrorDescription , () -> game.playBlueAt(1) );
 	
 		assertTrue(game.getTurn().redsTurn());
 		assertFalse(game.getTurn().bluesTurn());	
@@ -67,14 +66,13 @@ public class connect4Test {
 	@Test
 	public void test05CannotPlayOnceTheGameIsFinished() {
 		Linea game = new Linea(3, 3, 'C');
-		assertThrowsLike( "El juego ha terminado" , () -> game.playRedAt(1) );
-		
+		assertThrowsLike( Linea.gameHasFinishedErrorDescription , () -> game.playRedAt(1) );
 	}
 	
 	@Test
 	public void test06CannotPlayOutsideTheGameSpace() {
 		Linea game = new Linea(4, 4, 'C');
-		assertThrowsLike( "La posición no se encuentra disponible" , () -> game.playRedAt(5) );
+		assertThrowsLike(Linea.notAvailablePositionErrorDescription , () -> game.playRedAt(5) );
 	}
 	
 	@Test
@@ -84,7 +82,7 @@ public class connect4Test {
 		game.playBlueAt(1);
 		game.playRedAt(1);
 		game.playBlueAt(1);
-		assertThrowsLike( "La posición no se encuentra disponible" , () -> game.playRedAt(1) );
+		assertThrowsLike( Linea.notAvailablePositionErrorDescription , () -> game.playRedAt(1) );
 	}
 	
 //	@Test void testGameCannotBeInizializatedWithNonValidStrategy(){
@@ -92,83 +90,61 @@ public class connect4Test {
 //	} //innecesario creo
 	
 	@Test void testHorizontalWin() {
-	    Linea game = new Linea(7, 6, 'A');
-	    game.playRedAt(1);
-	    game.playBlueAt(1);
-	    game.playRedAt(2);
-	    game.playBlueAt(2);
-	    game.playRedAt(3);
-	    game.playBlueAt(3);
-	    game.playRedAt(4);
-	    assertTrue(game.finished());
+	    assertTrue(horizontalWin('A'));
 	}
 
 	@Test void testVerticalWin() {
-	    Linea game = new Linea(7, 6, 'A');
-	    game.playRedAt(1);
-	    game.playBlueAt(2);
-	    game.playRedAt(1);
-	    game.playBlueAt(2);
-	    game.playRedAt(1);
-	    game.playBlueAt(2);
-	    game.playRedAt(1);
-	    assertTrue(game.finished());
+		assertTrue(verticalWin('A'));
 	}
 
 	@Test void testDiagonalFromLeftToRightWin() {
-	    Linea game = new Linea(7, 6, 'B');
-	    game.playRedAt(1);
-	    game.playBlueAt(2);
-	    game.playRedAt(2);
-	    game.playBlueAt(3);
-	    game.playRedAt(3);
-	    game.playBlueAt(4);
-	    game.playRedAt(3);
-	    game.playBlueAt(4);
-	    game.playRedAt(4);
-	    game.playBlueAt(1);
-	    game.playRedAt(4);
-	    assertTrue(game.finished());
+		assertTrue(diagonalFromLeftToRightWin('B'));
 	}
 	
 	@Test void testDiagonalFromRightToLeftWin() {
-	    Linea game = new Linea(7, 6, 'B');
-	    game.playRedAt(4);
-	    game.playBlueAt(3);
-	    game.playRedAt(3);
-	    game.playBlueAt(2);
-	    game.playRedAt(2);
-	    game.playBlueAt(1);
-	    game.playRedAt(2);
-	    game.playBlueAt(1);
-	    game.playRedAt(1);
-	    game.playBlueAt(4);
-	    game.playRedAt(1);
-	    assertTrue(game.finished());
+		assertTrue(diagonalFromRightToLeftWin('B'));
+	}
+	
+	@Test void testTriumphCWorksWithHorizontalWin() {
+		assertTrue(horizontalWin('C'));
+	}
+	
+	@Test void testTriumphCWorksWithVerticalWin() {
+		assertTrue(verticalWin('C'));
+	}
+	
+	@Test void testTriumphCWorksWithDiagonalFromLeftToRightWin() {
+		assertTrue(diagonalFromLeftToRightWin('C'));
+	}
+	
+	@Test void testTriumphCWorksWithDiagonalFromRightToLeftWin() {
+		assertTrue(diagonalFromRightToLeftWin('C'));
+	}
+	
+	@Test void testTriumphADoesNotWorkWithDiagonalWin() {
+		assertFalse(diagonalFromLeftToRightWin('A'));
+	}
+	
+	@Test void testTriumphBDoesNorWorkWithHorizontalWin() {
+		assertFalse(horizontalWin('B'));
+	}
+	
+	@Test void testTriumphBDoesNorWorkWithVerticallWin() {
+		assertFalse(verticalWin('B'));
 	}
 	
 	@Test
 	void testDraw() {
 	    Linea game = new Linea(4, 4, 'A');
-	    
-	    game.playRedAt(1);
-	    game.playBlueAt(2);
-	    game.playRedAt(3);
-	    game.playBlueAt(4);
-	    game.playRedAt(1);
-	    game.playBlueAt(2);
-	    game.playRedAt(3);
-	    game.playBlueAt(4);
-	    game.playRedAt(1);
-	    game.playBlueAt(2);
-	    game.playRedAt(3);
-	    game.playBlueAt(4);
-	    game.playRedAt(2);
-	    game.playBlueAt(1);
-	    game.playRedAt(4);
-	    game.playBlueAt(3);
-
+	    drawGame(game);
 	    assertTrue(game.finished());
+	}
+	
+	@Test
+	public void testCannotPlayAfterADraw() {
+		Linea game = new Linea(4, 4, 'C');
+	    drawGame(game);
+		assertThrowsLike( Linea.gameHasFinishedErrorDescription , () -> game.playRedAt(1) );
 	}
 
 	  private void assertThrowsLike( String message, Executable executable ) {
@@ -176,6 +152,78 @@ public class connect4Test {
 				  assertThrows( Exception.class, executable ).getMessage() );
 	  }
 	  
-	
-
+		private boolean horizontalWin(char triumphKey) {
+			Linea game = new Linea(7, 6, triumphKey);
+		    game.playRedAt(1);
+		    game.playBlueAt(1);
+		    game.playRedAt(2);
+		    game.playBlueAt(2);
+		    game.playRedAt(3);
+		    game.playBlueAt(3);
+		    game.playRedAt(4);
+		    return game.finished();
+		}
+		
+		private boolean verticalWin(char triumphKey) {
+			Linea game = new Linea(7, 6, triumphKey);
+		    game.playRedAt(1);
+		    game.playBlueAt(2);
+		    game.playRedAt(1);
+		    game.playBlueAt(2);
+		    game.playRedAt(1);
+		    game.playBlueAt(2);
+		    game.playRedAt(1);
+		    return game.finished();
+		}
+		
+		private boolean diagonalFromLeftToRightWin(char triumphKey) {
+			Linea game = new Linea(7, 6, triumphKey);
+		    game.playRedAt(1);
+		    game.playBlueAt(2);
+		    game.playRedAt(2);
+		    game.playBlueAt(3);
+		    game.playRedAt(3);
+		    game.playBlueAt(4);
+		    game.playRedAt(3);
+		    game.playBlueAt(4);
+		    game.playRedAt(4);
+		    game.playBlueAt(1);
+		    game.playRedAt(4);
+		    return game.finished();
+		}
+		
+		private boolean diagonalFromRightToLeftWin(char triumphKey) {
+			Linea game = new Linea(7, 6, triumphKey);
+		    game.playRedAt(4);
+		    game.playBlueAt(3);
+		    game.playRedAt(3);
+		    game.playBlueAt(2);
+		    game.playRedAt(2);
+		    game.playBlueAt(1);
+		    game.playRedAt(2);
+		    game.playBlueAt(1);
+		    game.playRedAt(1);
+		    game.playBlueAt(4);
+		    game.playRedAt(1);
+		    return game.finished();
+		}
+		
+		private void drawGame(Linea game) {
+			game.playRedAt(1);
+		    game.playBlueAt(2);
+		    game.playRedAt(3);
+		    game.playBlueAt(4);
+		    game.playRedAt(1);
+		    game.playBlueAt(2);
+		    game.playRedAt(3);
+		    game.playBlueAt(4);
+		    game.playRedAt(1);
+		    game.playBlueAt(2);
+		    game.playRedAt(3);
+		    game.playBlueAt(4);
+		    game.playRedAt(2);
+		    game.playBlueAt(1);
+		    game.playRedAt(4);
+		    game.playBlueAt(3);
+		}
 }

@@ -17,12 +17,16 @@ import java.util.List;
 // lista de listas :) arreglo de arreglos :(
 
 public class Linea {
+		
 //		 no tenemos que tener tablero ni arreglo de arreglos.
 //	     la lista es de la base, el tamaño de cada columna depende de las fichas que tengo
 //	     o sea que inicializo una lista del tamaño del primer argumento que me pasan, o sea de la base
 //	     la lista va creciendo en altura con las fichas que se agregan, así vas recorriendo solo las que agregaste y no tenes espacios de más porque sí
 //	     la ficha no debe saber dónde está, solo el juego.
 //	     lista de columnas
+	
+		public static String gameHasFinishedErrorDescription = "El juego ha terminado";
+		public static String notAvailablePositionErrorDescription = "La posición no se encuentra disponible";
 
 	    private int base;
 	    private int height;
@@ -57,11 +61,11 @@ public class Linea {
 	    private void play(char color, int columna) {
 	
 	        if (finished()) {
-	            throw new RuntimeException("El juego ha terminado");
+	            throw new RuntimeException(gameHasFinishedErrorDescription);
 	        }
 
 	        if (columna < 0 || columna >= base || ColumnIsFull(columna)) { // si quiere poner y está llena se termina el juego
-	            throw new RuntimeException("La posición no se encuentra disponible");
+	            throw new RuntimeException(notAvailablePositionErrorDescription);
 	        }
 	       
 	        List<Character> currentColumn = columns.get(columna);

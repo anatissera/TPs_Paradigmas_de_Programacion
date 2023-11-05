@@ -3,7 +3,7 @@ package linea;
 public class Turno {
 	
     private char jugadorActual;
-    public static String noEsTurnoErrorDescription = "No es turno";
+    public static String notTurnErrorDescription = "No es turno";
 
     public char getJugadorActual() {
         return jugadorActual;
@@ -31,7 +31,7 @@ public class Turno {
 			setTurno('O');
 		}
 		else {
-			throw new RuntimeException (noEsTurnoErrorDescription);
+			throw new RuntimeException (notTurnErrorDescription);
 		}
 	}
 	
@@ -40,9 +40,8 @@ public class Turno {
 			setTurno('X');
 		}
 		else {
-			throw new RuntimeException (noEsTurnoErrorDescription);
+			throw new RuntimeException (notTurnErrorDescription);
 		}
-
 	}
 	
 	

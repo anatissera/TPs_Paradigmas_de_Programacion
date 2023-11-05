@@ -22,3 +22,4 @@ Para compilar el código ejecutar fuera del paquete linea lo siguiente:
 
  java linea.Game 
 
+javac linea/Linea.java linea/Game.java
