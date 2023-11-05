@@ -135,9 +135,7 @@ public class connect4Test {
 	
 	@Test
 	void testDraw() {
-	    Linea game = new Linea(4, 4, 'A');
-	    drawGame(game);
-	    assertTrue(game.finished());
+	    assertTrue( drawGame(new Linea(4, 4, 'A')) );
 	}
 	
 	@Test
@@ -147,83 +145,64 @@ public class connect4Test {
 		assertThrowsLike( Linea.gameHasFinishedErrorDescription , () -> game.playRedAt(1) );
 	}
 
-	  private void assertThrowsLike( String message, Executable executable ) {
-		  assertEquals( message,
-				  assertThrows( Exception.class, executable ).getMessage() );
-	  }
-	  
-		private boolean horizontalWin(char triumphKey) {
-			Linea game = new Linea(7, 6, triumphKey);
-		    game.playRedAt(1);
-		    game.playBlueAt(1);
-		    game.playRedAt(2);
-		    game.playBlueAt(2);
-		    game.playRedAt(3);
-		    game.playBlueAt(3);
-		    game.playRedAt(4);
-		    return game.finished();
-		}
-		
-		private boolean verticalWin(char triumphKey) {
-			Linea game = new Linea(7, 6, triumphKey);
-		    game.playRedAt(1);
-		    game.playBlueAt(2);
-		    game.playRedAt(1);
-		    game.playBlueAt(2);
-		    game.playRedAt(1);
-		    game.playBlueAt(2);
-		    game.playRedAt(1);
-		    return game.finished();
-		}
-		
-		private boolean diagonalFromLeftToRightWin(char triumphKey) {
-			Linea game = new Linea(7, 6, triumphKey);
-		    game.playRedAt(1);
-		    game.playBlueAt(2);
-		    game.playRedAt(2);
-		    game.playBlueAt(3);
-		    game.playRedAt(3);
-		    game.playBlueAt(4);
-		    game.playRedAt(3);
-		    game.playBlueAt(4);
-		    game.playRedAt(4);
-		    game.playBlueAt(1);
-		    game.playRedAt(4);
-		    return game.finished();
-		}
-		
-		private boolean diagonalFromRightToLeftWin(char triumphKey) {
-			Linea game = new Linea(7, 6, triumphKey);
-		    game.playRedAt(4);
-		    game.playBlueAt(3);
-		    game.playRedAt(3);
-		    game.playBlueAt(2);
-		    game.playRedAt(2);
-		    game.playBlueAt(1);
-		    game.playRedAt(2);
-		    game.playBlueAt(1);
-		    game.playRedAt(1);
-		    game.playBlueAt(4);
-		    game.playRedAt(1);
-		    return game.finished();
-		}
-		
-		private void drawGame(Linea game) {
-			game.playRedAt(1);
-		    game.playBlueAt(2);
-		    game.playRedAt(3);
-		    game.playBlueAt(4);
-		    game.playRedAt(1);
-		    game.playBlueAt(2);
-		    game.playRedAt(3);
-		    game.playBlueAt(4);
-		    game.playRedAt(1);
-		    game.playBlueAt(2);
-		    game.playRedAt(3);
-		    game.playBlueAt(4);
-		    game.playRedAt(2);
-		    game.playBlueAt(1);
-		    game.playRedAt(4);
-		    game.playBlueAt(3);
-		}
+  private void assertThrowsLike( String message, Executable executable ) {
+	  assertEquals( message,
+			  assertThrows( Exception.class, executable ).getMessage() );
+  }
+	
+	private boolean horizontalWin(char triumphKey) {
+		Linea game = new Linea(7, 6, triumphKey);
+	    sevenMoves(game, 1, 1, 2, 2, 3, 3, 4);
+	    return game.finished();
+	}
+	
+	private boolean verticalWin(char triumphKey) {
+		Linea game = new Linea(7, 6, triumphKey);
+		sevenMoves(game, 1, 2, 1, 2, 1, 2, 1);
+	    return game.finished();
+	}
+
+	private boolean diagonalFromLeftToRightWin(char triumphKey) {
+		Linea game = new Linea(7, 6, triumphKey);
+	    elevenMoves(game, 1, 2, 2, 3, 3, 4, 3, 4, 4, 1, 4);
+	    return game.finished();
+	}
+	
+	
+	private boolean diagonalFromRightToLeftWin(char triumphKey) {
+		Linea game = new Linea(7, 6, triumphKey);
+	    elevenMoves(game, 4, 3, 3, 2, 2, 1, 2, 1, 1, 4, 1);
+	    return game.finished();
+	}
+	
+	private boolean drawGame(Linea game) {
+		elevenMoves(game, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3);
+		game.playBlueAt(4);
+		twoMoves(game, 2, 1);
+		twoMoves(game, 4, 3);
+	    return game.finished();	   
+	}
+	
+	public void twoMoves( Linea game, int i, int i2 ) {
+		game.playRedAt(i);
+		game.playBlueAt(i2);
+	}
+	
+	public void sevenMoves( Linea game, int i, int i2, int i3, int i4, int i5, int i6, int i7 ) {
+		twoMoves(game, i, i2);
+		twoMoves(game, i3, i4);
+		twoMoves(game, i5, i6);
+	    game.playRedAt(i7);
+	}
+	
+	public void elevenMoves (Linea game, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11 ) {
+		sevenMoves(game, i, i2, i3, i4, i5, i6, i7);
+		game.playBlueAt(i8);
+		twoMoves(game, i9, i10);
+		game.playRedAt(i11);
+	}
+	
+
+	
+	
 }
