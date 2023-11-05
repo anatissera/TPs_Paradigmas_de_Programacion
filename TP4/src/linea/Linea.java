@@ -76,14 +76,14 @@ public class Linea {
 	    }
 	    
 //	    public String show() {
+//	    	
 //	        StringBuilder board = new StringBuilder();
 //
 //	        for (int row = height - 1; row >= 0; row--) {
 //	            board.append("| ");
 //	            for (int column = 0; column < base; column++) {
 //	                char ficha = preguntarAt(column, row);
-//	                board.append(ficha != ' ' ? ficha : "-");
-//	                board.append(" ");
+//	                board.append(ficha != ' ' ? ficha + " " : "- ");
 //	            }
 //	            board.append("|\n");
 //	        }
@@ -95,29 +95,29 @@ public class Linea {
 //	        board.append("|\n");
 //
 //	        return board.toString();
+//	          
 //	    }
 	    
 	    public String show() {
 	        StringBuilder board = new StringBuilder();
 
-	        for (int row = height - 1; row >= 0; row--) {
-	            board.append("| ");
-	            for (int column = 0; column < base; column++) {
-	                char ficha = preguntarAt(column, row);
-	                board.append(ficha != ' ' ? ficha + " " : "- ");
-	            }
-	            board.append("|\n");
-	        }
+	        IntStream.range(0, height)
+	                .mapToObj(row -> "| " +
+	                        IntStream.range(0, base)
+	                                .mapToObj(column -> {
+	                                    char ficha = preguntarAt(column, height - 1 - row);
+	                                    return ficha != ' ' ? ficha + " " : "- ";
+	                                })
+	                                .collect(Collectors.joining()) + "|\n")
+	                .forEach(board::append);
 
 	        board.append("| ");
-	        for (int column = 0; column < base; column++) {
-	            board.append("^ ");
-	        }
+	        IntStream.range(0, base)
+	                .forEach(column -> board.append("^ "));
 	        board.append("|\n");
 
 	        return board.toString();
 	    }
-
 
 
 	    public char preguntarAt(int column, int row) {

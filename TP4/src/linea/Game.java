@@ -15,6 +15,11 @@ public class Game {
       game.playRedAt( promptAsInt( "Rojas? " ) );
       System.out.println( game.show() );
       
+      if (game.finished()) {
+          System.out.println("Las " + (game.getTurn().redsTurn() ? "Azules" : "Rojas") + " Ganan");
+          break;
+      }
+      
       if ( !game.finished() ) {
         game.playBlueAt( promptAsInt( "Azul? " ) );
         System.out.println( game.show() );
