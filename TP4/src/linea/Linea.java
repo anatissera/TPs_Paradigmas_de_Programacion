@@ -32,7 +32,7 @@ public class Linea {
 	    private int height;
 	    private List<List<Character>> columns;
 	    private Turno turn;
-	    private Triumph triumphVariant;
+	    public Triumph triumphVariant;
 	    
 	    public Linea(int base, int height, char estrategia) {
 	        this.base = base;
