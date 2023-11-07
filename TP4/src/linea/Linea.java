@@ -10,17 +10,8 @@ import java.util.List;
 // ¿Cúales se pueden quedar?
 // el if de tamaño no se saca
 
-// crear:
-// función preguntar: qué hay en una coordenada, rojo, azul o vacío, o sea: " ", "x", "o"
-// la complejidad la tiene preguntar, columna no tiene más que el ancho
-// no indexo columnas
-// lista de listas :) arreglo de arreglos :(
-
 public class Linea {
 		
-//		 no tenemos que tener tablero ni arreglo de arreglos.
-//	     la lista es de la base, el tamaño de cada columna depende de las fichas que tengo
-//	     o sea que inicializo una lista del tamaño del primer argumento que me pasan, o sea de la base
 //	     la lista va creciendo en altura con las fichas que se agregan, así vas recorriendo solo las que agregaste y no tenes espacios de más porque sí
 //	     la ficha no debe saber dónde está, solo el juego.
 //	     lista de columnas
@@ -33,6 +24,7 @@ public class Linea {
 	    private List<List<Character>> columns;
 	    private GameInProcess turn;
 	    public Triumph triumphVariant;
+		private GameState gameState;
 	    
 	    public Linea(int base, int height, char estrategia) {
 	        this.base = base;
@@ -41,25 +33,22 @@ public class Linea {
 	                .mapToObj(i -> new ArrayList<Character>())
 	                .collect(Collectors.toList());
 	        
-	        // turn = new Turno().setTurno('X');; // X es rojas
 			turn = new RedsPlay();
 	        triumphVariant = InitializeTriumphVariant.createTriunfo(estrategia);
 	    } 
 	   // Referencia a reporte balance
 	 
 	    public void playRedAt(int columna) {
-	        play('X', columna - 1);
-			turn.playRed();
-			turn = new BluesPlay();
+	        play( columna - 1);
+			turn = turn.playRed();
 	    }
 
 	    public void playBlueAt(int columna) {
-	        play('O', columna - 1);
-			turn.playBlue();
-			turn = new RedsPlay();
+	        play( columna - 1);
+			turn = turn.playBlue();
 	    }
 
-	    private void play(char color, int columna) {
+	    private void play( int columna) {
 	
 	        if (finished()) {
 	            throw new RuntimeException(gameHasFinishedErrorDescription);
@@ -71,7 +60,7 @@ public class Linea {
 	       
 	        List<Character> currentColumn = columns.get(columna);
         	int row = currentColumn.size(); 
-        	currentColumn.add(row, color);
+        	currentColumn.add(row, turn.actualPlayer() );
 //	       	turn.alternarTurno();
 
 	    }
@@ -79,29 +68,6 @@ public class Linea {
 	    public boolean finished() {
 	        return triumphVariant.checkWin(this) || triumphVariant.checkDraw(this);
 	    }
-	    
-//	    public String show() {
-//	    	
-//	        StringBuilder board = new StringBuilder();
-//
-//	        for (int row = height - 1; row >= 0; row--) {
-//	            board.append("| ");
-//	            for (int column = 0; column < base; column++) {
-//	                char ficha = preguntarAt(column, row);
-//	                board.append(ficha != ' ' ? ficha + " " : "- ");
-//	            }
-//	            board.append("|\n");
-//	        }
-//
-//	        board.append("| ");
-//	        for (int column = 0; column < base; column++) {
-//	            board.append("^ ");
-//	        }
-//	        board.append("|\n");
-//
-//	        return board.toString();
-//	          
-//	    }
 	    
 	    public String show() {
 	        StringBuilder board = new StringBuilder();
@@ -158,6 +124,5 @@ public class Linea {
 		    return turn;
 		}
 	    
-	// que pasa si quiere poner una ficha en una columna que no existe?
-	 
+	
 }

@@ -3,6 +3,9 @@ package linea;
 public abstract class GameInProcess extends GameState{
 
     protected char actualPlayer;
+    public char actualPlayer() {
+    	return actualPlayer;
+    }
     
 //    protected GameInProcess actualPlayer;
 //    protected RedsPlay redsTurn = new RedsPlay();
@@ -10,12 +13,14 @@ public abstract class GameInProcess extends GameState{
     
     public static String notTurnErrorDescription = "No es turno";
     
-	public boolean gameFinished() {
+    public boolean gameFinished() {
 		return false;
 	}
 	
-    public abstract void playRed();
-    public abstract void playBlue();
+
+	
+    public abstract GameInProcess playRed();
+    public abstract GameInProcess playBlue();
     public abstract boolean isRedsTurn();
     public abstract boolean isBluesTurn();
 }

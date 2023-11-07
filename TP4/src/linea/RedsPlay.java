@@ -3,14 +3,14 @@ package linea;
 public class RedsPlay extends GameInProcess {
 
 	public RedsPlay() {
-		 actualPlayer = 'X';
+		actualPlayer = 'X';
 	}
 
-	public void playRed() {
-		 actualPlayer = 'O';
+	public GameInProcess playRed() {
+		return new BluesPlay();
 	}
 
-	public void playBlue() {
+	public GameInProcess playBlue() {
 		throw new RuntimeException(notTurnErrorDescription);
 	}
 

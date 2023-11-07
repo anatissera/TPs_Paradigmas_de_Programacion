@@ -6,12 +6,12 @@ public class BluesPlay extends GameInProcess {
         actualPlayer = 'O';
     }
 
-    public void playRed() {
+    public GameInProcess playRed() {
         throw new RuntimeException(notTurnErrorDescription);
     }
 
-    public void playBlue() {
-    	actualPlayer = 'X';
+    public GameInProcess playBlue() {
+    	return new RedsPlay();
     }
 
 	public boolean isRedsTurn() {
