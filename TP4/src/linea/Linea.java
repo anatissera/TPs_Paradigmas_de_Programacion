@@ -154,8 +154,8 @@ public class Linea {
 		    return triumphVariant;
 		}
 
-		public GameState getTurn() {
-		    return turn.turn;
+		public GameInProcess getTurn() {
+		    return turn;
 		}
 	    
 	// que pasa si quiere poner una ficha en una columna que no existe?

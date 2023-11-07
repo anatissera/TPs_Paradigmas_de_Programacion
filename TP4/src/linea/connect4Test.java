@@ -19,8 +19,8 @@ public class connect4Test {
     public void test01RedsAlwaysStart() {
 		Linea game = new Linea(4, 4, 'C');
 		
-		assertTrue(game.getTurn().redsTurn());
-		assertFalse(game.getTurn().bluesTurn());
+		assertTrue(game.getTurn().isRedsTurn());
+		assertFalse(game.getTurn().isBluesTurn());
 }
 	
 	@Test
@@ -29,8 +29,8 @@ public class connect4Test {
 		
 		game.playRedAt(1);
 	
-		assertFalse(game.getTurn().redsTurn());
-		assertTrue(game.getTurn().bluesTurn());		
+		assertFalse(game.getTurn().isRedsTurn());
+		assertTrue(game.getTurn().isBluesTurn());		
 	}
 	
 	@Test
@@ -39,10 +39,10 @@ public class connect4Test {
 		
 		game.playRedAt(1);
 		
-		assertThrowsLike( GameState.notTurnErrorDescription , () -> game.playRedAt(1) );
+		assertThrowsLike( GameInProcess.notTurnErrorDescription , () -> game.playRedAt(1) );
 	
-		assertFalse(game.getTurn().redsTurn());
-		assertTrue(game.getTurn().bluesTurn());	
+		assertFalse(game.getTurn().isRedsTurn());
+		assertTrue(game.getTurn().isBluesTurn());	
 		
 		// assert que el ultimo que jugo es la ficha en 0,0
 		
@@ -56,10 +56,10 @@ public class connect4Test {
 		game.playRedAt(1);
 		game.playBlueAt(1);
 		
-		assertThrowsLike( GameState.notTurnErrorDescription , () -> game.playBlueAt(1) );
+		assertThrowsLike( GameInProcess.notTurnErrorDescription , () -> game.playBlueAt(1) );
 	
-		assertTrue(game.getTurn().redsTurn());
-		assertFalse(game.getTurn().bluesTurn());	
+		assertTrue(game.getTurn().isRedsTurn());
+		assertFalse(game.getTurn().isBluesTurn());	
 		
 	}
 	

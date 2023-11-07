@@ -21,4 +21,9 @@ public class BluesPlay extends GameInProcess {
 	public boolean isBluesTurn() {
 		return true;
 	}
+
+	@Override
+	public boolean gameFinished(Linea linea) {
+		return false;
+	}
 }

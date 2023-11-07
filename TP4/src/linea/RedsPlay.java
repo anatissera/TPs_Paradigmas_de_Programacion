@@ -21,4 +21,9 @@ public class RedsPlay extends GameInProcess {
 	public boolean isBluesTurn() {
 		return false;
 	}
+
+	@Override
+	public boolean gameFinished(Linea linea) {
+		return false;
+	}
 }
