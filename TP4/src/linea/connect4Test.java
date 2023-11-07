@@ -39,7 +39,7 @@ public class connect4Test {
 		
 		game.playRedAt(1);
 		
-		assertThrowsLike( Turno.notTurnErrorDescription , () -> game.playRedAt(1) );
+		assertThrowsLike( TurnState.notTurnErrorDescription , () -> game.playRedAt(1) );
 	
 		assertFalse(game.getTurn().redsTurn());
 		assertTrue(game.getTurn().bluesTurn());	
@@ -56,7 +56,7 @@ public class connect4Test {
 		game.playRedAt(1);
 		game.playBlueAt(1);
 		
-		assertThrowsLike( Turno.notTurnErrorDescription , () -> game.playBlueAt(1) );
+		assertThrowsLike( TurnState.notTurnErrorDescription , () -> game.playBlueAt(1) );
 	
 		assertTrue(game.getTurn().redsTurn());
 		assertFalse(game.getTurn().bluesTurn());	
@@ -201,8 +201,5 @@ public class connect4Test {
 		twoMoves(game, i9, i10);
 		game.playRedAt(i11);
 	}
-	
-
-	
 	
 }

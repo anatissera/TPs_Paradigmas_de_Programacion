@@ -31,7 +31,7 @@ public class Linea {
 	    private int base;
 	    private int height;
 	    private List<List<Character>> columns;
-	    private Turno turn;
+	    private Turn turn;
 	    public Triumph triumphVariant;
 	    
 	    public Linea(int base, int height, char estrategia) {
@@ -41,21 +41,22 @@ public class Linea {
 	                .mapToObj(i -> new ArrayList<Character>())
 	                .collect(Collectors.toList());
 	        
-	        turn = new Turno().setTurno('X');; // X es rojas
+	        // turn = new Turno().setTurno('X');; // X es rojas
+			turn = new Turn();
 	        triumphVariant = InitializeTriumphVariant.createTriunfo(estrategia);
-	        
 	    } 
 	   // Referencia a reporte balance
 	 
 	    public void playRedAt(int columna) {
 	        play('X', columna - 1);
-	    	turn.redPlays();
-	       
+	    	// turn.redPlays();
+			turn.switchToBlues();
 	    }
 
 	    public void playBlueAt(int columna) {
 	        play('O', columna - 1);
-	    	turn.bluePlays();
+	    	// turn.bluePlays();
+			turn.switchToReds();
 	    }
 
 	    private void play(char color, int columna) {
@@ -153,8 +154,8 @@ public class Linea {
 		    return triumphVariant;
 		}
 
-		public Turno getTurn() {
-		    return turn;
+		public TurnState getTurn() {
+		    return turn.turn;
 		}
 	    
 	// que pasa si quiere poner una ficha en una columna que no existe?
