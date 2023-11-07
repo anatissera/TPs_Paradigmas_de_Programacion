@@ -80,6 +80,29 @@ public class Linea {
 	        return triumphVariant.checkWin(this) || triumphVariant.checkDraw(this);
 	    }
 	    
+//	    public String show() {
+//	    	
+//	        StringBuilder board = new StringBuilder();
+//
+//	        for (int row = height - 1; row >= 0; row--) {
+//	            board.append("| ");
+//	            for (int column = 0; column < base; column++) {
+//	                char ficha = preguntarAt(column, row);
+//	                board.append(ficha != ' ' ? ficha + " " : "- ");
+//	            }
+//	            board.append("|\n");
+//	        }
+//
+//	        board.append("| ");
+//	        for (int column = 0; column < base; column++) {
+//	            board.append("^ ");
+//	        }
+//	        board.append("|\n");
+//
+//	        return board.toString();
+//	          
+//	    }
+	    
 	    public String show() {
 	        StringBuilder board = new StringBuilder();
 
@@ -131,8 +154,10 @@ public class Linea {
 		    return triumphVariant;
 		}
 
-		public Turn getTurn() {
-		    return turn;
+		public TurnState getTurn() {
+		    return turn.turn;
 		}
+	    
+	// que pasa si quiere poner una ficha en una columna que no existe?
 	 
 }

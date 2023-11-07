@@ -7,9 +7,9 @@ public class NotAvailableForMove extends TurnState {
 //  return linea.triumphVariant.checkWin(linea) || linea.triumphVariant.checkDraw(linea);
 //}
 	
-    public NotAvailableForMove(char actualPlayer) {
-    	super(actualPlayer);
-    }
+     public NotAvailableForMove(char actualPlayerChar) {
+         actualPlayer = actualPlayerChar;
+     }
 
     public void redPlays() {
         throw new RuntimeException(TurnState.notTurnErrorDescription);
