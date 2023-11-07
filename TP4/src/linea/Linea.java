@@ -50,13 +50,13 @@ public class Linea {
 	    public void playRedAt(int columna) {
 	        play('X', columna - 1);
 	    	// turn.redPlays();
-			turn.switchToBlues();
+			turn.playRed();
 	    }
 
 	    public void playBlueAt(int columna) {
 	        play('O', columna - 1);
 	    	// turn.bluePlays();
-			turn.switchToReds();
+			turn.playBlue();
 	    }
 
 	    private void play(char color, int columna) {
