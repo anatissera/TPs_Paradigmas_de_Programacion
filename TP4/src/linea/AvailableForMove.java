@@ -7,8 +7,8 @@ public class AvailableForMove extends TurnState{
 
 //	private TurnState previousPlayer;
 	
-    public AvailableForMove() {
-        actualPlayer = 'X';
+    public AvailableForMove(char actualPlayer) {
+        super(actualPlayer);
     }
 
     public void redPlays() {

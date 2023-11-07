@@ -4,15 +4,15 @@ public class Turn {
 	private TurnState turnState;
 
     public Turn() {
-        turnState = new AvailableForMove();
-    }
-
-    public void switchToReds() {
         turnState = new AvailableForMove('X');
     }
 
+    public void switchToReds() {
+        turnState = new NotAvailableForMove('X');
+    }
+
     public void switchToBlues() {
-        turnState = new AvailableForMove('O');
+        turnState = new NotAvailableForMove('O');
     }
 
     public boolean redsTurn() {
@@ -24,11 +24,13 @@ public class Turn {
     }
 
     public void playRed() {
-        turnState.redPlays();
+//        turnState.redPlays();
+        switchToBlues();
     }
 
     public void playBlue() {
-        turnState.bluePlays();
+//        turnState.bluePlays();
+        switchToReds();
     }
 
 }
