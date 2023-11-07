@@ -31,7 +31,7 @@ public class Linea {
 	    private int base;
 	    private int height;
 	    private List<List<Character>> columns;
-	    private Turn turn;
+	    private GameInProcess turn;
 	    public Triumph triumphVariant;
 	    
 	    public Linea(int base, int height, char estrategia) {
@@ -42,21 +42,21 @@ public class Linea {
 	                .collect(Collectors.toList());
 	        
 	        // turn = new Turno().setTurno('X');; // X es rojas
-			turn = new Turn();
+			turn = new RedsPlay();
 	        triumphVariant = InitializeTriumphVariant.createTriunfo(estrategia);
 	    } 
 	   // Referencia a reporte balance
 	 
 	    public void playRedAt(int columna) {
 	        play('X', columna - 1);
-	    	// turn.redPlays();
 			turn.playRed();
+			turn = new BluesPlay();
 	    }
 
 	    public void playBlueAt(int columna) {
 	        play('O', columna - 1);
-	    	// turn.bluePlays();
 			turn.playBlue();
+			turn = new RedsPlay();
 	    }
 
 	    private void play(char color, int columna) {
@@ -154,7 +154,7 @@ public class Linea {
 		    return triumphVariant;
 		}
 
-		public TurnState getTurn() {
+		public GameState getTurn() {
 		    return turn.turn;
 		}
 	    
