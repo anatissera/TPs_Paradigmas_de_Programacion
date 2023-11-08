@@ -5,6 +5,10 @@ public abstract class GameInProcess extends GameState{
     public static String notTurnErrorDescription = "No es turno";
     protected char actualPlayer;
     
+    public GameInProcess(char NewActualPlayer) {
+    	actualPlayer = NewActualPlayer;
+    }
+    
     public char actualPlayer() {
     	return actualPlayer;
     }

@@ -35,7 +35,7 @@ public class Linea {
 	        
 			gameState = new RedsPlay();
 			turn = new RedsPlay();
-	        triumphVariant = InitializeTriumphVariant.createTriunfo(estrategia);
+	        triumphVariant = Triumph.createTriumph(estrategia);
 	        ifFinished();
 	    } 
 	   // Referencia a reporte balance

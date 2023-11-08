@@ -1,5 +1,6 @@
 package linea;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
 public abstract class Triumph {
@@ -9,10 +10,6 @@ public abstract class Triumph {
         key = aKey;
     }
 
-    public boolean applies(char varianteTriunfo) {
-        return key == varianteTriunfo;
-    }
-
     public abstract boolean checkWin(Linea linea);
 
     public boolean checkDraw(Linea linea) {
@@ -20,6 +17,23 @@ public abstract class Triumph {
         return (linea.getBase() < 4 && linea.getHeight() < 4) || (IntStream.range(0, linea.getBase())
             .allMatch(columna -> linea.ColumnIsFull(columna)) && !checkWin(linea)) ;
         
+    }
+    
+    protected boolean applies(char varianteTriunfo) {
+        return key == varianteTriunfo;
+    }
+    
+    public static String NonValidStrategyVariant = "Variante de estrategia no válida";
+
+	static public Triumph createTriumph(char varianteTriunfo) {
+        return List.of(
+            new TriumphA(),
+            new TriumphB(),
+            new TriumphC()
+        ).stream()
+        .filter(each -> each.applies(varianteTriunfo))
+        .findFirst()
+        .orElseThrow(() -> new RuntimeException(NonValidStrategyVariant));
     }
     
 }

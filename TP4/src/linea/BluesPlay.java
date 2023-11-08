@@ -3,7 +3,7 @@ package linea;
 public class BluesPlay extends GameInProcess {
 
     public BluesPlay(){
-        actualPlayer = 'O';
+      super('O');
     }
 
     public GameInProcess playRed() {
