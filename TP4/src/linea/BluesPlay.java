@@ -22,8 +22,4 @@ public class BluesPlay extends GameInProcess {
 		return true;
 	}
 
-	@Override
-	public boolean gameFinished(Linea linea) {
-		return false;
-	}
 }

@@ -22,8 +22,4 @@ public class RedsPlay extends GameInProcess {
 		return false;
 	}
 
-	@Override
-	public boolean gameFinished(Linea linea) {
-		return false;
-	}
 }

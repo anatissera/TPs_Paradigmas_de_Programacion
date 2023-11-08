@@ -13,9 +13,7 @@ public class TriumphC  extends Triumph{
 	    this.triunfoB = new TriumphB();
 	}
 
-    @Override
     public boolean checkWin(Linea linea) {
         return triunfoA.checkWin(linea) || triunfoB.checkWin(linea);
     }
-
 }

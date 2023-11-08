@@ -17,12 +17,8 @@ public abstract class Triumph {
 
     public boolean checkDraw(Linea linea) {
     	
-        if  ( (linea.getBase() < 4 && linea.getHeight() < 4) || (IntStream.range(0, linea.getBase())
-            .allMatch(columna -> linea.ColumnIsFull(columna)) && !checkWin(linea)) ) {
-        	System.out.print( "Empate" );
-        	return true;
-        }
-        return false;
+        return (linea.getBase() < 4 && linea.getHeight() < 4) || (IntStream.range(0, linea.getBase())
+            .allMatch(columna -> linea.ColumnIsFull(columna)) && !checkWin(linea)) ;
         
     }
     

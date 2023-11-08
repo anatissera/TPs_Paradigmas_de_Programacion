@@ -66,7 +66,7 @@ public class connect4Test {
 	@Test
 	public void test05CannotPlayOnceTheGameIsFinished() {
 		Linea game = new Linea(3, 3, 'C');
-		assertThrowsLike( Linea.gameHasFinishedErrorDescription , () -> game.playRedAt(1) );
+		assertThrowsLike( GameFinished.gameHasFinishedErrorDescription , () -> game.playRedAt(1) );
 	}
 	
 	@Test
@@ -142,7 +142,7 @@ public class connect4Test {
 	public void testCannotPlayAfterADraw() {
 		Linea game = new Linea(4, 4, 'C');
 	    drawGame(game);
-		assertThrowsLike( Linea.gameHasFinishedErrorDescription , () -> game.playRedAt(1) );
+		assertThrowsLike( GameFinished.gameHasFinishedErrorDescription , () -> game.playRedAt(1) );
 	}
 
   private void assertThrowsLike( String message, Executable executable ) {

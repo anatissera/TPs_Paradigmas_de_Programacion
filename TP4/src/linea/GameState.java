@@ -2,7 +2,10 @@ package linea;
 
 public abstract class GameState {
 	
-	public abstract boolean gameFinished(Linea linea);
-
+	public boolean isGameFinished( Linea linea ){
+		return true;
+	}
+	
+	public abstract void play( Linea linea, int columna );
+	
 }
-

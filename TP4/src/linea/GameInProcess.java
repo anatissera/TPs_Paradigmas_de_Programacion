@@ -2,22 +2,22 @@ package linea;
 
 public abstract class GameInProcess extends GameState{
 
+    public static String notTurnErrorDescription = "No es turno";
     protected char actualPlayer;
+    
     public char actualPlayer() {
     	return actualPlayer;
     }
     
-//    protected GameInProcess actualPlayer;
-//    protected RedsPlay redsTurn = new RedsPlay();
-//    protected BluesPlay bluesTurn = new BluesPlay();
-    
-    public static String notTurnErrorDescription = "No es turno";
-    
-    public boolean gameFinished() {
-		return false;
+    public boolean isGameFinished() {
+		return true;
 	}
-	
-
+    
+    @Override
+	public void play( Linea linea, int columna ) {
+		linea.playAsLinea( columna );
+		
+	}
 	
     public abstract GameInProcess playRed();
     public abstract GameInProcess playBlue();
