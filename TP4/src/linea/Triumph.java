@@ -11,10 +11,24 @@ public abstract class Triumph {
     }
 
     public abstract boolean checkWin(Linea linea);
+    
+    public void SetWinOrDraw( Linea linea ) {
+    	if ( checkWin( linea ) ) {
+    		linea.setGameFinished( "Las " + linea.getTurn().actualPlayer() + " ganan" );
+    	}
+    	else if ( checkDraw(linea)) {
+    		linea.setGameFinished( "Empate" );
+    	}
+    }
+    
+    // no es empate, es inválido (linea.getBase() < 4 && linea.getHeight() < 4) 
 
     public boolean checkDraw(Linea linea) {
-    	
-        return (linea.getBase() < 4 && linea.getHeight() < 4) || (IntStream.range(0, linea.getBase())
+//    	if ((IntStream.range(0, linea.getBase())
+//            .allMatch(columna -> linea.ColumnIsFull(columna)) && linea.gameStateMessage == "") ) {
+//    		linea.setGameFinished( "Empate" );
+//    	}
+        return (IntStream.range(0, linea.getBase())
             .allMatch(columna -> linea.ColumnIsFull(columna)) && !checkWin(linea)) ;
         
     }

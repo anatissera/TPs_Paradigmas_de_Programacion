@@ -7,14 +7,17 @@ public class TriumphB  extends Triumph{
     }
 
 	public boolean checkWin(Linea linea) {
-		return checkDiagonalFromLeftToRight(linea) || checkDiagonalFromRightToLeft(linea);
+//		if ( checkDiagonal4FromLeftToRight(linea) || checkDiagonal4FromRightToLeft(linea) ) {
+//			linea.setGameFinished( "Las " + linea.getTurn().actualPlayer() + " ganan" );
+//		}
+		return checkDiagonal4FromLeftToRight(linea) || checkDiagonal4FromRightToLeft(linea);
 	}
 	
-	private boolean checkDiagonalFromLeftToRight(Linea linea) {
+	private boolean checkDiagonal4FromLeftToRight(Linea linea) {
 		return linea.checkConnected4(linea.getBase(), linea.maxHeight(), 1, 1, true);
 	}
 
-	private boolean checkDiagonalFromRightToLeft(Linea linea) {
+	private boolean checkDiagonal4FromRightToLeft(Linea linea) {
 		return linea.checkConnected4(linea.getBase(), linea.maxHeight(), 1, -1, true);
 	}
 	

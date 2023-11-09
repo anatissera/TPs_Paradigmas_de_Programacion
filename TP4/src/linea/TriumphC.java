@@ -14,6 +14,8 @@ public class TriumphC  extends Triumph{
 	}
 
     public boolean checkWin(Linea linea) {
+//    	triunfoA.checkWin(linea); 
+//    	triunfoB.checkWin(linea);
         return triunfoA.checkWin(linea) || triunfoB.checkWin(linea);
     }
 }

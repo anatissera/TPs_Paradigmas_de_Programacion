@@ -66,6 +66,7 @@ public class connect4Test {
 	@Test
 	public void test05CannotPlayOnceTheGameIsFinished() {
 		Linea game = new Linea(3, 3, 'C');
+		
 		assertThrowsLike( GameFinished.gameHasFinishedErrorDescription , () -> game.playRedAt(1) );
 	}
 	

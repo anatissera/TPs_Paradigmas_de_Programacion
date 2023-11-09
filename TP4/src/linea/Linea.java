@@ -20,8 +20,9 @@ public class Linea {
 	    private int base;
 	    private int height;
 	    private List<List<Character>> columns;
-	    public Triumph triumphVariant;
+	    private Triumph triumphVariant;
 		public GameState gameState;
+		public String gameFinishedMessage = "";
 	    
 	    public Linea(int base, int height, char estrategia) {
 	        this.base = base;
@@ -32,7 +33,10 @@ public class Linea {
 	        
 			gameState = new RedsPlay();
 	        triumphVariant = Triumph.createTriumph(estrategia);
-
+	        if (base < 4 && height <4) {
+	        	setGameFinished("No se puede ganar en este tablero");
+	        }
+	        
 	    } 
 	   // Referencia a reporte balance
 	 
@@ -40,33 +44,50 @@ public class Linea {
 	        return gameState.isGameFinished(this);
 	    }
 
-	    public void setGameFinished() {
+	    public void setGameFinished( String message ) {
+	    	gameFinishedMessage = message;
 	        gameState = new GameFinished();
 	    }
 
 	    public void playRedAt(int columna) {
 	    	if (finished()) {
-	    		setGameFinished();
+	    		setGameFinished( "Rojas" );
 	    	}
+//	    	triumphVariant.SetWinOrDraw(this);
 	    	gameState = gameState.playRed( this,  columna - 1);
 	    }
 
 	    public void playBlueAt(int columna) {
 	    	if (finished()) {
-	    		setGameFinished();
+	    		setGameFinished( "Azules" );
 	    	}
+//	    	triumphVariant.SetWinOrDraw(this);
 	    	gameState = gameState.playBlue( this, columna - 1);
 	    }
 	    
 	    public void playAsLinea( int columna ) {
-	    	if (columna < 0 || columna >= base || ColumnIsFull(columna)) {
+	    	if ( isNotWithinLimits(columna) ) {
 	            throw new RuntimeException( notAvailablePositionErrorDescription );
 	        }
 	       
 	        List<Character> currentColumn = columns.get(columna);
         	int row = currentColumn.size(); 
         	currentColumn.add(row, gameState.actualPlayer() );
-        	
+	    }
+	    
+	    boolean ColumnIsFull(int column) {
+	        return columns.get(column).size() >= height;
+	    } 
+	    
+	    public boolean isNotWithinLimits ( int columna ) {
+	    	return ( columna < 0 || columna >= base || ColumnIsFull(columna) );
+	    }
+	    
+	    public char preguntarAt(int column, int row) {
+	        if (row < columns.get(column).size()) {
+	            return columns.get(column).get(row);
+	        }
+	        return ' ';
 	    }
 	    
 	    public boolean checkConnected4( int ColumnsLimit, int RowsLimit, int deltaColumn, int deltaRow, boolean checkDiagonalBounds) {
@@ -85,6 +106,7 @@ public class Linea {
 		}
 
 	    public boolean finished() {
+//	    	return isGameFinished();
 	    	return triumphVariant.checkWin(this)||triumphVariant.checkDraw(this); 
 	    }
 	    
@@ -105,21 +127,11 @@ public class Linea {
 	        IntStream.range(0, base)
 	                .forEach(column -> board.append("^ "));
 	        board.append("|\n");
+	        board.append(gameFinishedMessage);
 
 	        return board.toString();
 	    }
 
-
-	    public char preguntarAt(int column, int row) {
-	        if (row < columns.get(column).size()) {
-	            return columns.get(column).get(row);
-	        }
-	        return ' ';
-	    }
-	    
-	    boolean ColumnIsFull(int column) {
-	        return columns.get(column).size() >= height;
-	    } 
 	    
 	    public int maxHeight() {
 	    	 return columns.stream()
