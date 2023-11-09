@@ -3,7 +3,7 @@ package linea;
 public abstract class GameState {
 	
 	public boolean isGameFinished( Linea linea ){
-		return true;
+		return linea.finished();
 	}
 	
 	public abstract GameState playRed(Linea linea, int columna);

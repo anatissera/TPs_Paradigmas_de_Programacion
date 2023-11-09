@@ -1,7 +1,5 @@
 package linea;
 
-import java.util.stream.IntStream;
-
 public class TriumphA extends Triumph {
 	
 	public TriumphA() {
@@ -13,28 +11,11 @@ public class TriumphA extends Triumph {
     }
 
     private boolean checkVertical(Linea linea) {
-        int base = linea.getBase();
-        int height = linea.maxHeight();
-
-        return checkLine(linea, base, height - 3, 0, 1);
+        return linea.checkConnected4(linea.getBase(), linea.maxHeight() - 3, 0, 1, false);
     }
 
     private boolean checkHorizontal(Linea linea) {
-        int base = linea.getBase();
-        int height = linea.maxHeight();
-        
-        return checkLine(linea, base - 3, height, 1, 0);
-    }
-    
-    private boolean checkLine(Linea linea, int baseLimit, int heightLimit, int deltaBase, int deltaHeight) {
-    	
-        return IntStream.range(0, baseLimit)
-            .anyMatch(columna -> IntStream.range(0, heightLimit)
-                .anyMatch(fila -> {
-                    char ficha = linea.preguntarAt(columna, fila);
-                    return IntStream.range(1, 4)
-                        .allMatch(i -> ficha != ' ' && ficha == linea.preguntarAt(columna + i * deltaBase, fila + i * deltaHeight));
-                }));
+        return linea.checkConnected4(linea.getBase() -3 , linea.maxHeight(), 1, 0, false);
     }
     
 }

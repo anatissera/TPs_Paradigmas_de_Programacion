@@ -67,8 +67,22 @@ public class Linea {
         	int row = currentColumn.size(); 
         	currentColumn.add(row, gameState.actualPlayer() );
         	
-        	
 	    }
+	    
+	    public boolean checkConnected4( int ColumnsLimit, int RowsLimit, int deltaColumn, int deltaRow, boolean checkDiagonalBounds) {
+
+		    return IntStream.range(0, ColumnsLimit)
+		        .anyMatch(column -> IntStream.range(0, RowsLimit)
+		            .anyMatch(row -> {
+		                char piece = preguntarAt(column, row);
+
+		                return IntStream.range(1, 4)
+		                    .allMatch(i -> piece != ' ' && 
+		                    		(!checkDiagonalBounds || (column + i * deltaColumn < ColumnsLimit && column + i * deltaColumn >= 0) && 
+		                                   (row + i * deltaRow < RowsLimit && row + i * deltaRow >= 0) ) && 
+		                                   piece == preguntarAt(column + i * deltaColumn, row + i * deltaRow) );
+		            }));
+		}
 
 	    public boolean finished() {
 	    	return triumphVariant.checkWin(this)||triumphVariant.checkDraw(this); 
