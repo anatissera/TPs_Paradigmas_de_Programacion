@@ -14,17 +14,11 @@ public abstract class GameInProcess extends GameState{
     }
     
     public boolean isGameFinished() {
-		return true;
-	}
-    
-    @Override
-	public void play( Linea linea, int columna ) {
-		linea.playAsLinea( columna );
-		
+		return false;
 	}
 	
-    public abstract GameInProcess playRed();
-    public abstract GameInProcess playBlue();
+    public abstract GameInProcess playRed( Linea linea, int columna );
+    public abstract GameInProcess playBlue( Linea linea, int columna );
     public abstract boolean isRedsTurn();
     public abstract boolean isBluesTurn();
 }

@@ -6,11 +6,12 @@ public class RedsPlay extends GameInProcess {
 		super('X');
 	}
 
-	public GameInProcess playRed() {
+	public GameInProcess playRed( Linea linea, int columna ) {
+		linea.playAsLinea( columna );
 		return new BluesPlay();
 	}
 
-	public GameInProcess playBlue() {
+	public GameInProcess playBlue( Linea linea, int columna ) {
 		throw new RuntimeException(notTurnErrorDescription);
 	}
 

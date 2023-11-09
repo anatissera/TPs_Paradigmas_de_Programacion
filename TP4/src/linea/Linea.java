@@ -6,23 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 // ¿Qué ifs sacar?
-// no hay ifs en la estrategia, ni en quien gana ni de quien es el turno
+// no hay ifs en la estrategia, ni en quien gana, ni de quien es el turno
 // ¿Cúales se pueden quedar?
 // el if de tamaño no se saca
 
 public class Linea {
 		
-//	     la lista va creciendo en altura con las fichas que se agregan, así vas recorriendo solo las que agregaste y no tenes espacios de más porque sí
 //	     la ficha no debe saber dónde está, solo el juego.
 //	     lista de columnas
 	
-		public static String gameHasFinishedErrorDescription = "El juego ha terminado";
 		public static String notAvailablePositionErrorDescription = "La posición no se encuentra disponible";
 
 	    private int base;
 	    private int height;
 	    private List<List<Character>> columns;
-	    private GameInProcess turn;
 	    public Triumph triumphVariant;
 		public GameState gameState;
 	    
@@ -34,9 +31,8 @@ public class Linea {
 	                .collect(Collectors.toList());
 	        
 			gameState = new RedsPlay();
-			turn = new RedsPlay();
 	        triumphVariant = Triumph.createTriumph(estrategia);
-	        ifFinished();
+
 	    } 
 	   // Referencia a reporte balance
 	 
@@ -49,52 +45,34 @@ public class Linea {
 	    }
 
 	    public void playRedAt(int columna) {
-	    	gameState.play( this,  columna - 1);
-			turn = turn.playRed();
+	    	if (finished()) {
+	    		setGameFinished();
+	    	}
+	    	gameState = gameState.playRed( this,  columna - 1);
 	    }
 
 	    public void playBlueAt(int columna) {
-	    	gameState.play(  this, columna - 1);
-			turn = turn.playBlue();
+	    	if (finished()) {
+	    		setGameFinished();
+	    	}
+	    	gameState = gameState.playBlue( this, columna - 1);
 	    }
-
-//	    private void play( int columna) {
-//	
-//	        if (gameState.isGameFinished(this)) {
-//	            throw new RuntimeException(gameHasFinishedErrorDescription);
-//	        }
-//
-//	        if (columna < 0 || columna >= base || ColumnIsFull(columna)) { // si quiere poner y está llena se termina el juego
-//	            throw new RuntimeException(notAvailablePositionErrorDescription);
-//	        }
-//	       
-//	        List<Character> currentColumn = columns.get(columna);
-//        	int row = currentColumn.size(); 
-//        	currentColumn.add(row, turn.actualPlayer() );
-//
-//	    }
 	    
 	    public void playAsLinea( int columna ) {
-	    	if (columna < 0 || columna >= base || ColumnIsFull(columna)) { // si quiere poner y está llena se termina el juego
-	            throw new RuntimeException(notAvailablePositionErrorDescription);
+	    	if (columna < 0 || columna >= base || ColumnIsFull(columna)) {
+	            throw new RuntimeException( notAvailablePositionErrorDescription );
 	        }
 	       
 	        List<Character> currentColumn = columns.get(columna);
         	int row = currentColumn.size(); 
-        	currentColumn.add(row, turn.actualPlayer() );
+        	currentColumn.add(row, gameState.actualPlayer() );
         	
-        	ifFinished();
+        	
 	    }
 
 	    public boolean finished() {
 	    	return triumphVariant.checkWin(this)||triumphVariant.checkDraw(this); 
 	    }
-	    
-	    public void ifFinished() {
-	    	if (finished()) {
-	    		gameState = new GameFinished();
-	    	}
-        }
 	    
 	    public String show() {
 	        StringBuilder board = new StringBuilder();
@@ -147,7 +125,7 @@ public class Linea {
 		    return triumphVariant;
 		}
 
-		public GameInProcess getTurn() {
-		    return turn;
+		public GameState getTurn() {
+		    return gameState;
 		}
 }

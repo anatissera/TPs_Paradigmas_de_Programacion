@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6cce5ad-3226-4536-b756-9d2a51274e37" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/TP4/src/linea/InitializeTriunfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/InitializeTriunfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/BluesPlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/BluesPlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/GameFinished.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/GameFinished.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/GameInProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/GameInProcess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP4/src/linea/Linea.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/Linea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP4/src/linea/Triunfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/Triunfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriunfoA.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriunfoA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriunfoB.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriunfoB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriunfoC.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriunfoC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP4/src/linea/Turno.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/Turno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP4/src/linea/connect4Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/connect4Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/RedsPlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/RedsPlay.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +42,21 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="TPs_Paradigmas_de_Programacion" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="TPs_Paradigmas_de_Programacion" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -70,6 +83,7 @@
       <workItem from="1697305834236" duration="15000" />
       <workItem from="1697398623452" duration="24000" />
       <workItem from="1698798632192" duration="22000" />
+      <workItem from="1699488314252" duration="42000" />
     </task>
     <servers />
   </component>

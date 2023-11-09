@@ -89,57 +89,57 @@ public class connect4Test {
 //		assertThrowsLike( "Variante de estrategia no válida" , () -> new Linea(7,6,'K') ); //InitializeTriunfo.NonValidStrategyVariant
 //	} //innecesario creo
 	
-	@Test void testHorizontalWin() {
+	@Test void test08HorizontalWin() {
 	    assertTrue(horizontalWin('A'));
 	}
 
-	@Test void testVerticalWin() {
+	@Test void test09VerticalWin() {
 		assertTrue(verticalWin('A'));
 	}
 
-	@Test void testDiagonalFromLeftToRightWin() {
+	@Test void test10DiagonalFromLeftToRightWin() {
 		assertTrue(diagonalFromLeftToRightWin('B'));
 	}
 	
-	@Test void testDiagonalFromRightToLeftWin() {
+	@Test void test11DiagonalFromRightToLeftWin() {
 		assertTrue(diagonalFromRightToLeftWin('B'));
 	}
 	
-	@Test void testTriumphCWorksWithHorizontalWin() {
+	@Test void test12TriumphCWorksWithHorizontalWin() {
 		assertTrue(horizontalWin('C'));
 	}
 	
-	@Test void testTriumphCWorksWithVerticalWin() {
+	@Test void test13TriumphCWorksWithVerticalWin() {
 		assertTrue(verticalWin('C'));
 	}
 	
-	@Test void testTriumphCWorksWithDiagonalFromLeftToRightWin() {
+	@Test void test14TriumphCWorksWithDiagonalFromLeftToRightWin() {
 		assertTrue(diagonalFromLeftToRightWin('C'));
 	}
 	
-	@Test void testTriumphCWorksWithDiagonalFromRightToLeftWin() {
+	@Test void test15TriumphCWorksWithDiagonalFromRightToLeftWin() {
 		assertTrue(diagonalFromRightToLeftWin('C'));
 	}
 	
-	@Test void testTriumphADoesNotWorkWithDiagonalWin() {
+	@Test void test16TriumphADoesNotWorkWithDiagonalWin() {
 		assertFalse(diagonalFromLeftToRightWin('A'));
 	}
 	
-	@Test void testTriumphBDoesNorWorkWithHorizontalWin() {
+	@Test void test17TriumphBDoesNorWorkWithHorizontalWin() {
 		assertFalse(horizontalWin('B'));
 	}
 	
-	@Test void testTriumphBDoesNorWorkWithVerticallWin() {
+	@Test void test18TriumphBDoesNorWorkWithVerticallWin() {
 		assertFalse(verticalWin('B'));
 	}
 	
 	@Test
-	void testDraw() {
+	void test19Draw() {
 	    assertTrue( drawGame(new Linea(4, 4, 'A')) );
 	}
 	
 	@Test
-	public void testCannotPlayAfterADraw() {
+	public void test20CannotPlayAfterADraw() {
 		Linea game = new Linea(4, 4, 'C');
 	    drawGame(game);
 		assertThrowsLike( GameFinished.gameHasFinishedErrorDescription , () -> game.playRedAt(1) );
