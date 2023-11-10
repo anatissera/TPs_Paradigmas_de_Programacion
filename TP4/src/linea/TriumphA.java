@@ -9,7 +9,6 @@ public class TriumphA extends Triumph {
 	@Override
     public boolean checkWin(Linea game) {
     	return checkVertical4(game) || checkHorizontal4(game);
-        
     }
 
     private boolean checkVertical4(Linea game) {

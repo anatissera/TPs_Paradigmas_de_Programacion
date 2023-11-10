@@ -1,18 +1,19 @@
 package linea;
 
-public class TriumphC  extends Triumph{
+public class TriumphC  extends Triumph {
 	
-    private Triumph triunfoA;
-    private Triumph triunfoB;
+    private Triumph triumphA;
+    private Triumph triumphB;
     
 	public TriumphC () {
 		super('C');
-		this.triunfoA = new TriumphA();
-	    this.triunfoB = new TriumphB();
+		this.triumphA = new TriumphA();
+	    this.triumphB = new TriumphB();
 	}
 
 	@Override
-    public boolean checkWin(Linea game) {
-        return triunfoA.checkWin(game) || triunfoB.checkWin(game);
+    public boolean checkWin( Linea game ) {
+        return triumphA.checkWin(game) || triumphB.checkWin(game);
     }
+	
 }

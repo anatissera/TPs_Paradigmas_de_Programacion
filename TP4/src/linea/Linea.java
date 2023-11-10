@@ -5,45 +5,40 @@ import java.util.stream.IntStream;
 import java.util.ArrayList;
 import java.util.List;
 
-// ¿Qué ifs sacar?
-// no hay ifs en la estrategia, ni en quien gana, ni de quien es el turno
-// ¿Cúales se pueden quedar?
-// el if de tamaño no se saca, el de finished tampoco
-
 public class Linea {
 
-		public static String notAvailablePositionErrorDescription = "La posición no se encuentra disponible";
-		private static String NonValidDimentions = "No se puede ganar en este tablero";
-		private static String ErrorMessage = "Ha ocurrido un error inesperado"; // estos van en el print
+		public static String NonValidDimentions = "No se puede ganar en este tablero";
+		private static String ErrorMessage = "El juego se ha finalizado por un error inesperado:"; // estos van en el print
+		public static String InvalidPosition = "La posición debe estar entre 1 y ";
+		public static String FullColumn = "Column is full";
 
 	    private int base;
 	    private int height;
 	    private List<List<Character>> columns;
 	    private Triumph triumphVariant;
 		private GameState gameState;
-		public String gameFinishedMessage = "";
-		 private boolean isFirstTurn;
+//		private boolean isFirstTurn = true; 
 	    
-	    public Linea( int base, int height, char estrategia ) {
+	    public Linea( int base, int height, char estrategy ) {
 	    
-	    	gameState = new RedsPlay( null );  	
+	    	gameState = new RedsPlay( );  	
 	    	if (base < 4 && height <4) {
-	        	setGameFinished( "\n" + NonValidDimentions );
+	    		setGameFinished ( ErrorMessage + "\n" + NonValidDimentions );
+	        	throw new RuntimeException( NonValidDimentions );
 	        }
 	    	
 	        this.base = base;
 	        this.height = height;
-	        this.columns = IntStream.range( 0, base )
+	        triumphVariant = Triumph.initializeTriumph( estrategy );
+	        
+	        columns = IntStream.range( 0, base )
 	                .mapToObj( i -> new ArrayList<Character>() )
 	                .collect( Collectors.toList() );
 	        
-	        triumphVariant = Triumph.initializeTriumph( estrategia );
-	        isFirstTurn = true;
 	    }
 	    
 	    public void setGameFinished( String message ) {
-	    	gameFinishedMessage = message;
-	        gameState = new GameFinished();
+	        gameState = new GameOver( "\n" + message );
 	    }
 	    
 	    public boolean finished() {
@@ -73,7 +68,7 @@ public class Linea {
 	                .allMatch(columna -> ColumnIsFull(columna)) );
 	    }
 	    private boolean isNotWithinLimits ( int column ) {
-	    	return ( column < 0 || column >= base || ColumnIsFull(column) );
+	    	return ( column < 0 || column >= base );
 	    }
 	    
 	    private char askAt(int column, int row) {
@@ -85,21 +80,23 @@ public class Linea {
 
 	    public void playAsLinea( int  column  ) {
 	    	if ( isNotWithinLimits( column ) ) {
-	    		setGameFinished( ErrorMessage );
-	            throw new RuntimeException( notAvailablePositionErrorDescription );
+	    		setGameFinished ( ErrorMessage + "\n" + InvalidPosition + this.base );
+	            throw new RuntimeException( InvalidPosition + this.base );
 	        }
+	    	if ( ColumnIsFull(column) ) {
+	    		setGameFinished ( ErrorMessage + "\n" + FullColumn );
+	    		throw new RuntimeException( FullColumn );
+	    	}
 
         	thisColumn(column).add( thisRow(column), gameState.actualPlayerChar() );
 	    }
 
 	    public void playRedAt(int columna) {
 	    	gameState = gameState.playRed( this,  columna - 1);
-	    	triumphVariant.SetWinOrDraw(this);
 	    }
 
 	    public void playBlueAt(int columna) {
 	    	gameState = gameState.playBlue( this, columna - 1);
-	    	triumphVariant.SetWinOrDraw(this);
 	    }
 	    
 	    public boolean checkConnected4( int ColumnsLimit, int RowsLimit, int deltaColumn, int deltaRow, boolean checkDiagonalBounds) {
@@ -117,6 +114,14 @@ public class Linea {
 		            }));
 		}
 	    
+	    public boolean checkWin() {
+	    	return triumphVariant.checkWin(this);	
+	    }
+	    
+	    public boolean checkDraw() {
+	    	return triumphVariant.checkDraw(this);	
+	    }
+	    
 	    public String show() {
 	        StringBuilder board = new StringBuilder();
 
@@ -133,15 +138,15 @@ public class Linea {
 	        board.append("| ");
 	        IntStream.range(0, base)
 	                .forEach(column -> board.append("^ "));
-	        board.append("|\n  ");
+	        board.append("|\n> ");
 	        IntStream.range(0, base)
 	        		.forEach(column -> board.append(column + 1 + " "));
 
-	        if (isFirstTurn) {
-	            board.append("\n\nEmpiezan: ").append( gameState.actualPlayerColor() );
-	            isFirstTurn = false;
-	        }
-	        board.append("\n").append(gameFinishedMessage);
+//	        if (isFirstTurn) {
+//	            board.append("\n\nEmpiezan: ").append( gameState.actualPlayerColor() );
+//	            isFirstTurn = false;
+//	        }
+	        board.append("<\n").append(gameState.getGameFinishedMessage());
 	        
 	        return board.toString();
 	    }
@@ -160,7 +165,7 @@ public class Linea {
 		    return triumphVariant;
 		}
 
-		public GameState getTurn() {
+		public GameState getGameState() {
 		    return gameState;
 		}
 }

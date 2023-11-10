@@ -1,22 +1,26 @@
 package linea;
 
-public abstract class GameInProcess extends GameState{
+public abstract class GameOn extends GameState{
 
     public static String notTurnErrorDescription = "No es turno";
     protected char actualPlayerChar;
     protected String actualPlayerColor;
-    protected GameInProcess previousPlayer;
     
-    public GameInProcess( char NewActualPlayerChar, String NewActualPlayerColor, GameInProcess previousPlayer ) {
+    public GameOn( char NewActualPlayerChar, String NewActualPlayerColor ) {
     	actualPlayerChar = NewActualPlayerChar;
     	actualPlayerColor = NewActualPlayerColor;
-    	this.previousPlayer = previousPlayer;
+    	gameFinishedMessage = "";
     }
     
     @Override
     public boolean isGameFinished() {
 		return false;
 	}
+    
+    @Override
+    public GameState getWinner() {
+    	return null;
+    }
     
     @Override
     public char actualPlayerChar() {
@@ -29,17 +33,23 @@ public abstract class GameInProcess extends GameState{
     }
     
     @Override
-    public String previousPlayerColor() {
-    	return previousPlayer.actualPlayerColor();
-    }
-    
+    public abstract GameState playRed( Linea game, int columna );
     @Override
-    public abstract GameInProcess playRed( Linea game, int columna );
-    @Override
-    public abstract GameInProcess playBlue( Linea game, int columna );
+    public abstract GameState playBlue( Linea game, int columna );
     @Override
     public abstract boolean isRedsTurn();
     @Override
     public abstract boolean isBluesTurn();
+    
+    protected GameState returnDifferentGameState( Linea game, GameState playsNext ) {
+		if ( game.checkWin() ){
+			return new Win( this );
+		}
+		else if ( game.checkDraw() ) {
+			return new Draw();
+		}
+		return playsNext;
+    }
+    
 }
 

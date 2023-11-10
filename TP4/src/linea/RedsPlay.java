@@ -1,19 +1,19 @@
 package linea;
 
-public class RedsPlay extends GameInProcess {
+public class RedsPlay extends GameOn {
 
-	public RedsPlay( GameInProcess previousPlayer ) {
-		super( 'X', "Rojas", previousPlayer );
+	public RedsPlay( ) {
+		super( 'X', "Rojas" );
 	}
 
 	@Override
-	public GameInProcess playRed( Linea game, int columna ) {
+	public GameState playRed( Linea game, int columna ) {
 		game.playAsLinea( columna );
-		return new BluesPlay( this );
+		return returnDifferentGameState( game, new BluesPlay() );
 	}
 
 	@Override
-	public GameInProcess playBlue( Linea game, int columna ) {
+	public GameState playBlue( Linea game, int columna ) {
 		throw new RuntimeException(notTurnErrorDescription);
 	}
 

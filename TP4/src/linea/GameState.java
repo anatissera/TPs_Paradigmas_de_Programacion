@@ -2,6 +2,8 @@ package linea;
 
 public abstract class GameState {
 	
+	protected String gameFinishedMessage;
+	
 	public abstract boolean isGameFinished();
 	
 	public abstract GameState playRed(Linea game, int columna);
@@ -12,6 +14,10 @@ public abstract class GameState {
 
 	protected abstract char actualPlayerChar();
 	protected abstract String actualPlayerColor();
-	protected abstract String previousPlayerColor();
+
+	public String getGameFinishedMessage() {
+		return gameFinishedMessage;
+	}
+	public abstract GameState getWinner();
 	
 }

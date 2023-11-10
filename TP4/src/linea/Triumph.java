@@ -31,14 +31,5 @@ public abstract class Triumph {
     public boolean checkDraw(Linea game) {
         return ( game.allColumnsAreFull() && !checkWin(game) ) ; 
     }
-  
-    public void SetWinOrDraw( Linea game ) {
-    	if ( checkWin( game ) ) {
-    		game.setGameFinished( "\nLas " + game.getTurn().previousPlayerColor() + " ganan!" );
-    	}
-    	else if ( checkDraw(game) ) {
-    		game.setGameFinished( "\nEmpate!" );
-    	}
-    }
 	    
 }

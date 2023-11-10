@@ -2,7 +2,7 @@ package linea;
 
 public class Game {
 
-  public static void main( String[] args) throws Exception {
+  public static void main( String[] args ) throws Exception {
 	  
 	System.out.println( "Dimensiones?");
     Linea game = new Linea( promptAsInt( "Base? " ), 
