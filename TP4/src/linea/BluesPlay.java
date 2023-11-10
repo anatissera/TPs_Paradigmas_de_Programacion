@@ -2,8 +2,8 @@ package linea;
 
 public class BluesPlay extends GameInProcess {
 
-    public BluesPlay(){
-      super( 'O', "Azules", "Rojas" );
+    public BluesPlay( GameInProcess previousPlayer ){
+      super( 'O', "Azules", previousPlayer );
     }
 
     public GameInProcess playRed( Linea linea, int columna ) {
@@ -12,7 +12,7 @@ public class BluesPlay extends GameInProcess {
 
     public GameInProcess playBlue( Linea linea, int columna) {
     	linea.playAsLinea( columna );
-    	return new RedsPlay();
+    	return new RedsPlay( this );
     }
 
 	public boolean isRedsTurn() {

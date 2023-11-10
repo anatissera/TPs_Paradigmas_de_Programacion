@@ -2,13 +2,13 @@ package linea;
 
 public class RedsPlay extends GameInProcess {
 
-	public RedsPlay() {
-		super( 'X', "Rojas", "Azules" );
+	public RedsPlay( GameInProcess previousPlayer ) {
+		super( 'X', "Rojas", previousPlayer );
 	}
 
 	public GameInProcess playRed( Linea linea, int columna ) {
 		linea.playAsLinea( columna );
-		return new BluesPlay();
+		return new BluesPlay( this );
 	}
 
 	public GameInProcess playBlue( Linea linea, int columna ) {

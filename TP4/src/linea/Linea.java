@@ -25,7 +25,7 @@ public class Linea {
 	    
 	    public Linea( int base, int height, char estrategia ) {
 	    
-	    	gameState = new RedsPlay();  	
+	    	gameState = new RedsPlay( null );  	
 	    	if (base < 4 && height <4) {
 	        	setGameFinished( "\n" + NonValidDimentions );
 	        }
@@ -43,6 +43,10 @@ public class Linea {
 	    public void setGameFinished( String message ) {
 	    	gameFinishedMessage = message;
 	        gameState = new GameFinished();
+	    }
+	    
+	    public boolean finished() {
+	    	return gameState.isGameFinished();
 	    }
 	    
 	    public int actualMaxHeight() {
@@ -85,7 +89,6 @@ public class Linea {
 	        }
 
         	thisColumn(column).add( thisRow(column), gameState.actualPlayerChar() );
-        	
 	    }
 
 	    public void playRedAt(int columna) {
@@ -112,11 +115,6 @@ public class Linea {
 		                                   piece == askAt(column + i * deltaColumn, row + i * deltaRow) );
 		            }));
 		}
-
-	    public boolean finished() {
-	    	return gameState.isGameFinished();
-//	    	return triumphVariant.checkWin(this)||triumphVariant.checkDraw(this); 
-	    }
 	    
 	    public String show() {
 	        StringBuilder board = new StringBuilder();
@@ -134,9 +132,11 @@ public class Linea {
 	        board.append("| ");
 	        IntStream.range(0, base)
 	                .forEach(column -> board.append("^ "));
-	        board.append("|\n");
+	        board.append("|\n  ");
+	        IntStream.range(0, base)
+	        		.forEach(column -> board.append(column + 1 + " "));
 
-	        return board.toString() + gameFinishedMessage ;
+	        return board.toString() + "\n" + gameFinishedMessage ;
 	    }
 	    
 //	    Accessors
