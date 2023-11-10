@@ -23,7 +23,8 @@ public abstract class GameInProcess extends GameState{
     	return actualPlayerChar;
     }
     
-    private String actualPlayerColor() {
+    @Override
+    public String actualPlayerColor() {
     	return actualPlayerColor;
     }
     

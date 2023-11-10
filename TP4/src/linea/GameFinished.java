@@ -29,5 +29,8 @@ public class GameFinished extends GameState {
 
 	@Override
 	protected String previousPlayerColor() { return ""; }
+
+	@Override
+	protected String actualPlayerColor() { return ""; }
 	
 }

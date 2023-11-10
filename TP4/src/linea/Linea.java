@@ -22,6 +22,7 @@ public class Linea {
 	    private Triumph triumphVariant;
 		private GameState gameState;
 		public String gameFinishedMessage = "";
+		 private boolean isFirstTurn;
 	    
 	    public Linea( int base, int height, char estrategia ) {
 	    
@@ -37,7 +38,7 @@ public class Linea {
 	                .collect( Collectors.toList() );
 	        
 	        triumphVariant = Triumph.initializeTriumph( estrategia );
-	        
+	        isFirstTurn = true;
 	    }
 	    
 	    public void setGameFinished( String message ) {
@@ -136,7 +137,13 @@ public class Linea {
 	        IntStream.range(0, base)
 	        		.forEach(column -> board.append(column + 1 + " "));
 
-	        return board.toString() + "\n" + gameFinishedMessage ;
+	        if (isFirstTurn) {
+	            board.append("\n\nEmpiezan: ").append( gameState.actualPlayerColor() );
+	            isFirstTurn = false;
+	        }
+	        board.append("\n").append(gameFinishedMessage);
+	        
+	        return board.toString();
 	    }
 	    
 //	    Accessors
