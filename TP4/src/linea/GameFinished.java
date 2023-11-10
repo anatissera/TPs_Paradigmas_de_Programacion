@@ -3,6 +3,7 @@ package linea;
 public class GameFinished extends GameState {
 	public static String gameHasFinishedErrorDescription = "El juego ha terminado";
 	
+	@Override
     public boolean isGameFinished( ) {
         return true;
     }
@@ -24,6 +25,9 @@ public class GameFinished extends GameState {
 	protected boolean isBluesTurn() { return false; }
 
 	@Override
-	protected char actualPlayer() { return ' '; }
+	protected char actualPlayerChar() { return ' '; }
+
+	@Override
+	protected String actualPlayerColor() { return ""; }
 	
 }

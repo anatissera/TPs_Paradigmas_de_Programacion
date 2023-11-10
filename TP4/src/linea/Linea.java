@@ -25,6 +25,10 @@ public class Linea {
 		public String gameFinishedMessage = "";
 	    
 	    public Linea(int base, int height, char estrategia) {
+	    	if (base < 4 && height <4) {
+	        	setGameFinished("No se puede ganar en este tablero");
+	        }
+	    	
 	        this.base = base;
 	        this.height = height;
 	        this.columns = IntStream.range(0, base)
@@ -33,16 +37,9 @@ public class Linea {
 	        
 			gameState = new RedsPlay();
 	        triumphVariant = Triumph.createTriumph(estrategia);
-	        if (base < 4 && height <4) {
-	        	setGameFinished("No se puede ganar en este tablero");
-	        }
 	        
 	    } 
 	   // Referencia a reporte balance
-	 
-	    public boolean isGameFinished() {
-	        return gameState.isGameFinished(this);
-	    }
 
 	    public void setGameFinished( String message ) {
 	    	gameFinishedMessage = message;
@@ -50,18 +47,12 @@ public class Linea {
 	    }
 
 	    public void playRedAt(int columna) {
-	    	if (finished()) {
-	    		setGameFinished( "Rojas" );
-	    	}
-//	    	triumphVariant.SetWinOrDraw(this);
+	    	triumphVariant.SetWinOrDraw(this);
 	    	gameState = gameState.playRed( this,  columna - 1);
 	    }
 
 	    public void playBlueAt(int columna) {
-	    	if (finished()) {
-	    		setGameFinished( "Azules" );
-	    	}
-//	    	triumphVariant.SetWinOrDraw(this);
+	    	triumphVariant.SetWinOrDraw(this);
 	    	gameState = gameState.playBlue( this, columna - 1);
 	    }
 	    
@@ -72,7 +63,7 @@ public class Linea {
 	       
 	        List<Character> currentColumn = columns.get(columna);
         	int row = currentColumn.size(); 
-        	currentColumn.add(row, gameState.actualPlayer() );
+        	currentColumn.add(row, gameState.actualPlayerChar() );
 	    }
 	    
 	    boolean ColumnIsFull(int column) {
@@ -83,7 +74,7 @@ public class Linea {
 	    	return ( columna < 0 || columna >= base || ColumnIsFull(columna) );
 	    }
 	    
-	    public char preguntarAt(int column, int row) {
+	    public char askAt(int column, int row) {
 	        if (row < columns.get(column).size()) {
 	            return columns.get(column).get(row);
 	        }
@@ -95,18 +86,18 @@ public class Linea {
 		    return IntStream.range(0, ColumnsLimit)
 		        .anyMatch(column -> IntStream.range(0, RowsLimit)
 		            .anyMatch(row -> {
-		                char piece = preguntarAt(column, row);
+		                char piece = askAt(column, row);
 
 		                return IntStream.range(1, 4)
 		                    .allMatch(i -> piece != ' ' && 
 		                    		(!checkDiagonalBounds || (column + i * deltaColumn < ColumnsLimit && column + i * deltaColumn >= 0) && 
 		                                   (row + i * deltaRow < RowsLimit && row + i * deltaRow >= 0) ) && 
-		                                   piece == preguntarAt(column + i * deltaColumn, row + i * deltaRow) );
+		                                   piece == askAt(column + i * deltaColumn, row + i * deltaRow) );
 		            }));
 		}
 
 	    public boolean finished() {
-//	    	return isGameFinished();
+//	    	return gameState.isGameFinished(this);
 	    	return triumphVariant.checkWin(this)||triumphVariant.checkDraw(this); 
 	    }
 	    
@@ -117,7 +108,7 @@ public class Linea {
 	                .mapToObj(row -> "| " +
 	                        IntStream.range(0, base)
 	                                .mapToObj(column -> {
-	                                    char ficha = preguntarAt(column, height - 1 - row);
+	                                    char ficha = askAt(column, height - 1 - row);
 	                                    return ficha != ' ' ? ficha + " " : "- ";
 	                                })
 	                                .collect(Collectors.joining()) + "|\n")
@@ -127,9 +118,8 @@ public class Linea {
 	        IntStream.range(0, base)
 	                .forEach(column -> board.append("^ "));
 	        board.append("|\n");
-	        board.append(gameFinishedMessage);
 
-	        return board.toString();
+	        return board.toString() + gameFinishedMessage ;
 	    }
 
 	    

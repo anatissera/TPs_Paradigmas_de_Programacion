@@ -12,16 +12,9 @@ public abstract class GameState {
 	protected abstract boolean isRedsTurn();
 	protected abstract boolean isBluesTurn();
 
-	protected abstract char actualPlayer();
+	protected abstract char actualPlayerChar();
+	protected abstract String actualPlayerColor();
 	
-//	static public GameState initializeGameState(char varianteTriunfo) {
-//        return List.of(
-//            new GameFinished(),
-//            new GameInProcess()
-//        ).stream()
-//        .filter(each -> each.!isGameFinished())
-//        .findFirst()
-//        .orElse(null);
-//    }
+	public abstract boolean isGameFinished();
 	
 }

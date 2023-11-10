@@ -7,9 +7,6 @@ public class TriumphB  extends Triumph{
     }
 
 	public boolean checkWin(Linea linea) {
-//		if ( checkDiagonal4FromLeftToRight(linea) || checkDiagonal4FromRightToLeft(linea) ) {
-//			linea.setGameFinished( "Las " + linea.getTurn().actualPlayer() + " ganan" );
-//		}
 		return checkDiagonal4FromLeftToRight(linea) || checkDiagonal4FromRightToLeft(linea);
 	}
 	
