@@ -1,8 +1,6 @@
 package linea;
 
 public class TriumphC  extends Triumph{
-	// 4 en línea en cualquier orientación.
-	// = A + B
 	
     private Triumph triunfoA;
     private Triumph triunfoB;
@@ -13,7 +11,8 @@ public class TriumphC  extends Triumph{
 	    this.triunfoB = new TriumphB();
 	}
 
-    public boolean checkWin(Linea linea) {
-        return triunfoA.checkWin(linea) || triunfoB.checkWin(linea);
+	@Override
+    public boolean checkWin(Linea game) {
+        return triunfoA.checkWin(game) || triunfoB.checkWin(game);
     }
 }

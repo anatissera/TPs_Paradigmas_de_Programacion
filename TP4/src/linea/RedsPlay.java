@@ -6,22 +6,25 @@ public class RedsPlay extends GameInProcess {
 		super( 'X', "Rojas", previousPlayer );
 	}
 
-	public GameInProcess playRed( Linea linea, int columna ) {
-		linea.playAsLinea( columna );
+	@Override
+	public GameInProcess playRed( Linea game, int columna ) {
+		game.playAsLinea( columna );
 		return new BluesPlay( this );
 	}
 
-	public GameInProcess playBlue( Linea linea, int columna ) {
+	@Override
+	public GameInProcess playBlue( Linea game, int columna ) {
 		throw new RuntimeException(notTurnErrorDescription);
 	}
 
+	@Override
 	public boolean isRedsTurn() {
 		return true;
 	}
 
+	@Override
 	public boolean isBluesTurn() {
 		return false;
 	}
-
 
 }

@@ -6,17 +6,18 @@ public class TriumphA extends Triumph {
         super('A');
     }
 
-    public boolean checkWin(Linea linea) {
-    	return checkVertical4(linea) || checkHorizontal4(linea);
+	@Override
+    public boolean checkWin(Linea game) {
+    	return checkVertical4(game) || checkHorizontal4(game);
         
     }
 
-    private boolean checkVertical4(Linea linea) {
-        return linea.checkConnected4(linea.getBase(), linea.actualMaxHeight() - 3, 0, 1, false);
+    private boolean checkVertical4(Linea game) {
+        return game.checkConnected4(game.getBase(), game.actualMaxHeight() - 3, 0, 1, false);
     }
 
-    private boolean checkHorizontal4(Linea linea) {
-        return linea.checkConnected4(linea.getBase() - 3 , linea.actualMaxHeight(), 1, 0, false);
+    private boolean checkHorizontal4(Linea game) {
+        return game.checkConnected4(game.getBase() - 3 , game.actualMaxHeight(), 1, 0, false);
     }
     
 }

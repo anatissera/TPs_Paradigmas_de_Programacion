@@ -26,18 +26,18 @@ public abstract class Triumph {
         .orElseThrow(() -> new RuntimeException( NonValidStrategyVariant ));
     }	
 
-    public abstract boolean checkWin(Linea linea);  
+    public abstract boolean checkWin(Linea game);  
 
-    public boolean checkDraw(Linea linea) {
-        return ( linea.allColumnsAreFull() && !checkWin(linea) ) ; 
+    public boolean checkDraw(Linea game) {
+        return ( game.allColumnsAreFull() && !checkWin(game) ) ; 
     }
   
-    public void SetWinOrDraw( Linea linea ) {
-    	if ( checkWin( linea ) ) {
-    		linea.setGameFinished( "\nLas " + linea.getTurn().previousPlayerColor() + " ganan!" );
+    public void SetWinOrDraw( Linea game ) {
+    	if ( checkWin( game ) ) {
+    		game.setGameFinished( "\nLas " + game.getTurn().previousPlayerColor() + " ganan!" );
     	}
-    	else if ( checkDraw(linea) ) {
-    		linea.setGameFinished( "\nEmpate!" );
+    	else if ( checkDraw(game) ) {
+    		game.setGameFinished( "\nEmpate!" );
     	}
     }
 	    

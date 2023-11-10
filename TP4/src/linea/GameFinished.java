@@ -1,6 +1,7 @@
 package linea;
 
 public class GameFinished extends GameState {
+	
 	public static String gameHasFinishedErrorDescription = "El juego ha terminado";
 	
 	@Override
@@ -9,12 +10,12 @@ public class GameFinished extends GameState {
     }
 
 	@Override
-	public GameState playRed(Linea linea, int columna) {
+	public GameState playRed(Linea game, int columna) {
 		throw new RuntimeException( gameHasFinishedErrorDescription );
 	}
 
 	@Override
-	public GameState playBlue(Linea linea, int columna) {
+	public GameState playBlue(Linea game, int columna) {
 		throw new RuntimeException( gameHasFinishedErrorDescription );
 	}
 

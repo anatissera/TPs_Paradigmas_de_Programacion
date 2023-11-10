@@ -33,9 +33,13 @@ public abstract class GameInProcess extends GameState{
     	return previousPlayer.actualPlayerColor();
     }
     
-    public abstract GameInProcess playRed( Linea linea, int columna );
-    public abstract GameInProcess playBlue( Linea linea, int columna );
+    @Override
+    public abstract GameInProcess playRed( Linea game, int columna );
+    @Override
+    public abstract GameInProcess playBlue( Linea game, int columna );
+    @Override
     public abstract boolean isRedsTurn();
+    @Override
     public abstract boolean isBluesTurn();
 }
 
