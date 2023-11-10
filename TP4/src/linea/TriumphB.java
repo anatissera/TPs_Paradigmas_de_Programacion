@@ -11,11 +11,11 @@ public class TriumphB  extends Triumph{
 	}
 	
 	private boolean checkDiagonal4FromLeftToRight(Linea linea) {
-		return linea.checkConnected4(linea.getBase(), linea.maxHeight(), 1, 1, true);
+		return linea.checkConnected4(linea.getBase(), linea.actualMaxHeight(), 1, 1, true);
 	}
 
 	private boolean checkDiagonal4FromRightToLeft(Linea linea) {
-		return linea.checkConnected4(linea.getBase(), linea.maxHeight(), 1, -1, true);
+		return linea.checkConnected4(linea.getBase(), linea.actualMaxHeight(), 1, -1, true);
 	}
 	
 //	 ¿cómo recorro las columnas?

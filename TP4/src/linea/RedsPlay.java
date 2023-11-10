@@ -3,7 +3,7 @@ package linea;
 public class RedsPlay extends GameInProcess {
 
 	public RedsPlay() {
-		super( 'X', "Rojas" );
+		super( 'X', "Rojas", "Azules" );
 	}
 
 	public GameInProcess playRed( Linea linea, int columna ) {

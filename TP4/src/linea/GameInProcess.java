@@ -4,19 +4,23 @@ public abstract class GameInProcess extends GameState{
 
     public static String notTurnErrorDescription = "No es turno";
     protected char actualPlayerChar;
+    protected String previousPlayerColor;
     protected String actualPlayerColor;
     
-    public GameInProcess(char NewActualPlayerChar, String NewActualPlayerColor) {
+    public GameInProcess( char NewActualPlayerChar, String NewActualPlayerColor, String previousPlayerColor ) {
     	actualPlayerChar = NewActualPlayerChar;
     	actualPlayerColor = NewActualPlayerColor;
+    	this.previousPlayerColor = previousPlayerColor;
     }
     
+    @Override
     public char actualPlayerChar() {
     	return actualPlayerChar;
     }
     
-    public String actualPlayerColor() {
-    	return actualPlayerColor;
+    @Override
+    public String previousPlayerColor() {
+    	return previousPlayerColor;
     }
     
     @Override

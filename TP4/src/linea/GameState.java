@@ -9,7 +9,7 @@ public abstract class GameState {
 	protected abstract boolean isBluesTurn();
 
 	protected abstract char actualPlayerChar();
-	protected abstract String actualPlayerColor();
+	protected abstract String previousPlayerColor();
 	
 	public abstract boolean isGameFinished();
 	

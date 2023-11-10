@@ -28,6 +28,6 @@ public class GameFinished extends GameState {
 	protected char actualPlayerChar() { return ' '; }
 
 	@Override
-	protected String actualPlayerColor() { return ""; }
+	protected String previousPlayerColor() { return ""; }
 	
 }

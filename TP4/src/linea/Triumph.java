@@ -1,7 +1,6 @@
 package linea;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 public abstract class Triumph {
 	 
@@ -16,7 +15,7 @@ public abstract class Triumph {
         return key == varianteTriunfo;
     }
 
-	static public Triumph createTriumph(char varianteTriunfo) {
+	static public Triumph initializeTriumph(char varianteTriunfo) {
         return List.of(
             new TriumphA(),
             new TriumphB(),
@@ -30,19 +29,16 @@ public abstract class Triumph {
     public abstract boolean checkWin(Linea linea);  
 
     public boolean checkDraw(Linea linea) {
-        return (IntStream.range(0, linea.getBase())
-            .allMatch(columna -> linea.ColumnIsFull(columna)) && !checkWin(linea)) ; 
+        return ( linea.allColumnsAreFull() && !checkWin(linea) ) ; 
     }
-    
   
-   public void SetWinOrDraw( Linea linea ) {
+    public void SetWinOrDraw( Linea linea ) {
     	if ( checkWin( linea ) ) {
-    		linea.setGameFinished( "Las " + linea.getTurn().actualPlayerColor() + " ganan" );
+    		linea.setGameFinished( "\nLas " + linea.getTurn().previousPlayerColor() + " ganan!" );
     	}
     	else if ( checkDraw(linea) ) {
-    		linea.setGameFinished( "Empate" );
+    		linea.setGameFinished( "\nEmpate!" );
     	}
     }
 	    
-    
 }

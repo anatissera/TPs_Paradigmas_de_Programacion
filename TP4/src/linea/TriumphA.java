@@ -12,11 +12,11 @@ public class TriumphA extends Triumph {
     }
 
     private boolean checkVertical4(Linea linea) {
-        return linea.checkConnected4(linea.getBase(), linea.maxHeight() - 3, 0, 1, false);
+        return linea.checkConnected4(linea.getBase(), linea.actualMaxHeight() - 3, 0, 1, false);
     }
 
     private boolean checkHorizontal4(Linea linea) {
-        return linea.checkConnected4(linea.getBase() - 3 , linea.maxHeight(), 1, 0, false);
+        return linea.checkConnected4(linea.getBase() - 3 , linea.actualMaxHeight(), 1, 0, false);
     }
     
 }
