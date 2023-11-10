@@ -19,9 +19,8 @@ public class Game {
         game.playBlueAt( promptAsInt( "Azul? " ) );
         System.out.println( game.show() );
       }
-      System.out.println(game.gameFinishedMessage);
     }
-    System.out.println(game.gameFinishedMessage);
+    
   }
   
 
