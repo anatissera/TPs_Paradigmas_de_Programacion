@@ -128,8 +128,16 @@ public class connect4Test {
 		assertTrue( diagonalFromRightToLeftWin( game ) );
 	}
 	
+	@Test void test15bTriumphCWorksWithDiagonalFromLeftToRightWinNotFromCorner() {
+		assertTrue( diagonalFromLeftToRightWinNotFromTheCorner( new Linea(7, 6, 'C') ) );
+	}
+	
+	@Test void test16bTriumphCWorksWithDiagonalFromRightToLeftWin() {
+		assertTrue( diagonalFromRightToLeftWinNotFromTheCorner( new Linea(7, 6, 'C') ) );
+	}
+	
 	@Test void test17TriumphADoesNotWorkWithDiagonalWin() {
-		assertFalse( diagonalFromLeftToRightWin( new Linea(4, 4, 'A') ) );
+		assertFalse( diagonalFromLeftToRightWin( lineaA() ) );
 	}
 	
 	@Test void test18TriumphBDoesNorWorkWithHorizontalWin() {
@@ -273,10 +281,19 @@ public class connect4Test {
 	    return game.finished() && redWon(game);
 	}
 	
-	
 	private boolean diagonalFromRightToLeftWin( Linea game  ) {
 	    playGame( game, 4, 3, 3, 2, 2, 1, 2, 1, 1, 4, 1 );
 	    return game.finished() && redWon(game);
+	}
+	
+	private boolean diagonalFromLeftToRightWinNotFromTheCorner( Linea game ) {
+		playGame( game, 4, 5, 4, 5, 6, 6, 5, 6, 6, 7, 7, 7, 7, 3, 7 );
+	    return game.finished() && redWon(game);
+	}
+	
+	private boolean diagonalFromRightToLeftWinNotFromTheCorner( Linea game  ) {
+	    playGame( game, 5, 5, 4, 4, 3, 2, 3, 4, 3, 3, 2, 2, 2, 2 );
+	    return game.finished() && blueWon(game);
 	}
 	
 	private boolean drawGame(Linea game) {
