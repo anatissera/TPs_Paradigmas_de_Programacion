@@ -26,12 +26,12 @@ public class GameOver extends GameState {
     }
 
 	@Override
-	public GameState playRed(Linea game, int columna) {
+	public GameState playRed( Linea game, int columna ) {
 		throw new RuntimeException( gameFinishedErrorDescription );
 	}
 
 	@Override
-	public GameState playBlue(Linea game, int columna) {
+	public GameState playBlue( Linea game, int columna ) {
 		throw new RuntimeException( gameFinishedErrorDescription );
 	}
 

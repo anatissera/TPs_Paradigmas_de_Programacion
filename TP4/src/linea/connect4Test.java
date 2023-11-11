@@ -20,27 +20,31 @@ public class connect4Test {
 	
 	@Test
     public void test01RedsAlwaysStart() {
-		assertTrue(game.getGameState().isRedsTurn());
-		assertFalse(game.getGameState().isBluesTurn());
+		assertTrue( game.getGameState().isRedsTurn() );
+		assertFalse( game.getGameState().isBluesTurn() );
 }
 	
 	@Test
 	public void test02BluePlaysAfterRedTurn() {
 		game.playRedAt(1);
 	
-		assertFalse(game.getGameState().isRedsTurn());
-		assertTrue(game.getGameState().isBluesTurn());		
+		assertFalse( game.getGameState().isRedsTurn() );
+		assertTrue( game.getGameState().isBluesTurn() );		
 	}
 	
 	@Test
-	public void test03RedsCannotPlayWhenItsBluesTurn() {
+	public void test03RedsCannotPlayWhenItsBluesTurnAndCanPlay() {
 		game.playRedAt(1);
 		
 		assertThrowsLike( GameOn.notTurnErrorDescription , () -> game.playRedAt(1) );
 		assertEquals ( GameOn.notTurnErrorDescription, "No es turno de las Rojas!" );
 	
+		assertFalse ( game.finished() );
+		
 		assertFalse(game.getGameState().isRedsTurn());
 		assertTrue(game.getGameState().isBluesTurn());	
+		
+		
 	}
 	
 	@Test
@@ -51,6 +55,8 @@ public class connect4Test {
 		assertThrowsLike( GameOn.notTurnErrorDescription , () -> game.playBlueAt(1) );
 		assertEquals ( GameOn.notTurnErrorDescription, "No es turno de las Azules!" );
 	
+		assertFalse ( game.finished() );
+		
 		assertTrue(  game.getGameState().isRedsTurn() );
 		assertFalse( game.getGameState().isBluesTurn() );	
 		
@@ -302,7 +308,7 @@ public class connect4Test {
 	}
 	
 	public void drawMoves( Linea game ) {
-		playGame(game, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 2, 1, 4, 3);
+		playGame( game, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 2, 1, 4, 3 );
 	}
    
     private Linea playGame(Linea game, int... moves) {
@@ -323,6 +329,5 @@ public class connect4Test {
     
     private Linea lineaB() { return new Linea(4, 4, 'B'); }
     private Linea lineaA() { return new Linea(4, 4, 'A'); }
-
 	
 }

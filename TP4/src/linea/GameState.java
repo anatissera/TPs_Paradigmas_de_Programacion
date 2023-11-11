@@ -1,7 +1,5 @@
 package linea;
 
-import java.util.Objects;
-
 public abstract class GameState {
 	
 	protected String gameFinishedMessage;
