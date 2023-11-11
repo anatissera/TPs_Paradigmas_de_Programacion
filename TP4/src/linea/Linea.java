@@ -8,7 +8,7 @@ import java.util.List;
 public class Linea {
 
 		public static String NonValidDimentions = "No se puede ganar en este tablero";
-		private static String ErrorMessage = "El juego se ha finalizado por un error inesperado:"; // estos van en el print
+		public static String ErrorMessage = "El juego se ha finalizado por un error inesperado:"; // estos van en el print
 		public static String InvalidPosition = "La posición debe estar entre 1 y ";
 		public static String FullColumn = "Column is full";
 
@@ -20,16 +20,15 @@ public class Linea {
 //		private boolean isFirstTurn = true; 
 	    
 	    public Linea( int base, int height, char estrategy ) {
-	    
-	    	gameState = new RedsPlay( );  	
 	    	if (base < 4 && height <4) {
-	    		setGameFinished ( ErrorMessage + "\n" + NonValidDimentions );
 	        	throw new RuntimeException( NonValidDimentions );
 	        }
-	    	
+	    
 	        this.base = base;
 	        this.height = height;
+	        
 	        triumphVariant = Triumph.initializeTriumph( estrategy );
+	        gameState = new RedsPlay( );  	
 	        
 	        columns = IntStream.range( 0, base )
 	                .mapToObj( i -> new ArrayList<Character>() )
@@ -168,4 +167,9 @@ public class Linea {
 		public GameState getGameState() {
 		    return gameState;
 		}
+		
+		public GameState winner() {
+			return gameState.getWinner();
+		}
+		
 }

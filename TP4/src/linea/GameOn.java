@@ -2,13 +2,14 @@ package linea;
 
 public abstract class GameOn extends GameState{
 
-    public static String notTurnErrorDescription = "No es turno";
+    public static String notTurnErrorDescription;
     protected char actualPlayerChar;
     protected String actualPlayerColor;
     
-    public GameOn( char NewActualPlayerChar, String NewActualPlayerColor ) {
-    	actualPlayerChar = NewActualPlayerChar;
-    	actualPlayerColor = NewActualPlayerColor;
+    public GameOn( char newActualPlayerChar, String newActualPlayerColor, String errorMessage ) {
+    	actualPlayerChar = newActualPlayerChar;
+    	actualPlayerColor = newActualPlayerColor;
+    	notTurnErrorDescription = errorMessage;
     	gameFinishedMessage = "";
     }
     

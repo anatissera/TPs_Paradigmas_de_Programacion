@@ -1,5 +1,7 @@
 package linea;
 
+import java.util.Objects;
+
 public abstract class GameState {
 	
 	protected String gameFinishedMessage;
@@ -19,5 +21,8 @@ public abstract class GameState {
 		return gameFinishedMessage;
 	}
 	public abstract GameState getWinner();
-	
+
+	public boolean equals(Object obj) {
+        return obj.getClass() == this.getClass();
+    }
 }

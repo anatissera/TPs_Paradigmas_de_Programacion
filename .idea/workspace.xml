@@ -5,12 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c6cce5ad-3226-4536-b756-9d2a51274e37" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/BluesPlay.class" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/BluesPlay.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP4/src/linea/BluesPlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/BluesPlay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP4/src/linea/GameFinished.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/GameFinished.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TP4/src/linea/GameInProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/GameInProcess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/GameFinished.class" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/GameFinished.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/GameFinished.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/GameOver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/GameInProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/GameOn.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP4/src/linea/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/Linea.class" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/Linea.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP4/src/linea/Linea.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/Linea.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/RedsPlay.class" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/RedsPlay.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TP4/src/linea/RedsPlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/RedsPlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/Triumph.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/Triumph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriumphA.class" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriumphA.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriumphA.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriumphA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriumphB.class" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriumphB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriumphC.class" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriumphC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/TriumphC.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/TriumphC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TP4/src/linea/connect4Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/TP4/src/linea/connect4Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +96,7 @@
       <workItem from="1697398623452" duration="24000" />
       <workItem from="1698798632192" duration="22000" />
       <workItem from="1699488314252" duration="42000" />
+      <workItem from="1699658906883" duration="143000" />
     </task>
     <servers />
   </component>

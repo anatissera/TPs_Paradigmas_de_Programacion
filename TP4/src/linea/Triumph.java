@@ -5,7 +5,7 @@ import java.util.List;
 public abstract class Triumph {
 	 
     protected char key;
-    private static String NonValidStrategyVariant = "Variante de estrategia no válida";
+    public static String NonValidStrategyVariant = "Variante de estrategia no válida";
 
     public Triumph(char aKey) {
         key = aKey;

@@ -7,6 +7,7 @@ import static org.junit.Assert.assertFalse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.function.Executable;
+import java.util.stream.IntStream;
 
 public class connect4Test {
 	
@@ -36,148 +37,145 @@ public class connect4Test {
 		game.playRedAt(1);
 		
 		assertThrowsLike( GameOn.notTurnErrorDescription , () -> game.playRedAt(1) );
+		assertEquals ( GameOn.notTurnErrorDescription, "No es turno de las Rojas!" );
 	
 		assertFalse(game.getGameState().isRedsTurn());
 		assertTrue(game.getGameState().isBluesTurn());	
-		
 	}
 	
 	@Test
-	public void test04BluesCannotPlayWhenItsRedsTurn() {
+	public void test04BluesCannotPlayWhenItsRedsTurnAndThrowsDifferentMessage() {
 		game.playRedAt(1);
 		game.playBlueAt(1);
 		
 		assertThrowsLike( GameOn.notTurnErrorDescription , () -> game.playBlueAt(1) );
+		assertEquals ( GameOn.notTurnErrorDescription, "No es turno de las Azules!" );
 	
-		assertTrue(game.getGameState().isRedsTurn());
-		assertFalse(game.getGameState().isBluesTurn());	
+		assertTrue(  game.getGameState().isRedsTurn() );
+		assertFalse( game.getGameState().isBluesTurn() );	
 		
 	}
 	
-//	@Test
-//	public void test05CannotPlayOnceTheGameIsFinished() {
-//		Linea game = new Linea(3, 3, 'C');
-//		
-//		assertThrowsLike( GameFinished.gameHasFinishedErrorDescription , () -> game.playRedAt(1) );
-//	}
-	
 	@Test
-	public void test06CannotPlacePieceOutsideTheGameSpace() {
-		assertThrowsLike(Linea.InvalidPosition + game.getBase() , () -> game.playRedAt(5) );
+	public void test05CannotPlacePieceOutsideTheGameSpace() {
+		assertThrowsLike( Linea.InvalidPosition + game.getBase() , () -> game.playRedAt(5) );
+		assertEquals ( Linea.InvalidPosition + game.getBase(), "La posición debe estar entre 1 y 4" );
+		assertTrue ( game.finished() );
+		assertEquals ( emptyBoard() + "\n" + Linea.ErrorMessage + "\n" + Linea.InvalidPosition + "4", game.show() );
 	}
 	
     @Test
-    public void test06bCannotPlacePieceOutsideTheGameSpaceThrowsDifferentExceptionMessage() {
+    public void test05bCannotPlacePieceOutsideTheGameSpaceThrowsDifferentExceptionMessage() {
     	Linea game = new Linea(6, 6, 'A');
         assertThrowsLike(Linea.InvalidPosition + game.getBase() , () -> game.playRedAt(7) );
-        
+        assertEquals ( Linea.InvalidPosition + game.getBase(), "La posición debe estar entre 1 y 6" );
+		assertTrue ( game.finished() );   
     }
 	
 	@Test
-	public void test07CannotPlayOnAFullColumn() {
-		game.playRedAt(1);
-		game.playBlueAt(1);
-		game.playRedAt(1);
-		game.playBlueAt(1);
+	public void test06CannotPlayOnAFullColumn() {
+		playGame( game, 1, 1, 1, 1 );
 		assertThrowsLike( Linea.FullColumn , () -> game.playRedAt(1) );
+		assertTrue ( game.finished() );   
+		 String expectedBoard = 
+			        "| O - - - |\n" +
+			        "| X - - - |\n" +
+			        "| O - - - |\n" +
+			        "| X - - - |\n" +
+			        "| ^ ^ ^ ^ |\n" +
+			        "> 1 2 3 4 <\n";
+		assertEquals (expectedBoard + "\n" + Linea.ErrorMessage + "\n" + Linea.FullColumn, game.show() );	
 	}
 	
 	 @Test
-	 public void test08CannotInitializeGameSpaceSmallerThan4x4() {
-		 assertThrowsLike( Linea.NonValidDimentions , () -> new Linea(3, 3, 'A') );
+	 public void test07CannotInitializeGameSpaceSmallerThan4x4() {
+		 assertThrowsLike( Linea.NonValidDimentions , () -> new Linea(3, 3, 'A') );  
 	 }
 	
-	@Test void testGameCannotBeInizializatedWithNonValidStrategy(){
-		assertThrowsLike( "Variante de estrategia no válida" , () -> new Linea(7, 6, 'K') ); //InitializeTriunfo.NonValidStrategyVariant
+	@Test void test08GameCannotBeInizializatedWithNonValidStrategy(){
+		assertThrowsLike( Triumph.NonValidStrategyVariant , () -> new Linea(7, 6, 'K') ); //InitializeTriunfo.NonValidStrategyVariant
 	} 
 	
-	@Test void test08HorizontalWin() {
-	    assertTrue(horizontalWin( new Linea(4, 4, 'A') ) );
+	@Test void test09HorizontalWin() {
+	    assertTrue( horizontalWin( new Linea(4, 4, 'A') ) );
 	}
 
-	@Test void test09VerticalWin() {
-		assertTrue(verticalWin( new Linea(4, 4, 'A') ));
+	@Test void test10VerticalWin() {
+		assertTrue( verticalWin( new Linea(4, 4, 'A') ) );
 	}
 
-	@Test void test10DiagonalFromLeftToRightWin() {
-		assertTrue(diagonalFromLeftToRightWin( new Linea(4, 4, 'B') ));
+	@Test void test11DiagonalFromLeftToRightWin() {
+		assertTrue( diagonalFromLeftToRightWin( new Linea(4, 4, 'B') ) );
 	}
 	
-	@Test void test11DiagonalFromRightToLeftWin() {
-		assertTrue(diagonalFromRightToLeftWin( newLineaB() ));
+	@Test void test12DiagonalFromRightToLeftWin() {
+		assertTrue( diagonalFromRightToLeftWin( lineaB() ) );
 	}
 	
-	@Test void test12TriumphCWorksWithHorizontalWin() {
-		assertTrue(horizontalWin( game ));
+	@Test void test13TriumphCWorksWithHorizontalWin() {
+		assertTrue( horizontalWin( game ) );
 	}
 	
-	@Test void test13TriumphCWorksWithVerticalWin() {
-		assertTrue(verticalWin( game ));
+	@Test void test14TriumphCWorksWithVerticalWin() {
+		assertTrue( verticalWin( game ) );
 	}
 	
-	@Test void test14TriumphCWorksWithDiagonalFromLeftToRightWin() {
-		assertTrue(diagonalFromLeftToRightWin( game ));
+	@Test void test15TriumphCWorksWithDiagonalFromLeftToRightWin() {
+		assertTrue( diagonalFromLeftToRightWin( game ) );
 	}
 	
-	@Test void test15TriumphCWorksWithDiagonalFromRightToLeftWin() {
-		assertTrue(diagonalFromRightToLeftWin( game ));
+	@Test void test16TriumphCWorksWithDiagonalFromRightToLeftWin() {
+		assertTrue( diagonalFromRightToLeftWin( game ) );
 	}
 	
-	@Test void test16TriumphADoesNotWorkWithDiagonalWin() {
-		assertFalse(diagonalFromLeftToRightWin( new Linea(4, 4, 'A') ));
+	@Test void test17TriumphADoesNotWorkWithDiagonalWin() {
+		assertFalse( diagonalFromLeftToRightWin( new Linea(4, 4, 'A') ) );
 	}
 	
-	@Test void test17TriumphBDoesNorWorkWithHorizontalWin() {
-		assertFalse(horizontalWin( newLineaB() ));
+	@Test void test18TriumphBDoesNorWorkWithHorizontalWin() {
+		assertFalse( horizontalWin( lineaB() ) );
 	}
 	
-	@Test void test18TriumphBDoesNorWorkWithVerticallWin() {
-		assertFalse(verticalWin( newLineaB() ));
+	@Test void test19TriumphBDoesNorWorkWithVerticallWin() {
+		assertFalse( verticalWin( lineaB() ) );
 	}
 	
 	@Test
-	void test19Draw() {
-	    assertTrue( drawGame( newLineaA() ) );
+	void test20Draw() {
+	    assertTrue( drawGame( lineaA() ) );
 	}
 	
 	
 	@Test
-	public void test20CannotPlayAfterADraw() {
-	    drawGame(game);
+	public void test21CannotPlayAfterADraw() {
+		assertTrue( drawGame(game) );
 		assertThrowsLike( GameOver.gameFinishedErrorDescription, () -> game.playRedAt(1) );
 		assertEquals ( GameOver.gameFinishedErrorDescription, "El juego ha terminado en empate!");
 	}
 	
 	@Test
-	public void test21CannotPlayAfterWin() {
-	    verticalWin(game);
+	public void test22CannotPlayAfterWin() {
+		assertTrue( verticalWin(game) );
 		assertThrowsLike( GameOver.gameFinishedErrorDescription, () -> game.playRedAt(1) );
 		assertEquals ( GameOver.gameFinishedErrorDescription, "El juego ha terminado.\nGanaron: las Azules");
 	}
 	
 	@Test
-	public void test21bCannotPlayAfterWinMessageIsDifferentForDifferentWinners() {
-	    horizontalWin(game);
+	public void test22bCannotPlayAfterWinMessageIsDifferentForDifferentWinners() {
+		assertTrue( horizontalWin(game) );
 		assertThrowsLike( GameOver.gameFinishedErrorDescription, () -> game.playRedAt(1) );
 		assertEquals ( GameOver.gameFinishedErrorDescription, "El juego ha terminado.\nGanaron: las Rojas");
 	}
 	
+	// show tests
 	
 	@Test
-	public void test21ShowEmptyBoard() {
-		
-	    String expectedBoard = 
-	        "| - - - - |\n" +
-	        "| - - - - |\n" +
-	        "| - - - - |\n" +
-	        "| - - - - |\n" +
-	        "| ^ ^ ^ ^ |\n" +
-	        "> 1 2 3 4 <\n";
-	    assertEquals(expectedBoard, game.show());
+	public void test23ShowEmptyBoard() {
+	    assertEquals( emptyBoard(), game.show() );
 	}
 
 	@Test
-	public void test22ShowAfterRedPlay() {
+	public void test24ShowAfterRedPlay() {
 	    game.playRedAt(1);
 	    String expectedBoard = 
 	        "| - - - - |\n" +
@@ -186,11 +184,11 @@ public class connect4Test {
 	        "| X - - - |\n" +
 	        "| ^ ^ ^ ^ |\n" +
 	        "> 1 2 3 4 <\n";
-	    assertEquals(expectedBoard, game.show());
+	    assertEquals(  expectedBoard, game.show() );
 	}
 
 	@Test
-	public void test23ShowAfterBluePlay() {
+	public void test25ShowAfterBluePlay() {
 	    game.playRedAt(1);
 	    game.playBlueAt(2);
 	    String expectedBoard = 
@@ -200,14 +198,12 @@ public class connect4Test {
 	        "| X O - - |\n" +
 	        "| ^ ^ ^ ^ |\n" +
 	        "> 1 2 3 4 <\n";
-	    assertEquals(expectedBoard, game.show());
+	    assertEquals( expectedBoard, game.show() );
 	}
-	
 
 	@Test
-	public void test25ShowAfterDrawGame() {
+	public void test26ShowAfterDrawGame() {
 	    drawGame(game);
-	
 	    String expectedBoard = 
 	    	"| O X O X |\n" +
 	        "| X O X O |\n" +
@@ -215,11 +211,11 @@ public class connect4Test {
 	        "| X O X O |\n" +
 	        "| ^ ^ ^ ^ |\n" +
 	        "> 1 2 3 4 <\n";
-	    assertEquals(expectedBoard + "\nEmpate!", game.show());
+	    assertEquals( expectedBoard + "\nEmpate!", game.show() );
 	}
 	
 	@Test
-	public void test26ShowWithRedsWin() {
+	public void test27ShowWithRedsWin() {
 	    horizontalWin( game );
 	    
 	    String expectedBoard = 
@@ -228,12 +224,12 @@ public class connect4Test {
 	        "| O O O - |\n" +
 	        "| X X X X |\n" +
 	        "| ^ ^ ^ ^ |\n" +
-	        "> 1 2 3 4 <";
-	    assertEquals(expectedBoard + "\n\nLas Rojas ganan!", game.show());
+	        "> 1 2 3 4 <\n";
+	    assertEquals(expectedBoard + "\nLas Rojas ganan!", game.show());
 	}
 	
 	@Test
-	public void test27ShowWithBluesWin() {
+	public void test28ShowWithBluesWin() {
 	    verticalWin ( game );
 	  
 	    String expectedBoard = 
@@ -250,98 +246,66 @@ public class connect4Test {
 	  assertEquals( message,
 			  assertThrows( Exception.class, executable ).getMessage() );
   }
+  	
+	private String emptyBoard() {
+		return 
+				"| - - - - |\n" +
+				"| - - - - |\n" +
+				"| - - - - |\n" +
+				"| - - - - |\n" +
+				"| ^ ^ ^ ^ |\n" +
+				"> 1 2 3 4 <\n";
+	}
 	
 	private boolean horizontalWin( Linea game ) {
-	    sevenMoves(game, 1, 1, 2, 2, 3, 3, 4);
-	    return game.finished();
+	    playGame( game, 1, 1, 2, 2, 3, 3, 4 );
+	    return game.finished() && redWon(game);
 	}
 	
 	private boolean verticalWin( Linea game ) {
-		sevenMoves(game, 1, 2, 1, 2, 1, 2, 3);
+		playGame( game, 1, 2, 1, 2, 1, 2, 3 );
 		game.playBlueAt(2);
-	    return game.finished();
+	    return game.finished() && blueWon(game);
 	}
 
 	private boolean diagonalFromLeftToRightWin( Linea game ) {
-	    elevenMoves(game, 1, 2, 2, 3, 3, 4, 3, 4, 4, 1, 4);
-	    return game.finished();
+	    playGame( game, 1, 2, 2, 3, 3, 4, 3, 4, 4, 1, 4 );
+	    return game.finished() && redWon(game);
 	}
 	
 	
 	private boolean diagonalFromRightToLeftWin( Linea game  ) {
-	    elevenMoves(game, 4, 3, 3, 2, 2, 1, 2, 1, 1, 4, 1);
-	    return game.finished() ;
+	    playGame( game, 4, 3, 3, 2, 2, 1, 2, 1, 1, 4, 1 );
+	    return game.finished() && redWon(game);
 	}
 	
 	private boolean drawGame(Linea game) {
 		drawMoves(game);
-	    return game.finished();	   
-	}
-	
-	public void twoMoves( Linea game, int i, int i2 ) {
-		game.playRedAt(i);
-		game.playBlueAt(i2);
-	}
-	
-	public void sevenMoves( Linea game, int i, int i2, int i3, int i4, int i5, int i6, int i7 ) {
-		twoMoves(game, i, i2);
-		twoMoves(game, i3, i4);
-		twoMoves(game, i5, i6);
-	    game.playRedAt(i7);
-	}
-	
-	public void elevenMoves (Linea game, int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11 ) {
-		sevenMoves(game, i, i2, i3, i4, i5, i6, i7);
-		game.playBlueAt(i8);
-		twoMoves(game, i9, i10);
-		game.playRedAt(i11);
+	    return game.finished() && noOneWon(game);	   
 	}
 	
 	public void drawMoves( Linea game ) {
-		elevenMoves(game, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3);
-		game.playBlueAt(4);
-		twoMoves(game, 2, 1);
-		twoMoves(game, 4, 3);
+		playGame(game, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 2, 1, 4, 3);
 	}
-	
    
-//    @Test
-//    public void test27ModeAGameCanFinishOnDrawIfNoneWins() {
-//        assertEquals(drawStatus(), playDraw().getStatus());
-//    }
-//
-//   
-//
-//    @Test
-//    public void test41ModeCGameCanFinishOnDrawIfNoneWins() {
-//        assertEquals(drawStatus(), playDraw().getStatus());
-//    }
-//
-//    @Test
-//    public void test42BlueWinsDiagonallyIn6x6Board() {
-//        assertTrue(playGame(1, 2, 2, 3, 4, 3, 3, 4, 3, 4, 2, 5, 5, 5, 1, 5).finished());
-//    }
-//
-
-
-
-    private Linea playDraw() { return playGame(1, 2, 3, 4, 1, 2, 3, 4, 2, 1, 4, 3, 2, 1, 4, 3); }
-
-    private Linea playGame(int ... moves) {
-        for (int i = 0; i < moves.length; i += 2) {
-            game.playRedAt(moves[i]);
-            if (i + 1 ==  moves.length) break;
-            game.playBlueAt(moves[i + 1]);
-        }
+    private Linea playGame(Linea game, int... moves) {
+        IntStream.range(0, moves.length)
+                .forEach(i -> {
+                    if (i % 2 == 0) {
+                        game.playRedAt(moves[i]);
+                    } else {
+                        game.playBlueAt(moves[i]);
+                    }
+                });
         return game;
     }
 
-    public boolean redWon() { return game.getGameState().getWinner().equals( new RedsPlay() ) ; }
-    public boolean blueWon() { return game.getGameState().getWinner().equals( new BluesPlay() ) ; }
+    public boolean redWon( Linea game ) { return game.winner().equals( new RedsPlay() ) ; }
+    public boolean blueWon( Linea game ) { return game.winner().equals( new BluesPlay() ) ; }
+    public boolean noOneWon ( Linea game ) { return game.winner() == null ; }
     
-    private Linea newLineaB() { return new Linea(4, 4, 'B'); }
-
-    private Linea newLineaA() { return new Linea(4, 4, 'A'); }
+    private Linea lineaB() { return new Linea(4, 4, 'B'); }
+    private Linea lineaA() { return new Linea(4, 4, 'A'); }
 
 	
 }

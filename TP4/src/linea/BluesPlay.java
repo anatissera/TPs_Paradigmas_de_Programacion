@@ -3,7 +3,7 @@ package linea;
 public class BluesPlay extends GameOn {
 
     public BluesPlay( ){
-    	super( 'O', "Azules" );
+    	super( 'O', "Azules", "No es turno de las Rojas!" );
     }
 
     @Override

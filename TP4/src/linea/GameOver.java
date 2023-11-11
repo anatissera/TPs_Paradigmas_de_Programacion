@@ -7,6 +7,7 @@ public class GameOver extends GameState {
 
     public GameOver( String Message ) {
         gameFinishedMessage = Message;
+        this.winner = null;
     }
     
 	@Override
