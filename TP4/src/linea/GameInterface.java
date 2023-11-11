@@ -1,6 +1,6 @@
 package linea;
 
-public class Game {
+public class GameInterface {
 
   public static void main( String[] args ) throws Exception {
 	  
@@ -23,7 +23,6 @@ public class Game {
     
   }
   
-
   private static int promptAsInt( String message ) {
     System.out.print( message );
     return Integer.parseInt( System.console().readLine() );
