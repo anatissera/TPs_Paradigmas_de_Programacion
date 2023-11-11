@@ -2,12 +2,12 @@ package linea;
 
 import java.util.List;
 
-public abstract class Triumph {
+public abstract class Mode {
 	 
     protected char key;
-    public static String NonValidStrategyVariant = "Variante de estrategia no válida";
+    public static String InvalidStrategyVariant = "Variante de estrategia no válida";
 
-    public Triumph(char aKey) {
+    public Mode(char aKey) {
         key = aKey;
     }
     
@@ -15,15 +15,15 @@ public abstract class Triumph {
         return key == varianteTriunfo;
     }
 
-	static public Triumph initializeTriumph(char varianteTriunfo) {
+	static public Mode initializeTriumphMode(char varianteTriunfo) {
         return List.of(
-            new TriumphA(),
-            new TriumphB(),
-            new TriumphC()
+            new ModeA(),
+            new ModeB(),
+            new ModeC()
         ).stream()
         .filter(each -> each.applies(varianteTriunfo))
         .findFirst()
-        .orElseThrow(() -> new RuntimeException( NonValidStrategyVariant ));
+        .orElseThrow(() -> new RuntimeException( InvalidStrategyVariant ));
     }	
 
     public abstract boolean checkWin(Linea game);  

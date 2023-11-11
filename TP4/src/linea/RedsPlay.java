@@ -3,12 +3,12 @@ package linea;
 public class RedsPlay extends GameOn {
 
 	public RedsPlay( ) {
-		super( 'X', "Rojas", "No es turno de las Azules!" );
+		super( 'X', "Reds", "It's not Blues' turn!" );
 	}
 
 	@Override
 	public GameState playRed( Linea game, int columna ) {
-		game.playAsLinea( columna );
+		game.playAsLinea( columna, actualPlayerChar );
 		return returnDifferentGameState( game, new BluesPlay() );
 	}
 
@@ -18,13 +18,9 @@ public class RedsPlay extends GameOn {
 	}
 
 	@Override
-	public boolean isRedsTurn() {
-		return true;
-	}
+	public boolean isRedsTurn() { return true; }
 
 	@Override
-	public boolean isBluesTurn() {
-		return false;
-	}
+	public boolean isBluesTurn() { return false; }
 
 }

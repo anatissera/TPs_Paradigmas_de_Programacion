@@ -4,34 +4,17 @@ public abstract class GameOn extends GameState{
 
     public static String notTurnErrorDescription;
     protected char actualPlayerChar;
-    protected String actualPlayerColor;
     
     public GameOn( char newActualPlayerChar, String newActualPlayerColor, String errorMessage ) {
     	actualPlayerChar = newActualPlayerChar;
     	actualPlayerColor = newActualPlayerColor;
     	notTurnErrorDescription = errorMessage;
     	gameFinishedMessage = "";
+    	winner = null;
     }
     
     @Override
-    public boolean isGameFinished() {
-		return false;
-	}
-    
-    @Override
-    public GameState getWinner() {
-    	return null;
-    }
-    
-    @Override
-    public char actualPlayerChar() {
-    	return actualPlayerChar;
-    }
-    
-    @Override
-    public String actualPlayerColor() {
-    	return actualPlayerColor;
-    }
+    public boolean isGameFinished() { return false; }
     
     @Override
     public abstract GameState playRed( Linea game, int columna );

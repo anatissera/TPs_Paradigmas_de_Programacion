@@ -1,8 +1,8 @@
 package linea;
 
-public class TriumphB  extends Triumph{
+public class ModeB  extends Mode{
 	
-	public TriumphB() {
+	public ModeB() {
         super('B');    
     }
 

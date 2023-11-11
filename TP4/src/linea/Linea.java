@@ -7,26 +7,26 @@ import java.util.List;
 
 public class Linea {
 
-		public static String NonValidDimentions = "No se puede ganar en este tablero";
-		public static String ErrorMessage = "El juego se ha finalizado por un error inesperado:"; // estos van en el print
-		public static String InvalidPosition = "La posición debe estar entre 1 y ";
-		public static String FullColumn = "La columna está llena";
+		public static String InvalidDimentions = "Invalid dimensions: There's no winning on this Game Space";
+		public static String ErrorMessage = "The Game has finished due to an unexpected Error: "; // estos van en el print
+		public static String InvalidPosition = "Position must be between 1 and ";
+		public static String FullColumn = "Column is full";
 
 	    private int base;
 	    private int height;
 	    private List<List<Character>> columns;
-	    private Triumph triumphVariant;
+	    private Mode triumphVariant;
 		private GameState gameState;
 	    
 	    public Linea( int base, int height, char estrategy ) {
 	    	if (base < 4 && height <4) {
-	        	throw new RuntimeException( NonValidDimentions );
+	        	throw new RuntimeException( InvalidDimentions );
 	        }
 	    
 	        this.base = base;
 	        this.height = height;
 	        
-	        triumphVariant = Triumph.initializeTriumph( estrategy );
+	        triumphVariant = Mode.initializeTriumphMode( estrategy );
 	        gameState = new RedsPlay( );  	
 	        
 	        columns = IntStream.range( 0, base )
@@ -38,7 +38,7 @@ public class Linea {
 	        gameState = new GameOver( "\n" + message );
 	    }
 
-	    public void playAsLinea( int  column  ) {
+	    public void playAsLinea( int  column, char toPlay  ) {
 	    	if ( isNotWithinLimits( column ) ) {
 	    		setGameFinished ( ErrorMessage + "\n" + InvalidPosition + this.base );
 	            throw new RuntimeException( InvalidPosition + this.base );
@@ -48,7 +48,7 @@ public class Linea {
 	    		throw new RuntimeException( FullColumn );
 	    	}
 	    	
-        	thisColumn(column).add( thisRow(column), gameState.actualPlayerChar() );
+        	thisColumn(column).add( thisRow(column), toPlay );
 	    }
 
 	    public void playRedAt(int columna) {
@@ -74,13 +74,14 @@ public class Linea {
 		            }));
 		}
 	    
-	    public boolean checkWin() {
-	    	return triumphVariant.checkWin(this);	
+	    public boolean allColumnsAreFull () {
+	    	return ( IntStream.range( 0, base )
+	                .allMatch(columna -> ColumnIsFull(columna)) );
 	    }
 	    
-	    public boolean checkDraw() {
-	    	return triumphVariant.checkDraw(this);	
-	    }
+	    public boolean checkWin() { return triumphVariant.checkWin(this); }
+	    
+	    public boolean checkDraw() { return triumphVariant.checkDraw(this);	}
 	    
 	    public String show() {
 	        StringBuilder board = new StringBuilder();
@@ -106,8 +107,6 @@ public class Linea {
 	        return board.toString();
 	    }
 	    
-// auxiliaries
-	    
 	    public int actualMaxHeight() {
 	    	 return columns.stream()
 	    		        .map(List::size)
@@ -130,11 +129,6 @@ public class Linea {
 	        return thisRow(column) >= height;
 	    } 
 	    
-	    public boolean allColumnsAreFull () {
-	    	return ( IntStream.range( 0, base )
-	                .allMatch(columna -> ColumnIsFull(columna)) );
-	    }
-	    
 	    private boolean isNotWithinLimits ( int column ) {
 	    	return ( column < 0 || column >= base );
 	    }
@@ -148,24 +142,15 @@ public class Linea {
 	    
 //	    Accessors
 	    
-	    public int getBase() {
-	        return base;
-	    }
+	    public int getBase() { return base; }
 
-		public int getHeight() {
-			return height;
-		}
+		public int getHeight() { return height; }
 		
-		public Triumph getTriumphVariant() {
-		    return triumphVariant;
-		}
-
-		public GameState getGameState() {
-		    return gameState;
-		}
+		public boolean isRedsTurn() { return gameState.isRedsTurn(); }
 		
-		public GameState winner() {
-			return gameState.getWinner();
-		}
+		public boolean isBluesTurn() { return gameState.isBluesTurn(); }
+		
+		public GameState winner() { return gameState.getWinner(); }
+		
 		
 }

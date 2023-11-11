@@ -3,9 +3,9 @@ package linea;
 public class Win extends GameOver{
 
 	public Win( GameState winner ) {
-		super( "\nLas " + winner.actualPlayerColor() +" ganan!" );
+		super( "\nThe " + winner.actualPlayerColor + " win!" );
 		this.winner = winner;
-		gameFinishedErrorDescription = "El juego ha terminado.\nGanaron: las " + winner.actualPlayerColor() ;
+		gameFinishedErrorDescription = "The Game has finished.\nThe winner is: " + winner.actualPlayerColor;
 	}
 	
 }
