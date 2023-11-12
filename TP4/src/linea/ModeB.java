@@ -12,11 +12,11 @@ public class ModeB  extends Mode{
 	}
 	
 	private boolean checkDiagonal4FromLeftToRight(Linea game) {
-		return game.checkConnected4(game.getBase(), game.actualMaxHeight(), 1, 1, true);
+		return game.checkConnected4( game.getBase(), game.actualMaxHeight(), 1, 1, true );
 	}
 
 	private boolean checkDiagonal4FromRightToLeft(Linea game) {
-		return game.checkConnected4(game.getBase(), game.actualMaxHeight(), 1, -1, true);
+		return game.checkConnected4( game.getBase(), game.actualMaxHeight(), 1, -1, true );
 	}
 	
 }

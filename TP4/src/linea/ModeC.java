@@ -7,8 +7,8 @@ public class ModeC  extends Mode {
     
 	public ModeC () {
 		super('C');
-		this.triumphA = new ModeA();
-	    this.triumphB = new ModeB();
+		triumphA = new ModeA();
+	    triumphB = new ModeB();
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import java.util.List;
 public class Linea {
 
 		public static String InvalidDimentions = "Invalid dimensions: There's no winning on this Game Space";
-		public static String ErrorMessage = "The Game has finished due to an unexpected Error: "; // estos van en el print
+		public static String ErrorMessage = "The Game has finished due to an unexpected Error: ";
 		public static String InvalidPosition = "Position must be between 1 and ";
 		public static String FullColumn = "Column is full";
 
@@ -22,7 +22,7 @@ public class Linea {
 	    	if (base < 4 && height <4) {
 	        	throw new RuntimeException( InvalidDimentions );
 	        }
-	    
+	    	
 	        this.base = base;
 	        this.height = height;
 	        
@@ -35,7 +35,7 @@ public class Linea {
 	    }
 	    
 	    public void setGameFinished( String message ) {
-	        gameState = new GameOver( "\n" + message );
+	        gameState = new GameOver( "\n" + message, message );
 	    }
 
 	    public void playAsLinea( int  column, char toPlay  ) {
@@ -102,7 +102,7 @@ public class Linea {
 	        board.append("|\n> ");
 	        IntStream.range(0, base)
 	        		.forEach(column -> board.append(column + 1 + " "));
-	        board.append("<\n").append(gameState.getGameFinishedMessage());
+	        board.append("<\n").append( gameState.getGameFinishedMessage() );
 	        
 	        return board.toString();
 	    }

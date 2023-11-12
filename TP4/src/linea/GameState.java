@@ -8,8 +8,8 @@ public abstract class GameState {
 	
 	public abstract boolean isGameFinished();
 	
-	public abstract GameState playRed(Linea game, int columna);
-	public abstract GameState playBlue(Linea game, int columna);
+	public abstract GameState playRed( Linea game, int columna );
+	public abstract GameState playBlue( Linea game, int columna );
 
 	public abstract boolean isRedsTurn();
 	public abstract boolean isBluesTurn();

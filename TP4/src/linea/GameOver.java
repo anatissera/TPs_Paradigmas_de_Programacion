@@ -4,8 +4,9 @@ public class GameOver extends GameState {
 	
 	public static String gameFinishedErrorDescription;
 	
-    public GameOver( String Message ) {
+    public GameOver( String Message, String ErrorDescription ) {
         gameFinishedMessage = Message;
+        gameFinishedErrorDescription = ErrorDescription;
         winner = null;
         actualPlayerColor = "";
     }
