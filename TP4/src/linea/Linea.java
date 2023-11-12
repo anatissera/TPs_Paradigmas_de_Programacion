@@ -140,6 +140,7 @@ public class Linea {
 	        return ' ';
 	    }
 	    
+	    
 //	    Accessors
 	    
 	    public int getBase() { return base; }
@@ -151,6 +152,5 @@ public class Linea {
 		public boolean isBluesTurn() { return gameState.isBluesTurn(); }
 		
 		public GameState winner() { return gameState.getWinner(); }
-		
-		
+			
 }

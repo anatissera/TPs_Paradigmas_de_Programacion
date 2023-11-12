@@ -171,40 +171,40 @@ public class connect4Test {
 	}
 	
 	@Test
-	void test23cDrawOnModeC() {
+	void test22cDrawOnModeC() {
 	    assertTrue( drawGame( game ) );
 	}
 	
 	@Test
-	public void test24CannotPlayAfterADraw() {
+	public void test23CannotPlayAfterADraw() {
 		assertTrue( drawGame(game) );
 		assertThrowsLike( GameOver.gameFinishedErrorDescription, () -> game.playRedAt(1) );
 		assertEquals ( GameOver.gameFinishedErrorDescription, "The Game has finished in a Draw!");
 	}
 	
 	@Test
-	public void test25CannotPlayAfterWin() {
+	public void test24CannotPlayAfterWin() {
 		assertTrue( verticalWin(game) );
 		assertThrowsLike( GameOver.gameFinishedErrorDescription, () -> game.playRedAt(1) );
 		assertEquals ( GameOver.gameFinishedErrorDescription, "The Game has finished.\nThe winner is: Blues");
 	}
 	
 	@Test
-	public void test25bCannotPlayAfterWinMessageIsDifferentForDifferentWinners() {
+	public void test24bCannotPlayAfterWinMessageIsDifferentForDifferentWinners() {
 		assertTrue( horizontalWin(game) );
 		assertThrowsLike( GameOver.gameFinishedErrorDescription, () -> game.playRedAt(1) );
 		assertEquals ( GameOver.gameFinishedErrorDescription, "The Game has finished.\nThe winner is: Reds");
 	}
 	
 	@Test
-	public void test26CannotPlayAfterErrorTryToPlaceAPieceOutsideTheGameSpace() {
+	public void test25CannotPlayAfterErrorTryToPlaceAPieceOutsideTheGameSpace() {
 		cannotPlaceAPieceOutsideTheGameSpaceError();
 		assertThrowsLike( GameOver.gameFinishedErrorDescription , () -> game.playRedAt(1) );
 		assertEquals ( GameOver.gameFinishedErrorDescription, "The Game has finished due to an unexpected Error: \nPosition must be between 1 and 4");
 	}
 
 	@Test
-	public void test27CannotPlayAfterErrorTryToPlayOnAFullColumn() {
+	public void test26CannotPlayAfterErrorTryToPlayOnAFullColumn() {
 		cannotPlaceAPieceOnAFullColumn();  
 		assertThrowsLike( GameOver.gameFinishedErrorDescription , () -> game.playRedAt(2) );
 		assertEquals ( GameOver.gameFinishedErrorDescription, "The Game has finished due to an unexpected Error: \nColumn is full");
@@ -213,12 +213,12 @@ public class connect4Test {
 	// Test Show
 	
 	@Test
-	public void test28ShowEmptyBoard() {
+	public void test27ShowEmptyBoard() {
 	    assertEquals( emptyBoard(), game.show() );
 	}
 
 	@Test
-	public void test29ShowAfterRedPlay() {
+	public void test28ShowAfterRedPlay() {
 	    game.playRedAt(1);
 	    String expectedBoard = 
 	        "| - - - - |\n" +
@@ -231,7 +231,7 @@ public class connect4Test {
 	}
 
 	@Test
-	public void test30ShowAfterBluePlay() {
+	public void test29ShowAfterBluePlay() {
 	    game.playRedAt(1);
 	    game.playBlueAt(2);
 	    String expectedBoard = 
@@ -245,7 +245,7 @@ public class connect4Test {
 	}
 
 	@Test
-	public void test31ShowAfterDrawGame() {
+	public void test30ShowAfterDrawGame() {
 	    drawGame(game);
 	    String expectedBoard = 
 	    	"| O X O X |\n" +
@@ -258,7 +258,7 @@ public class connect4Test {
 	}
 	
 	@Test
-	public void test32ShowWithRedsWin() {
+	public void test31ShowWithRedsWin() {
 	    horizontalWin( game );
 	    
 	    String expectedBoard = 
@@ -272,7 +272,7 @@ public class connect4Test {
 	}
 	
 	@Test
-	public void test33ShowWithBluesWin() {
+	public void test32ShowWithBluesWin() {
 	    verticalWin ( game );
 	  
 	    String expectedBoard = 
@@ -286,13 +286,13 @@ public class connect4Test {
 	}
 	
 	@Test
-	public void test34ShowAfterGameFinishedDueToTryingToPlaceAPieceOutsideTheGameSpace() {
+	public void test33ShowAfterGameFinishedDueToTryingToPlaceAPieceOutsideTheGameSpace() {
 		cannotPlaceAPieceOutsideTheGameSpaceError();
 		assertEquals ( game.show(), emptyBoard() + "\n" + Linea.ErrorMessage + "\n" + Linea.InvalidPosition + "4" );
 	}
 	
 	@Test
-	public void test35ShowAfterGameFinishedDueToTryingToPlayOnAFullColumn() {
+	public void test34ShowAfterGameFinishedDueToTryingToPlayOnAFullColumn() {
 		cannotPlaceAPieceOnAFullColumn();  
 		 String expectedBoard = 
 			        "| O - - - |\n" +
@@ -308,7 +308,7 @@ public class connect4Test {
 
 //	Auxiliaries
 
-    private Linea playGame(Linea game, int... moves) {
+    private Linea playGame( Linea game, int... moves ) {
         IntStream.range(0, moves.length)
                 .forEach(i -> {
                     if (i % 2 == 0) {
